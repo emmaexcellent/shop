@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['web-production-e5a4.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['shop-production-8a81.up.railway.app', '127.0.0.1']
 
 
 # Application definition
@@ -167,7 +167,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #DEPLOYMENT 
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-e5a4.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://shop-production-8a81.up.railway.app']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
