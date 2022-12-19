@@ -1,0 +1,129 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Tracked Order</title>
+{% endblock %}
+{% block content %}
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Order Tracking</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Order Tracking</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Order Detail Section Start -->
+    <section class="order-detail">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-4 g-3">
+                    {% for ord in order %}
+                <div class="col-xxl-3 col-xl-4 col-lg-6">
+                    <div class="order-image">
+                        <img src="/media/{{ord.cartorderitems_set.first.image}}" class="img-fluid blur-up lazyload" alt="">
+                    </div>
+                </div>
+
+                <div class="col-xxl-9 col-xl-8 col-lg-6">
+                    <div class="row g-sm-4 g-3">
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+                                <div class="order-tracking-icon">
+                                    <i data-feather="package" class="text-content"></i>
+                                </div>
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">Order Code</h5>                                    
+                                    <h2 class="theme-color">{{ord.code}}</h2>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+                                <div class="order-tracking-icon">
+                                    <i data-feather="truck" class="text-content"></i>
+                                </div>
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">Service</h5>
+                                    
+                                    <h2>EXCEL</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+                                <div class="order-tracking-icon">
+                                    <i class="text-content" data-feather="crosshair"></i>
+                                </div>
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">From</h5>
+                                    <h4>OOU IBOGUN CAMPUS</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="order-details-contain">
+                                <div class="order-tracking-icon">
+                                    <i class="text-content" data-feather="map-pin"></i>
+                                </div>
+
+                                <div class="order-details-name">
+                                    <h5 class="text-content">Destination</h5>
+                                    <h4>Customer's Address</h4>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="col-12 overflow-hidden">
+                            <ol class="progtrckr">
+                                <li class="progtrckr-done">
+                                    <h5>Order Placed</h5>
+                                    <h6>{{ord.order_dt|timesince}} ago</h6>
+                                </li>
+                                <li class="progtrckr-done">
+                                    <h5>Order Processing</h5>
+                                </li>
+                                {% if ord.order_status == 'process' %}
+                                <li class="progtrckr-todo">
+                                    <h5>Delivered</h5>
+                                    <h6>Pending</h6>
+                                </li>
+                                {% else %}
+                                <li class="progtrckr-done">
+                                    <h5>Delivered</h5>
+                                    <h6>Success</h6>
+                                </li>
+                                {% endif %}
+                            </ol>
+                        </div>
+                        
+                    </div>
+                </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- Order Detail Section End -->
+{% endblock content %}

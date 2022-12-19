@@ -1,0 +1,632 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load text_extras %}
+{% block title %}
+    <title>Product Details</title>
+{% endblock %}
+{% block content %}
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>{{p.name}}</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active"><a href="/shop/{{p.category}}-{{p.category.id}}">{{p.category}}</a></li>
+                                <li class="breadcrumb-item active">{{p.name}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Left Sidebar Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-9 col-xl-8 col-lg-7 wow fadeInUp">
+                    <div class="row g-4">
+                        <div class="col-xl-6 wow fadeInUp">
+                            <div class="product-left-box">
+                                <div class="row g-sm-4 g-2">
+                                    <div class="col-12">
+                                        <div class="product-main no-arrow">
+                                            <div>
+                                                <div class="slider-image">
+                                                    <img src="/media/{{p.thumb_nail}}" data-zoom-image="/media/{{p.thumb_nail}}" alt="">
+                                                    <a class="" href="/media/{{p.thumb_nail}}" data-gallery="product-media-preview">
+                                                    
+                                                </a>
+                                                </div>
+                                            </div>
+                                            {% for img in p.productimage_set.all %}
+                                            <div>
+                                                <div class="slider-image">
+                                                    <img src="/media/{{img.image}}" id="img-{{img.id}}" data-zoom-image="/media/{{img.image}}" class="
+                                                        img-fluid image_zoom_cls blur-up lazyload" alt="">
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="left-slider-image left-slider no-arrow slick-top">
+                                            <div>
+                                                <div class="sidebar-image">
+                                                    <img src="/media/{{p.thumb_nail}}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </div>
+                                            </div>
+                                            {% for img in p.productimage_set.all %}
+                                            <div>
+                                                <div class="sidebar-image">
+                                                    <img src="/media/{{img.image}}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 wow fadeInUp">
+                            <div class="right-box-contain">
+                                <h6 class="offer-top">{{p.variation_set.first.discount}}% Off</h6>
+                                <h2 class="name">{{p.name}} {% if p.color is not None %}({{p.color}}) {% endif %}</h2>
+                                <div class="price-rating">
+                                    {% if p.variation_set.first.discount %}
+                                    <h3 class="theme-color">&#8358; <span class="product-price price">{{p.variation_set.first.dis_price}}</span>.00 
+                                    <input type="hidden" class="product-price-h prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <del class="text-content dis-price">&#8358;{{p.variation_set.first.price}}.00</del>
+                                    </h3>                                    
+                                    {% else %}
+                                    <h3 class="theme-color">&#8358; <span class="product-price price">{{p.variation_set.first.price}} </span>.00
+                                    <input type="hidden" class="product-price-h prod-price-{{p.id}}" name="price" value="{{p.variation_set.dis_first.price}}">
+                                    </h3>
+                                    {% endif %}
+
+                                    <div class="product-rating custom-rate">
+                                        <ul class="rating">
+                                            {% if p.review_set.all.count > 0 %}
+                                            {% for star in avg_reviews.avg_rating|floatformat:1|ljust:avg_reviews.avg_rating %}
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </ul>
+                                        <span class="review">{{p.review_set.all.count}} Customer Review</span>
+                                    </div>
+                                </div>
+
+                                <div class="procuct-contain">
+                                    <p>{{p.short}}
+                                    </p>
+                                </div>
+                                <div class="product-packege">
+                                    <div class="product-title">
+                                        <h4>Choose Sizes:</h4>
+                                    </div>
+                                    <ul class="select-packege">
+                                        {% for s in p.variation_set.all %}
+                                        <li>
+                                            <a href="javascript:void(0)" class="choose-size color{{size.id}} prod-size-{{p.id}}"
+                                            {% if s.discount %}
+                                            data-price="{{s.dis_price}}"
+                                            {% else %}
+                                            data-price="{{s.price}}"
+                                            {% endif %}
+                                             >{{s.size}}</a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                                <div class="note-box product-packege">
+                                    {% csrf_token %}
+                                    <div class="cart_qty qty-box product-qty">
+                                        <div class="input-group">
+                                            <button type="button" class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </button>
+                                            <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number"
+                                                name="quantity" value="1" min="1">
+                                            <button type="button" class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                            </button>
+                                        </div>                                
+                                    </div>
+                                    <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                    <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                    <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                    <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                    <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" />
+
+                                    <button class="btn btn-md bg-dark cart-add text-white w-50 add-to-cart update-item" data-index="{{p.id}}" data-item="{{p.id}}">Add To Cart</button>
+                                </div>
+
+                                <div class="buy-box">
+                                    <a href="{% url 'wishlist' %}">
+                                        <i data-feather="heart"></i>
+                                        <span>Add To Wishlist</span>
+                                    </a>
+                                </div>
+
+                                <div class="pickup-box">
+                                    <div class="product-info">
+                                        <ul class="product-info-list product-info-list-2">
+                                            <li>Type : <a href="javascript:void(0)">{{p.category}}</a></li>
+                                            <li>Product ID : <a href="javascript:void(0)">{{p.ref}}</a></li>
+                                            <li>MFG : <a href="javascript:void(0)">Jun 4, 2022</a></li>
+                                            <li>Stock : <a href="javascript:void(0)">{{p.variation_set.first.number}} Items Left</a></li>
+                                            <li>Subcategory : <a href="javascript:void(0)">Cake,</a> <a
+                                                    href="javascript:void(0)">{{p.subcategory}}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="paymnet-option">
+                                    <div class="product-title">
+                                        <h4>Guaranteed Safe Checkout</h4>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <img src="{% static 'assets/' %}images/product/payment/1.svg"
+                                                    class="blur-up lazyload" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <img src="{% static 'assets/' %}images/product/payment/2.svg"
+                                                    class="blur-up lazyload" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <img src="{% static 'assets/' %}images/product/payment/3.svg"
+                                                    class="blur-up lazyload" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <img src="{% static 'assets/' %}images/product/payment/4.svg"
+                                                    class="blur-up lazyload" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <img src="{% static 'assets/' %}images/product/payment/5.svg"
+                                                    class="blur-up lazyload" alt="">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block wow fadeInUp">
+                    <div class="right-sidebar-box">
+                        <div class="vendor-box">
+                            <div class="verndor-contain">
+                                <div class="vendor-image">
+                                    <img src="/media/{{p.vendor.image}}" class="blur-up lazyload" alt="vendorimage">
+                                </div>
+
+                                <div class="vendor-name">
+                                    <h5 class="fw-500">{{p.vendor}}.</h5>
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
+ 
+                                    <div class="product-rating mt-1">
+                                        <ul class="rating">
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star"></i>
+                                            </li>
+                                        </ul>
+                                        <span>(36 Reviews)</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <p class="vendor-detail">{{p.vendor.description}}.</p>
+
+                            <div class="vendor-list">
+                                <ul>
+                                    <li>
+                                        <div class="address-contact">
+                                            <i data-feather="map-pin"></i>
+                                            <h5>Address: <span class="text-content">{{p.vendor.address}}</span></h5>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="address-contact">
+                                            <i data-feather="headphones"></i>
+                                            <h5>Contact Seller: <span class="text-content">{{p.vendor.phone}}</span></h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Trending Product -->
+                        <div class="pt-25">
+                            <div class="category-menu">
+                                <h3>Trending Products</h3>
+
+                                <ul class="product-list product-right-sidebar border-0 p-0">
+                                    {% for p in trend|slice:2 %}
+                                    <li>
+                                        <div class="offer-product">
+                                            <a href="product-left-thumbnail.html" class="offer-image">
+                                                <img src="/media/{{p.thumb_nail}}"
+                                                    class="img-fluid blur-up lazyload" alt="">
+                                            </a>
+
+                                            <div class="offer-detail">
+                                                <div>
+                                                    <a href="product-left-thumbnail.html">
+                                                        <h6 class="name">{{p.name}}</h6>
+                                                    </a>
+                                                    <span>{{p.variation_set.first.size}}</span>
+                                                    <h6 class="price theme-color">&#8358;{{p.variation_set.first.price|floatformat:2}}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Left Sidebar End -->
+   <section>
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-section-box m-0">
+                        <ul class="nav nav-tabs custom-nav" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                                    data-bs-target="#description" type="button" role="tab"
+                                    aria-controls="description" aria-selected="true">Description</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="info-tab" data-bs-toggle="tab"
+                                    data-bs-target="#info" type="button" role="tab" aria-controls="info"
+                                    aria-selected="false">Additional info</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="review-tab" data-bs-toggle="tab"
+                                    data-bs-target="#review" type="button" role="tab" aria-controls="review"
+                                    aria-selected="false">Review</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content custom-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel"
+                                aria-labelledby="description-tab">
+                                <div class="product-description">
+                                    <div class="nav-desh">
+                                        <p>{{p.description|convert_markdown|safe}}.</p>
+                                    </div>
+                                    <div class="banner-contain nav-desh">
+                                        <img src="{% static 'assets/' %}images/vegetable/banner/14.jpg"
+                                            class="bg-img blur-up lazyload" alt="">
+                                        <div class="banner-details p-center banner-b-space w-100 text-center">
+                                            <div>
+                                                <h6 class="ls-expanded theme-color mb-sm-3 mb-1">GET</h6>
+                                                <h2>GROCERIES</h2>
+                                                <p class="mx-auto mt-1">Save up to 5% OFF</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+                                <div class="table-responsive">
+                                    <table class="table info-table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Ingredients</td>
+                                                
+                                                <td>
+                                                {% if p.productinformation_set.first.ingredients is not None %}
+                                                {{p.productinformation_set.first.ingredients}}
+                                                {% endif %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brand</td>                                                        
+                                                <td>
+                                                {% if p.brand is not None %}
+                                                {{p.brand}}
+                                                {% endif %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Package Information</td>
+                                                <td>
+                                                {% if p.productinformation_set.first.package is not None %}
+                                                {{p.productinformation_set.first.package}}
+                                                {% endif %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Manufacturer</td>
+                                                
+                                                <td>
+                                                    {% if p.productinformation_set.first.manufacturer is not None %}
+                                                    {{p.productinformation_set.first.manufacturer}}
+                                                    {% endif %}
+                                                </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>Item part number</td>
+                                                <td>
+                                                {% if p.productinformation_set.first.item_number is not None %}
+                                                {{p.productinformation_set.first.item_number}}
+                                                {% endif %}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>PROD date</td>
+                                                <td>{{p.productinformation_set.first.prod_date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>EXP date</td>
+                                                <td>{{p.productinformation_set.first.expiry_date}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                <div class="review-box">
+                                    <div class="row g-4">
+                                        <div class="col-xl-6">
+                                            <div class="review-title">
+                                                <h4 class="fw-500">{{p.review_set.all.count}} Customer reviews</h4>
+                                            </div>
+                                            {% if p.review_set.all.count is not 0 %} 
+                                            <div class="d-flex">
+                                                <div class="product-rating">
+                                                    <ul class="rating">
+                                                        {% if p.review_set.all.count > 0 %}
+                                                        {% for star in avg_reviews.avg_rating|floatformat:1|ljust:avg_reviews.avg_rating %}
+                                                        <li>
+                                                            <i data-feather="star" class="fill"></i>
+                                                        </li>
+                                                        {% endfor %}
+                                                        {% endif %}
+                                                    </ul>
+                                                </div>
+                                                <h6 class="ms-3">{{avg_reviews.avg_rating|floatformat:1}} Out Of 5.0</h6>
+                                            </div>
+                                            {% else %}
+                                            <div class="review-title">
+                                                <h4 class="fw-700">Be the first to review this product!</h4>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <form method="post" action="" class="col-xl-6">
+                                            {% csrf_token %}
+                                            <div class="review-title">
+                                                <h4 class="fw-500">Add a review</h4>
+                                            </div>
+                                            <br>
+                                            <div class="col-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating theme-form-floating">
+                                                        {{form.rating}}
+                                                        <label for="review1">Rating</label>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="user" name="user" value="{{request.user.username}}">
+                                                <input type="hidden" id="product" name="product" value="{{p.name}}">
+                                                <br>
+
+                                                <div class="col-12">
+                                                    <div class="form-floating theme-form-floating">
+                                                        {{form.text}}
+                                                        
+                                                        <label for="floatingTextarea2">Write Your
+                                                            Comment</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <button class="btn btn-animation w-100 justify-content-center" type="submit">Submit</button>
+                                        </form>
+
+                                        <div class="col-12">
+                                            <div class="review-title">
+                                                <h4 class="fw-500">Customer questions & answers</h4>
+                                            </div>
+
+                                            <div class="review-people">
+                                                <ul class="review-list">
+                                                    {% for r in p.review_set.all %}
+                                                    <li>
+                                                        <div class="people-box">
+                                                            <div>
+                                                                <div class="people-image">
+                                                                    <img src="{% static 'assets/' %}images/pro_pic.png"
+                                                                        class="img-fluid blur-up lazyload"
+                                                                        alt="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="people-comment">
+                                                                <a class="name"
+                                                                    href="javascript:void(0)">{{r.user}}</a>
+                                                                <div class="date-time">
+                                                                    <h6 class="text-content">{{r.date}}</h6>
+
+                                                                    <div class="product-rating">
+                                                                        <ul class="rating">
+                                                                            {% for star in r.rating|ljust:r.rating %}
+                                                                            <li>
+                                                                                <i data-feather="star"
+                                                                                    class="fill"></i>
+                                                                            </li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="reply">
+                                                                    <p>{{r.text}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Nav Tab Section End --> 
+
+    <!-- Releted Product Section Start -->
+    <section class="product-list-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Related Products</h2>
+                <span class="title-leaf">
+                    <svg class="icon-width">
+                        <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                    </svg>
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-6_1 product-wrapper">
+                        {% for p in related %}
+                        <div>
+                            <div class="product-box-3 h-100 wow fadeInUp">
+                                <div class="product-header">
+                                    <div class="product-image">
+                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                            <img src="/media/{{p.thumb_nail}}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+
+                                        <ul class="product-option">
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                    data-bs-target="#view{{p.id}}">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                            </li>
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                                <a href="wishlist.html" class="notifi-wishlist">
+                                                    <i data-feather="heart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-footer">
+                                    <div class="product-detail">
+                                        <span class="span-name">{{p.category}}</span>
+                                        <a href="/product/{{p.category}}/{{p.name|slugify}}{{p.id}}">
+                                            <h5 class="name">{{p.name}}</h5>
+                                        </a>
+                                        <p class="text-content mt-1 mb-2 product-content">{{p.short_description}}</p>
+                                        <div class="product-rating mt-2">
+                                            <ul class="rating">
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star"></i>
+                                                </li>
+                                            </ul>
+                                            <span>(4.0)</span>
+                                        </div>
+                                        <h6 class="unit">{{p.variation_set.first.size}}</h6>
+                                        {% if p.variation_set.first.discount %}
+                                        <h5 class="price"><span class="theme-color">&#8358;{{p.variation_set.first.dis_price|floatformat:2}}</span>                                 
+                                        <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                        </h5>
+                                        {% else %}
+                                        <h5 class="price"><span class="theme-color">&#8358;{{p.variation_set.first.price|floatformat:2}}</span>
+                                        </h5>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Releted Product Section End -->
+
+{% endblock %}

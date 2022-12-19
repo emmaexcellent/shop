@@ -1,0 +1,176 @@
+{% load static %}
+
+<!-- Footer Start -->
+    <footer class="section-t-space footer-section-2 footer-color-2">
+        <div class="container-fluid-lg">
+            <div class="main-footer">
+                <div class="row g-md-4 gy-sm-5">
+                    <div class="col-xxl-3 col-xl-4 col-sm-6">
+                        <a href="{% url 'home' %}" class="foot-logo theme-logo">
+                            <img src="{% static 'assets/' %}images/logo/3.png" class="img-fluid blur-up lazyload" alt="">
+                        </a>
+                        <p class="information-text information-text-2">We are here to make your shopping super convenient</p>
+                        <ul class="social-icon">
+                            <li class="light-bg">
+                                <a href="" class="footer-link-color">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="light-bg">
+                                <a href="" class="footer-link-color">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="light-bg">
+                                <a href="" class="footer-link-color">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="light-bg">
+                                <a href="wa.me/2349032929196" class="footer-link-color">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-4 col-sm-6">
+                        <div class="footer-title">
+                            <h4 class="text-white">Useful Links</h4>
+                        </div>
+                        <ul class="footer-list footer-contact footer-list-light">
+                            <li>
+                                <a href="{% url 'about' %}" class="light-text">About Us</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'contact' %}" class="light-text">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'faq' %}" class="light-text">FAQs</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xxl-2 col-xl-4 col-sm-6">
+                        <div class="footer-title">
+                            <h4 class="text-white">Help Center</h4>
+                        </div>
+                        <ul class="footer-list footer-contact footer-list-light">
+                            <li>
+                                <a href="{% url 'user-dashboard' %}" class="light-text">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'order-tracking' %}" class="light-text">Track Order</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'wishlist' %}" class="light-text">Your Wishlist</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-footer sub-footer-lite section-b-space section-t-space">
+                 <ul class="payment-box">
+                    <li>
+                        <img src="{% static 'assets/' %}images/icon/paymant/visa.png" class="blur-up lazyload" alt="">
+                    </li>
+                    <li>
+                        <img src="{% static 'assets/' %}images/icon/paymant/discover.png" alt="" class="blur-up lazyload">
+                    </li>
+                    <li>
+                        <img src="{% static 'assets/' %}images/icon/paymant/american.png" alt="" class="blur-up lazyload">
+                    </li>
+                    <li>
+                        <img src="{% static 'assets/' %}images/icon/paymant/master-card.png" alt="" class="blur-up lazyload">
+                    </li>
+                    <li>
+                        <img src="{% static 'assets/' %}images/icon/paymant/giro-pay.png" alt="" class="blur-up lazyload">
+                    </li>
+                </ul>
+                <br><br>
+                <div class="left-footer">
+                    <p class="light-text">2022 Copyright By Excelcart Powered By La Excel</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+   {% include 'popupview/quickview.html' %}
+    <!-- Tap to top start -->
+    <div class="theme-option">
+        
+        <div class="back-to-top">
+            <a id="back-to-top" href="#">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Tap to top end -->
+    <!-- Bg overlay Start -->
+    <div class="bg-overlay"></div>
+    <!-- Bg overlay End -->
+
+    <!-- latest jquery-->
+    <script src="{% static 'assets/' %}js/jquery-3.6.0.min.js"></script>
+
+    <!-- jquery ui-->
+    <script src="{% static 'assets/' %}js/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap js-->
+    <script src="{% static 'assets/' %}js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'assets/' %}js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="{% static 'assets/' %}js/bootstrap/popper.min.js"></script>
+
+    <!-- feather icon js-->
+    <script src="{% static 'assets/' %}js/feather/feather.min.js"></script>
+    <script src="{% static 'assets/' %}js/feather/feather-icon.js"></script>
+
+    <!-- Lazyload Js -->
+    <script src="{% static 'assets/' %}js/lazysizes.min.js"></script>
+
+    <!-- Slick js-->
+    <script src="{% static 'assets/' %}js/slick/slick.js"></script>
+    <script src="{% static 'assets/' %}js/slick/slick-animation.min.js"></script>
+    <script src="{% static 'assets/' %}js/custom-slick-animated.js"></script>
+    <script src="{% static 'assets/' %}js/slick/custom_slick.js"></script>
+
+    <!-- Range slider js -->
+    <script src="{% static 'assets/' %}js/ion.rangeSlider.min.js"></script>
+
+    <!-- Auto Height Js -->
+    <script src="{% static 'assets/' %}js/auto-height.js"></script>
+
+    <!-- Lazyload Js -->
+    <script src="{% static 'assets/' %}js/lazysizes.min.js"></script>
+
+    <!-- Quantity js -->
+    <script src="{% static 'assets/' %}js/quantity-2.js"></script>
+
+    <!-- Fly Cart Js -->
+    <script src="{% static 'assets/' %}js/fly-cart.js"></script>
+
+    <!-- Timer Js -->
+    <script src="{% static 'assets/' %}js/timer1.js"></script>
+    <script src="{% static 'assets/' %}js/timer2.js"></script>
+
+    <!-- Copy clipboard Js -->
+    <script src="{% static 'assets/' %}js/clipboard.min.js"></script>
+    <script src="{% static 'assets/' %}js/copy-clipboard.js"></script>
+
+    <!-- WOW js -->
+    <script src="{% static 'assets/' %}js/wow.min.js"></script>
+    <script src="{% static 'assets/' %}js/custom-wow.js"></script>
+
+    <!-- script js -->
+    <script src="{% static 'assets/' %}js/script.js"></script>
+
+    <!-- Zoom -->
+    <script src="{% static 'assets/' %}js/jquery.zoom.js"></script>
+
+    <!-- thme setting js -->
+    <script src="{% static 'assets/' %}js/theme-setting.js"></script>
+</body>
+
+</html>

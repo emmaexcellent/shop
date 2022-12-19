@@ -1,0 +1,583 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Dashboard </title>
+{% endblock %}
+{% block content %}
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>User Dashboard</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">User Dashboard</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- User Dashboard Section Start -->
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-xxl-3 col-lg-4">
+                    <div class="dashboard-left-sidebar">
+                        <div class="close-button d-flex d-lg-none">
+                            <button class="close-sidebar">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="profile-box">
+                            <div class="profile-contain">
+
+                                <div class="profile-name">
+                                    {% if request.user.first_name %}
+                                    <h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
+                                    {% else %}
+                                    <h3>{{request.user}}</h3>
+                                    {% endif %}
+                                    <h6 class="text-content">{{request.user.email}}</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pills-dashboard-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-dashboard" type="button" role="tab"
+                                    aria-controls="pills-dashboard" aria-selected="true"><i data-feather="home"></i>
+                                    Dashboard</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-order-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-order" type="button" role="tab" aria-controls="pills-order"
+                                    aria-selected="false"><i data-feather="shopping-bag"></i>Order</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-wishlist-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-wishlist" type="button" role="tab"
+                                    aria-controls="pills-wishlist" aria-selected="false"><i data-feather="heart"></i>
+                                    Wishlist</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-address-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-address" type="button" role="tab"
+                                    aria-controls="pills-address" aria-selected="false"><i data-feather="map-pin"></i>
+                                    Address</button>
+                            </li>        
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-profile" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false"><i data-feather="user"></i>
+                                    Profile</button>        
+                            </li>
+                            {% if is_vendor %}
+                            <li class="nav-item" role="presentation">
+                                <button onclick="location.href='/vendor/dashboard'" class="nav-link" data-bs-toggle="pill" type="button" role="tab" aria-selected="false"><i data-feather="map-pin"></i>
+                                    Vendor Dashboard</button>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item" role="presentation">
+                                <button onclick="location.href='{% url 'logout' %}'" style="color: #cf420c;" class="nav-link" id="pills-address-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-address" type="button" role="tab"
+                                    aria-controls="pills-address" aria-selected="false"><i data-feather="map-pin"></i>
+                                    Logout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xxl-9 col-lg-8">
+                    <button class="btn left-dashboard-show btn-animation btn-md fw-bold d-block mb-4 d-lg-none">Show
+                        Menu</button>
+                    <div class="dashboard-right-sidebar">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel"
+                                aria-labelledby="pills-dashboard-tab">
+                                <div class="dashboard-home">
+                                    <div class="title">
+                                        <h2>My Dashboard</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="total-box">
+                                        <div class="row g-sm-4 g-3">
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="{% static 'assets/' %}images/svg/order.svg"
+                                                        class="img-1 blur-up lazyload" alt="">
+                                                    <img src="{% static 'assets/' %}images/svg/order.svg" class="blur-up lazyload"
+                                                        alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>Total Orders</h5>
+                                                        <h3>{{orders.count}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="{% static 'assets/' %}images/svg/pending.svg"
+                                                        class="img-1 blur-up lazyload" alt="">
+                                                    <img src="{% static 'assets/' %}images/svg/pending.svg" class="blur-up lazyload"
+                                                        alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>Total Pending Order</h5>
+                                                        <h3>{{false_ord.count}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="{% static 'assets/' %}images/svg/wishlist.svg"
+                                                        class="img-1 blur-up lazyload" alt="">
+                                                    <img src="{% static 'assets/' %}images/svg/wishlist.svg"
+                                                        class="blur-up lazyload" alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>Total Wishlist</h5>
+                                                        <h3>{{wishlist.count}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="pills-wishlist" role="tabpanel"
+                                aria-labelledby="pills-wishlist-tab">
+                                <div class="dashboard-wishlist">
+                                    <div class="title">
+                                        <h2>My Wishlist History</h2>
+                                        <span class="title-leaf title-leaf-gray">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="row g-sm-4 g-3">
+                                        {% for p in wishlist %}
+                                        <div class="col-xxl-3 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="product-box-3 theme-bg-white h-100">
+                                                <div class="product-header">
+                                                    <div class="product-image">
+                                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                                            <img src="/media/{{p.product.productimage_set.first.image}}"
+                                                                class="img-fluid blur-up lazyload" alt="">
+                                                        </a>
+                                                        <form method="post" action="{% url 'wishlist' %}" class="product-header-top">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="delID" value="{{p.id}}">
+                                                            <button type="submit" name="delete-wish" class="btn wishlist-button close_button">
+                                                                <i data-feather="x"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-footer">
+                                                    <div class="product-detail">
+                                                        <span class="span-name">{{p.product.category}}</span>
+                                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                                            <h5 class="name">{{p.product.name}}</h5>
+                                                        </a>
+                                                        <h6 class="unit mt-1">{{p.product.variation_set.first.size}}</h6>
+                                                        {% if p.product.variation_set.first.discount %}
+                                                        <h5 class="price"><span class="theme-color">&#8358; {{p.product.variation_set.first.dis_price|floatformat:2}}</span>
+                                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.product.variation_set.first.dis_price}}">
+                                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                                        <del>&#8358;{{p.product.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                                        </h5>
+                                                        {% else %}
+                                                        <h5 class="price"><span class="theme-color">&#8358; {{p.product.variation_set.first.price|floatformat:2}}</span>
+                                                            <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.product.variation_set.first.price}}">
+                                                        </h5>
+                                                        {% endif %} 
+                                                        <div class="add-to-cart-box mt-2">
+                                                            <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                                            <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                                            <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                                            <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                                            <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}" tabindex="0">Add
+                                                                <span class="add-icon">
+                                                                    <i class="fa-solid fa-plus"></i>
+                                                                </span>
+                                                            </button>
+                                                            <div class="cart_qty qty-box">
+                                                                <div class="input-group">
+                                                                    <button type="button" class="qty-left-minus"
+                                                                        data-type="minus" data-field="">
+                                                                        <i class="fa fa-minus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                                    </button>
+                                                                    <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="text" name="quantity" value="0">
+                                                                    <button type="button" class="qty-right-plus" data-type="plus" data-field="">
+                                                                        <i class="fa fa-plus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}                                        
+                                    </div>
+                                    <br>
+                                    {% if wishlist.count == 0 %}
+                                     <h4>You don't have any product in your wishlist</h4>
+                                     <br>
+                                    <button onclick="location.href='{% url 'shop' %}'" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3" >Go to Shop</button>
+                                    {% else %}
+                                    <button onclick="location.href='{% url 'wishlist' %}'" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3" >See all</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="pills-order" role="tabpanel"
+                                aria-labelledby="pills-order-tab">
+                                <div class="dashboard-order">
+                                    <div class="title">
+                                        <h2>My Orders History</h2>
+                                        <span class="title-leaf title-leaf-gray">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <div class="order-contain">
+                                        <div class="row"> 
+                                            {% for order in orders %} 
+                                            <div class="col-xxl-4 col-lg-6 col-sm-6">                                       
+                                                <div class="order-box dashboard-bg-box">
+                                                    <div class="order-container">
+                                                        <div class="order-icon">
+                                                            <i data-feather="box"></i>
+                                                        </div>
+
+                                                        <div class="order-detail">
+                                                            {% if order.paid_status == False %}
+                                                            <h4>Delivered <span>Pending</span></h4>
+                                                            {% else %}
+                                                            <h4>Delivered <span class="success-bg">Success</span></h4>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product-order-detail">
+                                                        <div class="order-wrap">
+                                                            <a href="">
+                                                                <h3>OrderCode - {{order.code}} </h3>
+                                                            </a>
+                                                            <ul class="product-size">
+                                                                <li>
+                                                                    <div class="size-box">
+                                                                        <h6 class="text-content">Total Amt : </h6>
+                                                                        <h5>&#8358; {{order.total_amt}}</h5>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="size-box">
+                                                                        <h6 class="text-content">Order Time : </h6>
+                                                                        <h5>{{order.order_dt|timesince}} ago</h5>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                            </div> 
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="pills-address" role="tabpanel"
+                                aria-labelledby="pills-address-tab">
+                                <div class="dashboard-address">
+                                    <div class="title title-flex">
+                                        <div>
+                                            <h2>My Address Book</h2>
+                                            <span class="title-leaf">
+                                                <svg class="icon-width bg-gray">
+                                                    <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+
+                                        <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#add-address"><i data-feather="plus"
+                                                class="me-2"></i> Add New Address</button>
+                                    </div>
+
+                                    <div class="row g-sm-4 g-3">
+                                        {% for add in address %}
+                                        <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6">
+                                            <div class="address-box">
+                                                <div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="jack"
+                                                            id="flexRadioDefault2" checked>
+                                                    </div>
+
+                                                    <div class="label">
+                                                        <label>{{add.name}}</label>
+                                                    </div>
+
+                                                    <div class="table-responsive address-table">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="2">{{add.user}}</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Address :</td>
+                                                                    <td>
+                                                                        <p>{{add.address}}
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phone :</td>
+                                                                    <td>{{add.phone}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="button-group">
+                                                    <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#edit-address-{{add.id}}"><i data-feather="edit"></i>
+                                                        Edit</button>
+                                                    <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#delete-add-{{add.id}}"><i data-feather="trash-2"></i>
+                                                        Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                aria-labelledby="pills-profile-tab">
+                                <div class="dashboard-profile">
+                                    <div class="title">
+                                        <h2>My Profile</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div>
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <i class="theme-color">{{message}}</i>
+                                    {% endfor %}
+                                    {% endif %}
+                                    </div>
+                                    <div class="profile-tab dashboard-bg-box">
+                                        <div class="dashboard-title dashboard-flex">
+                                            <h3>Profile Details</h3>
+                                            <button class="btn btn-sm theme-bg-color text-white" data-bs-toggle="modal"
+                                                data-bs-target="#edit-profile">Edit Profile</button>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <h5>Username :</h5>
+                                                <h5>{{request.user.username}}</h5>
+                                            </li>
+                                            <li>
+                                                <h5>Email Address :</h5>
+                                                <h5>{{request.user.email}}</h5>
+                                            </li>
+                                            <button onclick="location.href='{% url 'change-password' %}'" style="background-color:#ffa53b;" class="btn btn-sm text-white" data-bs-toggle="modal" >Change Password</button>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- User Dashboard Section End -->
+     <!-- Add address modal box start -->
+    <div class="modal fade theme-modal" id="add-address" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a new address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <textarea class="form-control" name="address" placeholder="Leave a comment here" id="address"
+                                style="height: 100px"></textarea>
+                            <label for="address">Enter Address</label>
+                        </div>
+
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="number" name="phone" class="form-control" id="pin" placeholder="Enter Phone Number">
+                            <label for="pin">Phone </label>
+                        </div>
+
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <textarea class="form-control" name="place" placeholder="Enter the name of place here" id="address"
+                                style="height: 100px"></textarea>
+                            <label for="address">Name of Place</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="addform" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Save
+                                changes</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Add address modal box end -->
+    {% for i in address %}
+    <div class="modal fade theme-modal" id="edit-address-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <textarea class="form-control" name="address" placeholder="Leave a comment here" id="address"
+                                style="height: 100px">{{i.address}}</textarea>
+                            <label for="address">Address</label>
+                        </div>
+
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="number" name="phone" class="form-control" id="pin" value="{{i.phone}}" placeholder="Enter Phone Number">
+                            <input type="hidden" name="addid" value="{{i.id}}">
+                            <label for="pin">Phone </label>
+                        </div>
+
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input class="form-control" name="place" value="{{i.name}}" placeholder="Enter the name of place here" id="address">
+                            <label for="address">Name of Place</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="add_edit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Save
+                                changes</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+{% for i in address %}
+<div class="modal fade theme-modal" id="delete-add-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to remove this address?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/accounts/dashboard">
+                    {% csrf_token %}
+                        <input type="hidden" name="delete_addid" value="{{i.id}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button style="background-color:orangered;" name="add_delete" type="submit" class="btn btn-md text-white" data-bs-dismiss="modal">Delete </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Edit Profile Modal Start -->
+    <div class="modal fade theme-modal" id="edit-profile" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Edit Your Vendor Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="companyName" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{request.user.username}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAddress" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{request.user.email}}">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-animation btn-md fw-bold"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button name="edit_profile" type="submit" type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                                data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Edit Profile Modal End -->
+
+
+{% endblock content %}

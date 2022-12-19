@@ -1,0 +1,135 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Register</title>
+{% endblock %}
+{% block content %}
+    <!-- mobile fix menu end -->
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Sign In</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Sign In</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <!-- log in section start -->
+    <section class="log-in-section section-b-space">
+        <div class="container-fluid-lg w-100">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-5 col-lg-6 col-sm-8 ms-auto">
+                    <div class="image-contain">
+                        <img src="{% static 'assets/' %}images/vendor-page/become-saller.svg" class="img-fluid" alt="">
+                    </div>
+                </div>
+                <br><br>
+                <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                    <div class="log-in-box">
+                        <div class="log-in-title">
+                            <h3>Welcome To Excelcart Seller Zone</h3>
+                            <br>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <h4 style="color:orangered;">{{ message }}</h4>
+                            {% endfor %}
+                            {% endif %}
+                            <h4>Register your vendor</h4>
+                        </div>
+                        <div class="input-box">
+                            <form method="post" class="row g-4" enctype="multipart/form-data">
+                            	{% csrf_token %}
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input name="vendorname" type="text" class="form-control" id="vendorname" placeholder="Vendor Name" required>
+                                        <label for="vendorname">Vendor Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input name="vendorimage" type="file" class="form-control" id="vendorimage" accept="image/*" required>
+                                        <label for="vendorimage">Vendor Image</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <select name="vendorcat" class="form-select" id="floatingSelect1" aria-label="Floating label select example">
+                                        {% for cat in categories %}
+                                            <option value="{{cat.title}}">{{cat.title}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <label for="vendorcat">Product Category</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <textarea name="vendordesc" type="text" class="form-control" id="vendordesc" placeholder="Description" style="height: 100px" required></textarea>
+                                        <label for="vendordesc">About Vendor</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input name="vendoradd" type="text" class="form-control" id="vendoradd" placeholder="Vendor Address" required>
+                                        <label for="vendoradd">Vendor Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input name="vendorcontact" type="number" class="form-control" id="vendorcontact" placeholder="Phone Contact" required>
+                                        <label for="vendorcontact">Phone Contact</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating theme-form-floating">
+                                        <input name="vendormail" type="email" class="form-control" id="vendormail" placeholder="Business Email">
+                                        <label for="vendormail">Business Email</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="forgot-box">
+                                        <div class="form-check ps-0 m-0 remember-box">
+                                            <input name="accept" class="checkbox_animated check-box" type="checkbox" id="flexCheckDefault" required>
+                                            <label class="form-check-label" for="flexCheckDefault">I agree with
+                                                <span>Terms</span> and <span>Privacy</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-animation w-100" type="submit">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xxl-7 col-xl-6 col-lg-6"></div>
+            </div>
+        </div>
+    </section>
+    <!-- log in section end -->
+
+    {% block footer %}
+    
+    {% endblock %}
+</body>
+
+</html>
+
+{% endblock %}

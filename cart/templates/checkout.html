@@ -1,0 +1,262 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Checkout</title>
+{% endblock %}
+{% block content %}
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Checkout</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout section Start -->
+    <section class="checkout-section-2 section-b-space">
+        <div class="container-fluid-lg">
+            <form action="{% url 'checkout' %}" method="post">
+                {% csrf_token %}
+            <div class="row g-sm-4 g-3">
+                <div class="col-lg-8">
+                    <div class="left-sidebar-checkout">
+                        <div class="checkout-detail-box">
+                            <ul>
+                                <li>
+                                    <div class="checkout-icon">
+                                        <lord-icon target=".nav-item" src="https://cdn.lordicon.com/ggihhudh.json"
+                                            trigger="loop-on-hover"
+                                            colors="primary:#121331,secondary:#646e78,tertiary:#0baf9a"
+                                            class="lord-icon">
+                                        </lord-icon>
+                                    </div>
+                                    <div class="checkout-box">
+                                        <div class="checkout-title">
+                                            <h4>Delivery Address</h4>
+                                        </div>                                      
+
+                                        <div class="checkout-detail">
+                                            <div class="row g-4">
+                                            	{% if address %}
+                                            	{% for add in address %}
+                                                <div class="col-xxl-6 col-lg-12 col-md-6">
+                                                    <div class="delivery-address-box">
+                                                        <div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="address" value="{{add.id}}" 
+                                                                    id="flexRadioDefault{{add.id}}" required>
+                                                            </div>
+
+                                                            <div class="label">
+                                                                <label>{{add.name}}</label>
+                                                            </div>
+
+                                                            <ul class="delivery-address-detail">
+                                                                <li>
+                                                                    <h4 class="fw-500">{{request.user.username}}</h4>
+                                                                </li>
+
+                                                                <li>
+                                                                    <p class="text-content"><span
+                                                                            class="text-title">Address
+                                                                            : </span>{{add.address}}</p>
+                                                                </li>
+                                                                <li>
+                                                                    <h6 class="text-content mb-0"><span
+                                                                            class="text-title">Phone
+                                                                            :</span> {{add.phone}}</h6>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                         <br>
+                                        <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#add-address"><i data-feather="plus"
+                                                class="me-2"></i> Add New Address</button>
+                                    </div>
+                                </li>                                
+
+                                <li>
+                                    <div class="checkout-icon">
+                                        <lord-icon target=".nav-item" src="https://cdn.lordicon.com/oaflahpk.json"
+                                            trigger="loop-on-hover" colors="primary:#0baf9a" class="lord-icon">
+                                        </lord-icon>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="checkout-box">
+                                        <div class="checkout-title">
+                                            <h4>Payment Option</h4>
+                                        </div>
+
+                                        <div class="checkout-detail">
+                                            <div class="accordion accordion-flush custom-accordion"
+                                                id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <div class="accordion-header" id="flush-headingTwo">
+                                                        <div class="accordion-button collapsed"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-collapseTwo">
+                                                            <div class="custom-form-check form-check mb-0">
+                                                                <label class="form-check-label" for="transfer">
+                                                                    <input class="form-check-input mt-0" type="radio" name="payment" value="Transfer" id="transfer" required>Bank Transfer
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="accordion-item">
+                                                    <div class="accordion-header" id="flush-headingThree">
+                                                        <div class="accordion-button collapsed"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-collapseThree">
+                                                            <div class="custom-form-check form-check mb-0">
+                                                                <label class="form-check-label" for="paystack">
+                                                                    <input class="form-check-input mt-0" type="radio" name="payment" value="Paystack" id="paystack">Pay Online [Secured]
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <label for="note">Note:</label>
+                                                <textarea class="form-control" placeholder="Write something about your order..." name="note" id="note" style="height: 100px" ></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="right-side-summery-box">
+                        <div class="summery-box-2">
+                            <div class="summery-header">
+                                <h3>Order Summery</h3>
+                            </div>                            
+
+                            <ul class="summery-contain">
+                            	{% for product_id,item in cart_data.items %}
+                                <li>
+                                    <img src="{% static 'assets/' %}images/vegetable/product/1.png"
+                                        class="img-fluid blur-up lazyloaded checkout-image" alt="">
+                                    <h4>{{item.title|truncatewords:3}} <span>X {{item.qty}}</span></h4>
+                                    <h4 class="price">&#8358; {% widthratio item.price 1 item.qty %}.00</h4>
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                            <ul class="summery-total">
+                                <li>
+                                    <h4>Subtotal</h4>
+                                    <h4 class="price">&#8358; {{total_amt|floatformat:2}}</h4>
+                                </li>
+                                <li>
+                                    <h4>Delivery</h4>
+                                    <h4 class="price">&#8358; {{delivery|floatformat:2}}</h4>
+                                </li>
+
+                                <li>
+                                    <h4>Coupon code</h4>
+                                    <h4 class="price">- &#8358; {{discount|floatformat:2}}</h4>
+                                </li>
+                                
+                                <li class="list-total">
+                                    <h4>Total</h4>
+                                    <h4 class="price">&#8358; {{total|floatformat:2}}</h4>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="checkout-offer">
+                            <div class="offer-title">
+                                <div class="offer-icon">
+                                    <img src="{% static 'assets/' %}images/inner-page/offer.svg" class="img-fluid" alt="">
+
+                                </div>
+                                 <h6 class="text-content"><b>Enter Coupon code </b></h6> 
+                                <input type="offer-title" class="form-control" name="code">
+                                <i style="color:orangered;">If coupon is valid, your discount will be deducted from the price... </i>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" name="order" class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold">Place Order</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </section>
+    <!-- Checkout section End -->
+    <!-- Add address modal box start -->
+    <div class="modal fade theme-modal" id="add-address" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a new address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{% url 'checkout' %}">
+                        {% csrf_token %}
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <textarea class="form-control" name="address2" placeholder="" id="address"
+                                style="height: 100px"></textarea>
+                            <label for="address">Enter Address</label>
+                        </div>
+
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <input type="number" name="phone" class="form-control" id="pin" placeholder="Enter Phone Number">
+                            <label for="pin">Phone </label>
+                        </div>
+
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <textarea class="form-control" name="place" placeholder="Enter the name of place here" id="address"
+                                style="height: 100px"></textarea>
+                            <label for="address">Name of Place</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="addform" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Save
+                                changes</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Add address modal box end -->
+
+
+{% endblock %}

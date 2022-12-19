@@ -1,0 +1,165 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Vendor List</title>
+{% endblock %}
+{% block content %}
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Vendors</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Vendors</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Grid Section Start -->
+    <section class="seller-grid-section">
+        <div class="container-fluid-lg">
+            <div class="row g-4">
+                {% for v in vendors %}
+                <div class="col-xxl-4 col-md-6">
+                    <div class="seller-grid-box seller-grid-box-1">
+                        <div class="grid-image">
+                            <div class="image">
+                                <img src="/media/{{v.image}}" class="img-fluid" alt="">
+                            </div>
+
+                            <div class="contain-name">
+                                <div>
+                                    <div class="since-number">
+                                        <h6>Since {{v.date|timesince}} ago</h6>
+                                    </div>
+                                    <h3>{{v.name}}</h3>
+                                </div>
+                                <label class="product-label">{{v.product_set.all.count}} Product{{v.product_set.all|pluralize}}</label>
+                            </div>
+                        </div>
+
+                        <div class="grid-contain">
+                            <div class="seller-contact-details">
+                                <div class="saller-contact">
+                                    <div class="seller-icon">
+                                        <i class="fa-solid fa-map-pin"></i>
+                                    </div>
+
+                                    <div class="contact-detail">
+                                        <h5>Address: <span> {{v.address}}</span></h5>
+                                    </div>
+                                </div>
+
+                                <div class="saller-contact">
+                                    <div class="seller-icon">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+
+                                    <div class="contact-detail">
+                                        <h5>Conact Us: <span> {{v.phone}}</span></h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="seller-category">
+                                <button onclick="location.href = '/vendor/{{v.name}}';"
+                                    class="btn btn-sm theme-bg-color text-white fw-bold">Visit Store <i
+                                        class="fa-solid fa-arrow-right-long ms-2"></i></button>
+                                <ul class="product-image">
+                                    {% for p in v.product_set.all|slice:5 %}
+                                    <li>
+                                        <img src="/media/{{p.thumb_nail}}" class="img-fluid" alt="">
+                                    </li>
+                                    {% endfor %}
+                                    {% if v.product_set.all.count > 5 %}
+                                    <li>+{{v.product_set.all.count}}</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if vendors.has_other_pages %}
+            <nav class="custome-pagination">
+                <ul class="pagination justify-content-center">
+                    {% if vendors.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{vendors.previous_page_number}}" tabindex="-1" aria-disabled="true">
+                            <i class="fa-solid fa-angles-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for i in vendors.paginator.page_range %}
+                    {% if vendors.number == i %}
+                    <li class="page-item active">
+                        <a class="page-link" href="javascript:void(0)">{{i}}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item" aria-current="page">
+                        <a class="page-link" href="?page={{i}}">{{i}}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if vendors.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{vendors.next_page_number}}">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </section>
+    <!-- Grid Section End -->
+
+    <!-- Newsletter Section Start -->
+    <section class="newsletter-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="newsletter-box newsletter-box-2">
+                <div class="newsletter-contain py-5">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xxl-4 col-lg-5 col-md-7 col-sm-9 offset-xxl-2 offset-md-1">
+                                <div class="newsletter-detail">
+                                    <h2>Join our newsletter and get...</h2>
+                                    <h5>$20 discount for your first order</h5>
+                                    <div class="input-box">
+                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Enter Your Email">
+                                        <i class="fa-solid fa-envelope arrow"></i>
+                                        <button class="sub-btn  btn-animation">
+                                            <span class="d-sm-block d-none">Subscribe</span>
+                                            <i class="fa-solid fa-arrow-right icon"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Newsletter Section End -->
+
+{% endblock content %}

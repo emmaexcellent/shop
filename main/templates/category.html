@@ -1,0 +1,188 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>{{category.title}} Products </title>
+{% endblock %}
+{% block content %}
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Shop Category</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li onclick="location.href='{% url 'shop' %}'"  class="breadcrumb-item active" aria-current="page">Shop</li>
+                                <li class="breadcrumb-item active" aria-current="page">{{category.title}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shop Section Start -->
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-custome-3">
+                    <div class="left-box wow fadeInUp">
+                        <div class="shop-left-sidebar">
+                            <ul class="nav nav-pills mb-3 custom-nav-tab" id="pills-tab" role="tablist">
+                                {% for cat in categories %}
+                                <li class="nav-item" role="presentation">
+                                    <button onclick="location.href='/shop/{{cat.title}}-{{cat.id}}'" class="nav-link {% if cat.title == category.title %} active {% endif %}" id="pills-vegetables" data-bs-toggle="pill" data-bs-target="#pills-vegetable" type="button" role="tab" aria-selected="true">{{cat.title}} <img src="/media/{{cat.svg}}" class="blur-up lazyloaded" alt=""></button>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-custome-9">
+                    <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
+                        {% for p in products %}
+                        <div>
+                            <div class="product-box-3 h-100 wow fadeInUp">
+                                <div class="product-header">
+                                    <div class="product-image">
+                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                            <img src="/media/{{p.thumb_nail}}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+
+                                        <ul class="product-option">
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                    data-bs-target="#view{{p.id}}">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                            </li>
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                                <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                    <i data-feather="heart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-footer">
+                                    <div class="product-detail">
+                                        <span class="span-name">{{p.category}}</span>
+                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                            <h5 class="name">{{p.name}}</h5>
+                                        </a>
+                                        <p class="text-content mt-1 mb-2 product-content">{{p.short_description}}</p>
+                                        <div class="product-rating mt-2">
+                                            <ul class="rating">
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star"></i>
+                                                </li>
+                                            </ul>
+                                            <span>(4.0)</span>
+                                        </div>
+                                        <h6 class="unit">{{p.variation_set.first.size}}</h6>
+                                        {% if p.variation_set.first.discount %}
+                                        <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                        <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                        </h5>
+                                        {% else %}
+                                        <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                            <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                        </h5>
+                                        {% endif %} 
+                                        <div class="add-to-cart-box bg-white">
+                                            <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                            <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                            <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                            <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" />  
+                                            <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5>    
+                                            <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}">Add
+                                                <span class="add-icon bg-light-gray">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </span>
+                                            </button>
+                                            <div class="cart_qty qty-box">
+                                                <div class="input-group bg-white">
+                                                    <button type="button" class="qty-left-minus bg-gray"
+                                                        data-type="minus" data-field="">
+                                                        <i class="fa fa-minus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                    </button>
+                                                    <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number"
+                                                        name="quantity" value="0">
+                                                    <button type="button" class="qty-right-plus bg-gray"
+                                                        data-type="plus" data-field="">
+                                                        <i class="fa fa-plus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% if products.has_other_pages %}
+                    <nav class="custome-pagination">
+                        <ul class="pagination justify-content-center">
+                            {% if products.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{products.previous_page_number}}" tabindex="-1" aria-disabled="true">
+                                    <i class="fa-solid fa-angles-left"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for i in products.paginator.page_range %}
+                            {% if products.number == i %}
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:void(0)">{{i}}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link" href="?page={{i}}">{{i}}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if products.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{products.next_page_number}}">
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+{% endblock %}

@@ -1,0 +1,840 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Seller Dashboard</title>
+{% endblock %}
+{% block content %}
+
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Vendor Dashboard</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Vendor Dashboard</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- User Dashboard Section Start -->
+    <section class="user-dashboard-section section-b-space">
+        <div class="container-fluid-lg">
+            {% for vend in vendor %}
+            <div class="row">
+                <div class="col-xxl-3 col-lg-4">
+                    <div class="dashboard-left-sidebar">
+                        <div class="close-button d-flex d-lg-none">
+                            <button class="close-sidebar">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="profile-box">
+                            <div class="cover-image">
+                                <img src="{% static 'assets/' %}images/inner-page/cover-img.jpg" class="img-fluid blur-up lazyload"
+                                    alt="">
+                            </div>
+
+                            <div class="profile-contain">
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="profile-image">
+                                        <div class="position-relative">
+                                            <img src="/media/{{vend.image}}"
+                                                class="blur-up lazyload update_img" alt="">                                              
+                                            <div class="cover-icon">
+                                                <i class="fa-solid fa-pen">
+                                                    <input name="vendor_image" type="file" onchange="readURL(this,0)">
+                                                </i>
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <input name="vend_image" type="submit" name="" value="save image">
+                                </form> 
+                                <div class="profile-name">
+                                    <h3>{{vend.name}}</h3>
+                                    <h6 class="text-content">{{vend.email}}</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a href="#pills-tabContent" class="nav-link active" id="pills-dashboard-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-dashboard" role="tab"
+                                    aria-controls="pills-dashboard" aria-selected="true"><i data-feather="home"></i>
+                                    DashBoard</a>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-product-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-product" type="button" role="tab"
+                                    aria-controls="pills-product" aria-selected="false"><i
+                                        data-feather="shopping-bag"></i>Products</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-order-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-order" type="button" role="tab" aria-controls="pills-order"
+                                    aria-selected="false"><i data-feather="shopping-bag"></i>Order</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-profile" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false"><i data-feather="user"></i>
+                                    Profile</button>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-address-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-address" type="button" role="tab"
+                                    aria-controls="pills-address" aria-selected="false"><i class="fa fa-money-bill"></i>&nbsp;
+                                    Payment Details</button>
+                            </li>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button onclick="location.href='{% url 'logout' %}'" style="color: #cf420c;" class="nav-link" id="pills-address-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-address" type="button" role="tab"
+                                    aria-controls="pills-address" aria-selected="false"><i data-feather="map-pin"></i>
+                                    Logout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xxl-9 col-lg-8">
+                    <button class="btn left-dashboard-show btn-animation btn-md fw-bold d-block mb-4 d-lg-none">Show
+                        Menu</button>
+                    <div class="dashboard-right-sidebar">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel"
+                                aria-labelledby="pills-dashboard-tab">
+                                <div class="dashboard-home">
+                                    <div class="title">
+                                        <h2>My Dashboard</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <div class="dashboard-user-name">
+                                        <h6 class="text-content">Hello, <b class="text-title">{{vend.name}}</b></h6>
+                                        {% if vend_approve %}
+                                        <p class="text-content">From your Seller Account Dashboard you have the ability to
+                                            view a snapshot of your recent account activity and information about your products.</p>
+                                        {% else %}
+                                        <h4 style="color: orangered;" class="text-content">Your Vendor account have not been approved! Our Teams are confirming your details to ensure trust within the site...</h4>  
+                                        <i>You will not be able to take any action until your vendor account is approved. Thanks!</i>
+                                        {% endif %}    
+                                    </div>
+
+                                    <div class="total-box">
+                                        <div class="row g-sm-4 g-3">
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="{% static 'assets/' %}images/svg/order.svg"
+                                                        class="img-1 blur-up lazyload" alt="">
+                                                    <img src="{% static 'assets/' %}images/svg/order.svg" class="blur-up lazyload"
+                                                        alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>Total Products</h5>
+                                                        <h3>{{vend.product_set.all.count}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="{% static 'assets/' %}images/svg/pending.svg"
+                                                        class="img-1 blur-up lazyload" alt="">
+                                                    <img src="{% static 'assets/' %}images/svg/pending.svg" class="blur-up lazyload"
+                                                        alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>Total Sales</h5>
+                                                        <h3>{{vend_sale.count}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="{% static 'assets/' %}images/svg/wishlist.svg"
+                                                        class="img-1 blur-up lazyload" alt="">
+                                                    <img src="{% static 'assets/' %}images/svg/wishlist.svg"
+                                                        class="blur-up lazyload" alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>Order Pending</h5>
+                                                        <h3>{{ord_pending.count}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-4">
+                                        <div class="col-xxl-6">
+                                            <div class="dashboard-bg-box">
+                                                <div id="chart"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-6">
+                                            <div class="dashboard-bg-box">
+                                                <div id="sale"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-6">
+                                            <div class="table-responsive dashboard-bg-box">
+                                                <div class="dashboard-title mb-4">
+                                                    <h3>Trending Products</h3>
+                                                </div>
+
+                                                <table class="table product-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Images</th>
+                                                            <th scope="col">Product Name</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Sales</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for p in popular_prod %}
+                                                        <tr>
+                                                            <td class="product-image">
+                                                                <img src="/media/{{p.thumb_nail}}"
+                                                                    class="img-fluid" alt="">
+                                                            </td>
+                                                            <td>
+                                                                <h6>{{p.name}}</h6>
+                                                            </td>
+                                                            <td>
+                                                                {% if p.variation_set.first.discount %}
+                                                                <h6>&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</h6>
+                                                                {% else %}
+                                                                <h6>&#8358; {{p.variation_set.first.price|floatformat:2}}</h6>
+                                                                {% endif %}
+                                                            </td>
+                                                            <td>
+                                                                <h6>{{p.sales}}</h6>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-6">
+                                            <div class="order-tab dashboard-bg-box">
+                                                <div class="dashboard-title mb-4">
+                                                    <h3>Recent Order</h3>
+                                                </div>
+
+                                                <div class="table-responsive">
+                                                    <table class="table order-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Order ID</th>
+                                                                <th scope="col">Product Name</th>
+                                                                <th scope="col">Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for item in order_items|slice:5 %}
+                                                            <tr>
+                                                                <td class="product-image">#{{item.order.code}}</td>
+                                                                <td>
+                                                                    <h6>{{item.item}}</h6>
+                                                                </td>
+                                                                <td>
+                                                                    {% if item.order.order_status == process %}
+                                                                    <label class="danger">Pending</label>
+                                                                    {% else %}
+                                                                    <label class="success">Delivered</label>
+                                                                    {% endif %}                                                                    
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="pills-product" role="tabpanel"
+                                aria-labelledby="pills-product-tab">
+                                <div class="product-tab">
+                                    <div class="title title-flex">
+                                        <div>
+                                            <h2>Products</h2>
+                                            <span class="title-leaf">
+                                                <svg class="icon-width bg-gray">
+                                                    <use xlink:href="/static/assets/svg/leaf.svg#leaf"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        {% if messages %}
+                                        {% for message in messages %}
+                                        <h4 class="theme-color">{{ message }}</h4>
+                                        {% endfor %}
+                                        {% endif %}                                        
+                                        {% if vend_approve %}
+                                        <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3" data-bs-toggle="modal" data-bs-target="#edit-product" onclick="location.href='/vendor/new/add-product'"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Add New Product</button>
+                                        {% else %}
+                                        <h4 class="theme-color"><i>You will be able to add products if your vendor account is approved!</i></h4>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="table-responsive dashboard-bg-box">
+                                        <table class="table product-table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Images</th>
+                                                    <th scope="col">Product Name</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Stock</th>
+                                                    <th scope="col">Sales</th>
+                                                    <th scope="col">Add / Edit / Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for p in products %}
+                                                <tr>
+                                                    <td class="product-image">
+                                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                                        <img src="/media/{{p.thumb_nail}}"
+                                                            class="img-fluid" alt=""></a>
+                                                    </td>
+                                                    <td>
+                                                        <h6>{{p.name}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        {% if p.variation_set.first.discount %}
+                                                        <h6 class="theme-color fw-bold">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</h6>
+                                                        {% else %}
+                                                        <h6 class="theme-color fw-bold">&#8358; {{p.variation_set.first.price|floatformat:2}}</h6>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <h6>{{p.variation_set.first.number}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6>{{p.sales}}</h6>
+                                                    </td>
+                                                    <td class="efit-delete">
+                                                        <i data-bs-toggle="modal" data-bs-target="#product-var-{{p.id}}" class="fa fa-plus theme-color"></i>&nbsp;&nbsp;
+                                                        <i data-bs-toggle="modal" data-bs-target="#edit-product-{{p.id}}" data-feather="edit" class="edit"></i>
+                                                        <i data-bs-toggle="modal" data-bs-target="#delete-product-{{p.id}}" data-feather="trash-2" class="delete"></i>                                                        
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="pills-order" role="tabpanel"
+                                aria-labelledby="pills-order-tab">
+                                <div class="dashboard-order">
+                                    <div class="title">
+                                        <h2>All Order</h2>
+                                        <span class="title-leaf title-leaf-gray">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <div class="order-tab dashboard-bg-box">
+                                        <div class="table-responsive">
+                                            <table class="table order-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Order ID</th>
+                                                        <th scope="col">Product Name</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for item in order_items %}
+                                                    <tr>
+                                                        <td class="product-image">#{{item.order.code}}</td>
+                                                        <td>
+                                                            <h6>{{item.item}}</h6>
+                                                        </td>
+                                                        <td>
+                                                            {% if item.order.order_status == process %}
+                                                            <label class="danger">Pending</label>
+                                                            {% else %}
+                                                            <label class="success">Delivered</label>
+                                                            {% endif %}                                                                    
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="theme-color fw-bold">&#8358; {{item.price|floatformat:2}}</h6>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="pills-address" role="tabpanel"
+                                aria-labelledby="pills-address-tab">
+                                <div class="dashboard-address">
+                                    <div class="title title-flex">
+                                        <div>
+                                            <h2>Payment Details</h2>
+                                            <span class="title-leaf">
+                                                <svg class="icon-width bg-gray">
+                                                    <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        {% if vend_approve %}
+                                        <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#add-address"><i data-feather="plus"
+                                                class="me-2"></i> Add New Payment
+                                        </button>                                        
+                                        {% endif %}
+
+                                    </div>
+
+                                    <div class="row g-sm-4 g-3">
+                                        {% for pay in payments %}                                        
+                                        <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6">
+                                            <div class="address-box">
+                                                <div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="jack"
+                                                            id="flexRadioDefault2" checked>
+                                                    </div>
+
+                                                    <div class="label">
+                                                        <label>{{pay.vendor}}</label>
+                                                    </div>
+
+                                                    <div class="table-responsive address-table">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="2">{{pay.bank}}</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Acct No :</td>
+                                                                    <td>
+                                                                        <p>{{pay.acct_no}}
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Acct Name :</td>
+                                                                    <td>&nbsp;{{pay.acct_name}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="button-group">
+                                                    <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#edit-payment-{{pay.id}}"><i data-feather="edit"></i>
+                                                        Edit</button>
+                                                    <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#delete-payment-{{pay.id}}"><i data-feather="trash-2"></i>
+                                                        Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% if payments.count == 0 %}
+                                    <h4>Add payment method to receive payments for your products...</h4>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                aria-labelledby="pills-profile-tab">
+                                <div class="dashboard-profile">
+                                    <div class="title">
+                                        <h2>My Profile</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div>
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <i class="theme-color">{{message}}</i>
+                                    {% endfor %}
+                                    {% endif %}
+                                    </div>
+                                    <div class="profile-tab dashboard-bg-box">
+                                        <div class="dashboard-title dashboard-flex">
+                                            <h3>Profile Details</h3>
+                                            <button class="btn btn-sm theme-bg-color text-white" data-bs-toggle="modal"
+                                                data-bs-target="#edit-profile">Edit Profile</button>
+                                        </div>
+                                        {% for vend in vendor %}
+                                        <ul>
+                                            <li>
+                                                <h5>Vendor Name :</h5>
+                                                <h5>{{vend.name}}</h5>
+                                            </li>
+                                            <li>
+                                                <h5>Description :</h5>
+                                                <h5>{{vend.description}}</h5>
+                                            </li>
+                                            <li>
+                                                <h5>Email Address :</h5>
+                                                <h5>{{vend.email}}</h5>
+                                            </li>
+                                            <li>
+                                                <h5>Address :</h5>
+                                                <h5>{{vend.address}}</h5>
+                                            </li>
+                                            <li>
+                                                <h5>Category :</h5>
+                                                <h5>{{vend.category}}</h5>
+                                            </li>
+                                        </ul>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- User Dashboard Section End -->
+
+<div class="modal fade theme-modal" id="add-address" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Payment Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/vendor/dashboard">
+                    {% csrf_token %}
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input class="form-control" name="bankname" placeholder="Leave a comment here" id="bank" required>
+                        <label for="bank">Bank Name</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="number" name="acctno" class="form-control" id="acctno" placeholder="Enter Phone Number" required>
+                        <label for="acctno">Account Number </label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input class="form-control" name="acctname" placeholder="Enter the name of place here" id="acctname" required>
+                        <label for="acctname">Account Name</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button name="pay_add" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Add </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% for i in payments %}
+<div class="modal fade theme-modal" id="edit-payment-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Payment Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/vendor/dashboard">
+                    {% csrf_token %}
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input class="form-control" name="edit_bankname" placeholder="Leave a comment here" id="bank" value="{{i.bank}}" required>
+                        <label for="bank">Bank Name</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="number" name="edit_acctno" class="form-control" id="acctno" placeholder="Enter Phone Number" value="{{i.acct_no}}" required>
+                        <label for="acctno">Account Number </label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input class="form-control" name="edit_acctname" placeholder="Enter the name of place here" id="acctname" value="{{i.acct_name}}" required>
+                        <label for="acctname">Account Name</label>
+                        <input type="hidden" name="edit_payid" value="{{i.id}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button name="pay_edit" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Add </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% for i in payments %}
+<div class="modal fade theme-modal" id="delete-payment-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to remove this payment account?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/vendor/dashboard">
+                    {% csrf_token %}
+                        <input type="hidden" name="delete_payid" value="{{i.id}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button style="background-color:orangered;" name="pay_delete" type="submit" class="btn btn-md text-white" data-bs-dismiss="modal">Delete </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+    <!-- Add address modal box end -->
+
+<!-- Edit Profile Modal Start -->
+    <div class="modal fade theme-modal" id="edit-profile" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Edit Your Vendor Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="companyName" class="form-label">Vendor Name</label>
+                            {{profile_edit.name}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="emailAddress" class="form-label">Business Email</label>
+                            {{profile_edit.email}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="employees" class="form-label">About</label>
+                            {{profile_edit.description}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            {{profile_edit.category}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="street" class="form-label">Address</label>
+                            {{profile_edit.address}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Phone Contact</label>
+                            {{profile_edit.phone}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-animation btn-md fw-bold"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button name="profile_edit" type="submit" type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                                data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Edit Profile Modal End -->
+
+{% for p in products %}
+<div class="modal fade theme-modal" id="edit-product-{{p.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/vendor/dashboard" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input class="form-control" name="pname" id="" value="{{p.name}}" required>
+                        <label for="name">Product Name</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="file" name="pimage" class="form-control" id="image" value="{{p.thumb_nail}}"> 
+                        <label for="image">Product Thumbnail </label>
+                    </div>
+                    <div class="form-floating mb-4 theme-form-floating">                        
+                        <select name="psize" class="form-select" id="size">
+                            {% for s in p.variation_set.all %}
+                            <option value="{{s.size}}">{{s.size}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="size">Size</label>
+                    </div>
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <i class="theme-color">Set the following values according to the product size selected!</i>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="number" class="form-control" name="pprice" id="price" value="0">
+                        <label for="price">Product Original Price</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="number" class="form-control" name="pdisprice" id="dis-price" value="0">
+                        <label for="dis-price">Product Discount Price</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="hidden" name="pid" value="{{p.id}}">
+                        <input type="number" class="form-control" name="pnumber" id="number" value="0">
+                        <label for="number">Number Of Product</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button name="product_edit" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Save </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div> 
+{% endfor %}
+
+{% for p in products %}
+<div class="modal fade theme-modal" id="product-var-{{p.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Variation To Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/vendor/dashboard">
+                    {% csrf_token %}
+                    <div class="form-floating mb-4 theme-form-floating">
+                        {{varform.size}}
+                        <label for="name">Product Size</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        {{varform.price}}
+                        <label for="image">Product Original Price </label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        {{varform.dis_price}}
+                        <label for="price">Product Discount Price</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        {{varform.stock_status}}
+                        <label for="dis-price">Product Discount Price</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        {{varform.number}}
+                        <input type="hidden" name="pid" value="{{p.id}}">
+                        <label for="number">Number Of Product</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button name="var_add" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Add</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>   
+{% endfor %} 
+
+{% for i in products %}
+<div class="modal fade theme-modal" id="delete-product-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this product? </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/vendor/dashboard">
+                    {% csrf_token %}
+                        <input type="hidden" name="pid" value="{{i.id}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button style="background-color:orangered;" name="prod_delete" type="submit" class="btn btn-md text-white" data-bs-dismiss="modal">Delete </button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
+

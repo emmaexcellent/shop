@@ -1,0 +1,888 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    {% block mobilemenu %}
+
+    {% endblock %}
+
+    <!-- Home Section Start -->
+    <section class="home-section-2 home-section-bg pt-0 overflow-hidden">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-animate">
+                        <div>
+                            <div class="home-contain rounded-0 p-0">
+                                <img src="{% static 'assets/' %}images/grocery/banner/slider1.png"
+                                    class="img-fluid bg-img blur-up lazyload" alt="">
+                                <div class="home-detail home-big-space p-center-left home-overlay position-relative">
+                                    <div class="container-fluid-lg">
+                                        <div>
+                                            <h6 class="ls-expanded theme-color text-uppercase">Excel
+                                            </h6>
+                                            <h1 class="heding-2">No.1 Online Shop For You</h1>
+                                            <h2 class="content-2">Purchase Of Goods Made Easy</h2>
+                                            <h5 class="text-content">Order your favourites and get it delivered to you!
+                                            </h5>
+                                            <button
+                                                class="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2 mend-auto"
+                                                onclick="location.href = '{% url 'shop' %}';">Shop Now <i
+                                                    class="fa-solid fa-arrow-right icon"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Home Section End -->
+
+    <!-- Banner Section Start -->
+
+    <!-- Banner Section End -->
+
+    <!-- Category Section Start -->
+    <section class="category-section-3">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Shop By Categories</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="category-slider-1 arrow-slider wow fadeInUp">
+                        {% for cat in categories %}
+                        <div>
+                            <div class="category-box-list">
+                                <a href="/shop/{{cat.title}}-{{cat.id}}" class="category-name">
+                                    <h4>{{cat.title}}</h4>
+                                </a>
+                                <div class="category-box-view">
+                                    <a href="/shop/{{cat.title}}-{{cat.id}}">
+                                        <img style="height: 130px; width: 130px" src="/media/{{cat.image}}" class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                    <button onclick="location.href = '/shop/{{cat.title}}-{{cat.id}}'" class="btn shop-button">
+                                        <span>Shop Now</span>
+                                        <i class="fas fa-angle-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Category Section End -->
+
+    <!-- Product Fruit & Vegetables Section Start -->
+    <section class="product-section-3">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Groceries</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in grocery %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="/media/{{p.thumb_nail}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
+                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Fruit & Vegetables Section End -->
+    
+    <!-- Offer Section Start -->
+    <section class="offer-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="offer-box hover-effect">
+                        <h2><span>FREE GIFT ANY ORDER</span> 70% oFF</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Offer Section End -->
+
+    <!-- Product Breakfast & Dairy Section Start -->
+    <section class="product-section-4">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Health</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in health %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="/media/{{p.thumb_nail}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
+                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Breakfast & Dairy Section End -->
+
+    <!-- Product Chemist Store Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Beauty</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in beauty %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="/media/{{p.thumb_nail}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
+                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Chemist Store Section End -->
+
+
+    <!-- Product Drinks Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Fashion</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in fashion %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="/media/{{p.thumb_nail}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
+                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Drinks Section End -->
+
+    <!-- Product Grocery & Staples Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Electronics</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in electronic %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="/media/{{p.thumb_nail}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
+                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Grocery & Staples Section End -->
+
+    <!-- Banner Section Start -->
+    <section class="banner-section">
+        <div class="container-fluid-lg">
+            <div class="row gy-lg-0 gy-3">
+                <div class="col-lg-8">
+                    <div class="banner-contain-3 h-100 pt-sm-5 hover-effect">
+                        <img src="{% static 'assets/' %}images/grocery/banner/8.png" class="bg-img blur-up lazyload" alt="">
+                        <div
+                            class="banner-detail banner-p-sm p-center-right position-relative banner-minus-position banner-detail-deliver">
+                            <div>
+                                <h3 class="fw-bold banner-contain">Safe Delivery to the door</h3>
+                                <h4 class="mb-sm-3 mb-2 delivery-contain">Order your terms. Anytime and anyhow.
+                                </h4>
+                                <ul class="banner-list">
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="check-icon">
+                                                <i class="fa-solid fa-check"></i>
+                                            </div>
+
+                                            <div class="check-contain">
+                                                <h5>Get live order tracking</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="check-icon">
+                                                <i class="fa-solid fa-check"></i>
+                                            </div>
+
+                                            <div class="check-contain">
+                                                <h5>Get latest feature updates</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <button class="btn theme-bg-color text-white mt-sm-4 mt-3 fw-bold"
+                                    onclick="location.href = '{% url 'shop' %}';">Start Shopping</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="banner-contain-3 pt-lg-4 h-100 hover-effect">
+                        <a href="javascript:void(0)">
+                            <img src="{% static 'assets/' %}images/grocery/banner/9.jpg"
+                                class="img-fluid social-image blur-up lazyload w-100" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section End -->
+
+    <!-- Product Personal Care Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Stationary</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in stationery %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="/media/{{p.thumb_nail}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
+                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Personal Care Section End -->
+
+    <!-- Product Kitchen & Dining Needs Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Accessory</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in accessory %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="/media/{{p.thumb_nail}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
+                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Kitchen & Dining Needs Section End -->
+
+    
+    <!-- Service Section Start -->
+    <section class="service-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row g-3 row-cols-xxl-5 row-cols-lg-3 row-cols-md-2">
+                <div>
+                    <div class="service-contain-2">
+                        <div class="service-image">
+                            <img src="{% static 'assets/' %}svg/delivery.svg" class="blur-up lazyloaded" alt="">
+                        </div>
+                        <div class="service-detail">
+                            <h3>Free Shipping</h3>
+                            <h6 class="text-content">Free Shipping world wide</h6>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="service-contain-2">
+                        <div class="service-image">
+                            <img src="{% static 'assets/' %}svg/product.svg" class="blur-up lazyloaded" alt="">
+                        </div>
+
+                        <div class="service-detail">
+                            <h3>24 x 7 Service</h3>
+                            <h6 class="text-content">Online Service For 24 x 7</h6>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="service-contain-2">
+                        <div class="service-image">
+                            <img src="{% static 'assets/' %}svg/discount.svg" class="blur-up lazyloaded" alt="">
+                        </div>
+                        <div class="service-detail">
+                            <h3>100% Original</h3>
+                            <h6 class="text-content">100% Money Back</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Service Section End -->
+    {% endblock content %}
+
+  

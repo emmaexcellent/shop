@@ -1,0 +1,275 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load text_extras %}
+{% block title %}
+    <title>Add Product</title>
+{% endblock %}
+{% block content %}
+
+<!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Add New Product</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="/vendor/dashboard">
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+    <br>
+    
+<!-- Page Body start -->
+<div class="page-body-wrapper">
+<div class="page-body">
+
+<!-- New Product Add Start -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-8 m-auto">
+                        {% if messages %}
+                            {% for message in messages %}
+                            <h5 style="color:orangered; font-size: 14;">{{ message }}</h5>
+                            {% endfor %}
+                            {% endif %}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header-2">
+                                    <h2>Product Information</h2>
+                                </div>
+                                <br>
+
+                                <div class="theme-form theme-form-2 mega-form">
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="form-label-title col-sm-3 mb-0">Product
+                                            Name</label>
+                                        <div class="col-sm-9">
+                                            {{pform.name}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Product
+                                            Category</label>
+                                        <div class="col-sm-9">
+                                            {{pform.category}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Short Description</label>
+                                        <div class="col-sm-9">
+                                            {{pform.short}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label
+                                            class="col-sm-3 col-form-label form-label-title">Subcategory</label>
+                                        <div class="col-sm-9">
+                                            {{pform.sub_category}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label
+                                            class="col-sm-3 col-form-label form-label-title">Color</label>
+                                        <div class="col-sm-9">
+                                            {{pform.color}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Brand</label>
+                                        <div class="col-sm-9">
+                                            {{pform.brand}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="theme-form theme-form-2 mega-form">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <label class="form-label-title col-sm-3 mb-0">Product
+                                                    Description</label>
+                                                <div class="col-12">
+                                                    <br>
+                                                   {{pform.description}}
+                                                   {{pform.media}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header-2">
+                                    <h2>Product Images</h2>
+                                </div>
+                                <br>
+                                <div class="theme-form theme-form-2 mega-form">
+                                    <div class="mb-4 row align-items-center">
+                                        <label
+                                            class="col-sm-3 col-form-label form-label-title">Thumbnail Image</label>
+                                        <div class="col-sm-9">
+                                            {{pform.thumb_nail}}
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Images</label>                                    
+                                        <div class="col-sm-9">
+                                            <i class="theme-color">Select multiple images between 2-5 images for better appearance of your product...</i>
+                                            <input name="files" class="form-control form-choose" type="file"
+                                                id="formFileMultiple1" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header-2">
+                                    <h2>Product Variation</h2>
+                                </div>
+                                <br>
+
+                                <div class="theme-form theme-form-2 mega-form">
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="form-label-title col-sm-3 mb-0">Product
+                                            Status</label>
+                                        <div class="col-sm-9">
+                                            {{variationform.stock_status}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Number Of Product</label>
+                                        <div class="col-sm-9">
+                                            {{variationform.number}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Product Size Unit</label>
+                                        <div class="col-sm-9">
+                                            {{variationform.size_par}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label
+                                            class="col-sm-3 col-form-label form-label-title">Product Size</label>
+                                        <div class="col-sm-9">
+                                            {{variationform.size}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label
+                                            class="col-sm-3 col-form-label form-label-title">Product Original Price </label>
+                                        <div class="col-sm-9">
+                                            {{variationform.price}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Product Discount Price</label>
+                                        <div class="col-sm-9">
+                                            <i class="theme-color">This is the price that will be displayed to customers as product price. Leave blank if there's no discount </i>
+                                            {{variationform.dis_price}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-header-2">
+                                    <h2>Product Additional Info</h2>
+                                </div>
+                                <br>
+
+                                <div class="theme-form theme-form-2 mega-form">
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="form-label-title col-sm-3 mb-0">Product
+                                            Manufacturer</label>
+                                        <div class="col-sm-9">
+                                            {{prodinfoform.manufacturer}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Materials/Ingredients</label>
+                                        <div class="col-sm-9">
+                                            <i class="theme-color">Separate with comma...</i>
+                                            {{prodinfoform.ingredients}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label class="col-sm-3 col-form-label form-label-title">Number on Product</label>
+                                        <div class="col-sm-9">
+                                            <i class="theme-color">Leave blank if no number on the product</i>
+                                            {{prodinfoform.item_number}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label
+                                            class="col-sm-3 col-form-label form-label-title">Manufacturing Date</label>
+                                        <div class="col-sm-9">
+                                            {{prodinfoform.prod_date}}
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row align-items-center">
+                                        <label
+                                            class="col-sm-3 col-form-label form-label-title">Expiry Date </label>
+                                        <div class="col-sm-9">
+                                            {{prodinfoform.expiry_date}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-12">
+                            <button style="float:right" type="submit" class="btn btn-md mt-3 theme-bg-color text-white">Submit New Product</button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- New Product Add End -->
+
+{% endblock content %}

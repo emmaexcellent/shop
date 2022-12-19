@@ -1,0 +1,116 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Wishlists</title>
+{% endblock %}
+{% block content %}
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Wishlist</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Wishlist Section Start -->
+    <section class="wishlist-section section-b-space">
+        <div class="container-fluid-lg">
+            {% if wlist.count == 0 %}
+             <h4>You don't have any product in your wishlist!</h4>
+             <br>
+            <button onclick="location.href='{% url 'shop' %}'" class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3" >Go to Shop</button>
+            {% endif %}
+            <div class="row g-sm-3 g-2">
+            	{% for p in wlist %}
+                <div class="col-xxl-2 col-lg-3 col-md-4 col-6 product-box-contain">
+                    <div class="product-box-3 h-100">
+                        <div class="product-header">
+                            <div class="product-image">
+                                <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                    <img src="/media/{{p.product.productimage_set.first.image}}" class="img-fluid blur-up lazyload"
+                                        alt="">
+                                </a>
+
+                                <form method="post" action="{% url 'wishlist' %}" class="product-header-top">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delID" value="{{p.id}}">
+                                    <button type="submit" class="btn wishlist-button close_button">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-detail">
+                                <span class="span-name">{{p.product.category}}</span>
+                                <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                    <h5 class="name">{{p.product.name}}</h5>
+                                </a>
+                                <h6 class="unit mt-1">{{p.product.variation_set.first.size}}</h6>
+                                {% if p.product.variation_set.first.discount %}
+                                <h5 class="price">
+                                    <span class="theme-color">&#8358; {{p.product.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.product.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">  
+                                    <del>&#8358;{{p.product.variation_set.first.price|floatformat:2}}</del>
+                                </h5>
+                                {% else %}
+                                <h5 class="price"><span class="theme-color">&#8358; {{p.product.variation_set.first.price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.product.variation_set.first.price}}">
+                                </h5>
+                                {% endif %} 
+                                <div class="add-to-cart-box bg-white mt-2">
+                                	<input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                    <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                    <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                    <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                    <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" />
+                                    <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}">Add
+                                        <span class="add-icon bg-light-gray">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                    <div class="cart_qty qty-box">
+                                        <div class="input-group bg-white">
+                                            <button type="button" class="qty-left-minus bg-gray" data-type="minus" data-field="">
+                                                <i class="fa fa-minus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                            </button>
+                                            <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="text"
+                                                name="quantity" value="0">
+                                            <button type="button" class="qty-right-plus bg-gray" data-type="plus"
+                                                data-field="">
+                                                <i class="fa fa-plus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <!-- Wishlist Section End -->
+
+{% endblock %}

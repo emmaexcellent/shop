@@ -1,0 +1,286 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>About Us</title>
+{% endblock %}
+{% block content %}
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>About Us</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Fresh Vegetable Section Start -->
+    <section class="fresh-vegetable-section section-lg-space">
+        <div class="container-fluid-lg">
+            <div class="row gx-xl-5 gy-xl-0 g-3 ratio_148_1">
+                <div class="col-xl-6 col-12">
+                    <div class="row g-sm-4 g-2">
+                        <div class="col-6">
+                            <div class="fresh-image-2">
+                                <div>
+                                    <img src="{% static 'assets/' %}images/inner-page/about-us/1.jpg"
+                                        class="bg-img blur-up lazyload" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="fresh-image">
+                                <div>
+                                    <img src="{% static 'assets/' %}images/inner-page/about-us/2.jpg"
+                                        class="bg-img blur-up lazyload" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-12">
+                    <div class="fresh-contain p-center-left">
+                        <div>
+                            <div class="review-title">
+                                <h4>About Us</h4>
+                                <h2>We make Organic Food In Market</h2>
+                            </div>
+
+                            <div class="delivery-list">
+                                <p class="text-content">Just a few seconds to measure your body temperature. Up to 5
+                                    users! The battery lasts up to 2 years. There are many variations of passages of
+                                    Lorem Ipsum available.We started in 2019 and haven't stopped smashing it since. A
+                                    global brand that doesn't sleep, we are 24/7 and always bringing something new with
+                                    over 100 new products dropping on the monhtly, bringing you the latest looks for
+                                    less.</p>
+
+                                <ul class="delivery-box">
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="delivery-icon">
+                                                <img src="{% static 'assets/' %}svg/3/delivery.svg" class="blur-up lazyload" alt="">
+                                            </div>
+
+                                            <div class="delivery-detail">
+                                                <h5 class="text">Free delivery for all orders</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="delivery-icon">
+                                                <img src="{% static 'assets/' %}svg/3/leaf.svg" class="blur-up lazyload" alt="">
+                                            </div>
+
+                                            <div class="delivery-detail">
+                                                <h5 class="text">Only fresh foods</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="delivery-icon">
+                                                <img src="{% static 'assets/' %}svg/3/delivery.svg" class="blur-up lazyload" alt="">
+                                            </div>
+
+                                            <div class="delivery-detail">
+                                                <h5 class="text">Free delivery for all orders</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="delivery-icon">
+                                                <img src="{% static 'assets/' %}svg/3/leaf.svg" class="blur-up lazyload" alt="">
+                                            </div>
+
+                                            <div class="delivery-detail">
+                                                <h5 class="text">Only fresh foods</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fresh Vegetable Section End -->
+
+    <!-- Review Section Start -->
+    <section class="review-section section-lg-space">
+        <div class="container-fluid">
+            <div class="about-us-title text-center">
+                <h4 class="text-content">Latest Testimonals</h4>
+                <h2 class="center">What people say</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-4-half product-wrapper">
+                        {% for rev in reviews %}
+                        <div>
+                            <div class="reviewer-box">
+                                <i class="fa-solid fa-quote-right"></i>
+                                <div class="product-rating">
+                                    <ul class="rating">
+                                        {% for star in rev.star|ljust:rev.star %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                                <h3>{{rev.title}}</h3>
+
+                                <p>"{{rev.message}}"</p>
+
+                                <div class="reviewer-profile">
+                                    <div class="reviewer-image">
+                                        <img src="/media/{{rev.image}}" class="blur-up lazyload"
+                                            alt="">
+                                    </div>
+
+                                    <div class="reviewer-name">
+                                        <h4>{{rev.name}}</h4>
+                                        <h6>{{rev.job}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Review Section End -->
+
+    <!-- Blog Section Start -->
+    <section class="section-lg-space">
+        <div class="container-fluid-lg">
+            <div class="about-us-title text-center">
+                <h4 class="text-content">Our Blog</h4>
+                <h2 class="center">Our Latest Blog</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-5 ratio_87">
+                        <div>
+                            <div class="blog-box">
+                                <div class="blog-box-image">
+                                    <div class="blog-image">
+                                        <a href="" class="rounded-3">
+                                            <img src="{% static 'assets/' %}images/veg-2/blog/1.jpg" class="bg-img blur-up lazyload"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <a href="" class="blog-detail d-block">
+                                    <h6>Farmart</h6>
+                                    <h5>Fresh Meat Saugage</h5>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="blog-box">
+                                <div class="blog-box-image">
+                                    <div class="blog-image">
+                                        <a href="" class="rounded-3">
+                                            <img src="{% static 'assets/' %}images/veg-2/blog/2.jpg" class="bg-img blur-up lazyload"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <a href="" class="blog-detail d-block">
+                                    <h6>Soda Brand</h6>
+                                    <h5>Soda 500ml - 20% OFF</h5>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="blog-box">
+                                <div class="blog-box-image">
+                                    <div class="blog-image">
+                                        <a href="" class="rounded-3">
+                                            <img src="{% static 'assets/' %}images/veg-2/blog/3.jpg" class="bg-img blur-up lazyload"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <a href="" class="blog-detail d-block">
+                                    <h6>Beer Brand</h6>
+                                    <h5>Soda 500ml - 20% OFF</h5>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="blog-box">
+                                <div class="blog-box-image">
+                                    <div class="blog-image">
+                                        <a href="" class="rounded-3">
+                                            <img src="{% static 'assets/' %}images/veg-2/blog/4.jpg" class="bg-img blur-up lazyload"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <a href="" class="blog-detail d-block">
+                                    <h6>Beer Brand</h6>
+                                    <h5>Fresh Beer -30% OFF</h5>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="blog-box">
+                                <div class="blog-image">
+                                    <a href="" class="rounded-3">
+                                        <img src="{% static 'assets/' %}images/veg-2/blog/5.jpg" class="bg-img blur-up lazyload"
+                                            alt="">
+                                    </a>
+                                </div>
+
+                                <a href="" class="blog-detail d-block">
+                                    <h6>Milk Brand</h6>
+                                    <h5>Fresh Milk</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+{% endblock content %}

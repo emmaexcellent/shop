@@ -1,0 +1,296 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    <title>Vendor Detail</title>
+{% endblock %}
+{% block content %}
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>{{vendor}}</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url 'home' %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href="/vendor/list">Vendor List</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{vendor}}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+   <!-- Shop Section Start -->
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+
+                <div class="col-xxl-3 col-lg-4">
+                    <div class="left-box wow fadeInUp">
+                        <div class="shop-left-sidebar">
+                            <div class="back-button">
+                                <h3><i class="fa-solid fa-arrow-left"></i> Back</h3>
+                            </div>
+                            <h3>Customers Reviews</h3>
+                            <br>
+                            <div class="review-title">
+                                <h4 class="fw-500">{{vendor.vendorreview_set.all.count}} Customer reviews</h4>
+                            </div>
+                            {% if  vendor.vendorreview_set.all.count is not 0 %} 
+                            <div class="d-flex">
+                                <div class="product-rating">
+                                    <ul class="rating">
+                                        {% if  vendor.vendorreview_set.all.count > 0 %}
+                                        {% for star in vrating.avg_rating|floatformat:1|ljust:vrating.avg_rating %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                <h6 class="ms-3">{{vrating.avg_rating|floatformat:1}} Out Of 5.0</h6>
+                            </div>
+                            {% else %}
+                            <div class="review-title">
+                                <h4 class="fw-700">Be the first to review this Vendor!</h4>
+                            </div>
+                            {% endif %}
+                           <br> 
+                            <div class="review-people">
+                                <ul class="review-list">
+                                    {% for r in vendor.vendorreview_set.all %}
+                                    <li style="display:block; width:100%;">
+                                        <div class="product-box-3">
+                                            <div class="people-comment">
+                                                <img width="25" height="25" src="{% static 'assets/' %}images/pro_pic.png" class="img-fluid blur-up lazyload" alt="customer">
+                                                <a style="font-weight: 600; font-size: 15px;" href="javascript:void(0)">&nbsp;{{r.user}}</a>                                                    
+                                                <div class="date-time">                                                    
+                                                    <div class="product-rating">
+                                                        <ul class="rating">
+                                                            {% for star in r.rating|ljust:r.rating %}
+                                                            <li>
+                                                                <i data-feather="star"
+                                                                    class="fill"></i>
+                                                            </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="reply">
+                                                    <p>{{r.text}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <br>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xxl-9 col-lg-8">
+                    <div class="vendor-detail-box-2">
+                        <div class="row g-4">
+                            <div class="col-xxl-2 col-md-3">
+                                <div class="vendor-logo">
+                                    <img src="/media/{{vendor.image}}" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-8 col-md-6">
+                                <div class="vendor-name p-center-left">
+                                    <div>
+                                        <div class="vendor-list-name">
+                                            <h3>{{vendor.name}}</h3>
+                                            <div class="product-rating vendor-rating">
+                                                {% if vendor.vendorreview_set %}
+                                                <ul class="rating">
+                                                    {% for star in vrating.avg_rating|floatformat:1|ljust:vrating.avg_rating %}
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                                <span>{{vrating.avg_rating|floatformat:1}} of 5</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <p>{{vendor.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-2 col-md-3">
+                                <div class="share-contact">
+                                    <div>
+                                        <div class="vendor-contect">
+                                            <h5>If You Any Query?</h5>
+                                            <button onclick="location.href='{% url 'contact' %}'" class="btn btn-sm btn-animation">Contact US</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="show-button">
+                        <div class="filter-button-group mt-0">
+                            <div class="filter-button d-inline-block d-lg-none">
+                                <a>Check Reviews</a>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Products</h3>
+                    <br>
+                    <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-3 row-cols-md-3 row-cols-2 product-list-section">
+                        {% for p in products %}
+                        <div>
+                            <div class="product-box-3 h-100 wow fadeInUp">
+                                <div class="product-header">
+                                    <div class="product-image">
+                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                            <img src="/media/{{p.thumb_nail}}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+
+                                        <ul class="product-option">
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                    data-bs-target="#view{{p.id}}">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                            </li>
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                                <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                    <i data-feather="heart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-footer">
+                                    <div class="product-detail">
+                                        <span class="span-name">{{p.category}}</span>
+                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                            <h5 class="name">{{p.name}}</h5>
+                                        </a>
+                                        <p class="text-content mt-1 mb-2 product-content">{{p.short_description}}</p>
+                                        <div class="product-rating mt-2">
+
+                                            <ul class="rating">
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star"></i>
+                                                </li>
+                                            </ul>
+                                            <span>(4.0)</span>
+                                        </div>
+                                        <h6 class="unit">{{p.variation_set.first.size}}</h6>
+                                        {% if p.variation_set.first.discount %}
+                                        <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                        <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                        </h5>
+                                        {% else %}
+                                        <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                            <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                        </h5>
+                                        {% endif %} 
+                                        <div class="add-to-cart-box bg-white">
+                                            <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                            <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                            <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                            <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" /> 
+                                            <h5 class="d-none prod-size-{{p.id}} active1">{{p.variation_set.first.size}}</h5>     
+                                            <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}">Add
+                                                <span class="add-icon bg-light-gray">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </span>
+                                            </button>
+                                            <div class="cart_qty qty-box">
+                                                <div class="input-group bg-white">
+                                                    <button type="button" class="qty-left-minus bg-gray"
+                                                        data-type="minus" data-field="">
+                                                        <i class="fa fa-minus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                    </button>
+                                                    <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number"
+                                                        name="quantity" value="0">
+                                                    <button type="button" class="qty-right-plus bg-gray" data-type="plus" data-field="">
+                                                        <i class="fa fa-plus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% if products.has_other_pages %}
+                    <nav class="custome-pagination">
+                        <ul class="pagination justify-content-center">
+                            {% if products.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{products.previous_page_number}}" tabindex="-1" aria-disabled="true">
+                                    <i class="fa-solid fa-angles-left"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for i in products.paginator.page_range %}
+                            {% if products.number == i %}
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:void(0)">{{i}}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link" href="?page={{i}}">{{i}}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if products.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{products.next_page_number}}">
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+{% endblock content %}

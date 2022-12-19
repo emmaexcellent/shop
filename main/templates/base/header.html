@@ -1,0 +1,320 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Excel">
+    <meta name="keywords" content="Excel">
+    <meta name="author" content="Excel">
+    <link rel="icon" href="{% static 'assets/' %}images/favicon/5.png" type="image/x-icon">
+    {% block title %}
+    <title>Excel Made For You </title>
+    {% endblock %}
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- bootstrap css -->
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/bootstrap.css">
+
+    <!-- wow css -->
+    <link rel="stylesheet" href="{% static 'assets/' %}css/animate.min.css" />
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/font-awesome.css">
+
+    <!-- feather icon css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/feather-icon.css">
+
+    <!-- Plugin CSS file with desired skin css -->
+    <link rel="stylesheet" href="{% static 'assets/' %}css/vendors/ion.rangeSlider.min.css">
+
+    <!-- slick css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/slick/slick-theme.css">
+
+    <!-- animation css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/font-style.css">
+
+    <!-- Template css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/style.css">
+</head>
+
+<body class="theme-color-3 dark">
+    <header class="pb-md-4 pb-0">
+        <div style="padding: 3px;" class="header-top">
+            <div class="container-fluid-lg">
+                <div class="row">
+                    <div class="col-xxl-3 d-xxl-block d-none">
+                        <div class="top-left-header">
+                            <i class="iconly-Location icli text-white"></i>
+                            <span class="text-white">OOU CAMPUS IBOGUN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="top-nav top-header sticky-header">
+            <div class="container-fluid-lg">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="navbar-top">
+                            <button class="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
+                                <span class="navbar-toggler-icon">
+                                    <i class="fa-solid fa-bars"></i>
+                                </span>
+                            </button>
+                            <a href="{% url 'home' %}" class="web-logo nav-logo">
+                                <img src="{% static 'assets/' %}images/logo/7.png" class="img-fluid blur-up lazyloaded" alt="">
+                            </a>
+                            <div class="middle-box">
+                                <div class="search-box">
+                                    <form method="get" action="{% url 'search' %}" class="input-group">
+                                        <input type="text" class="form-control" name="q" values="{{request.GET.q}}" placeholder="I'm searching for..." aria-label="Example text with button addon">
+                                        <button class="btn" type="submit" id="button-addon1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="rightside-box">
+                                <div class="search-full">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search font-light"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                        </span>
+                                        <input type="text" class="form-control search-type" placeholder="Search here..">
+                                        <span class="input-group-text close-search">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x font-light"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        </span>
+                                    </div>
+                                </div>
+                                <ul class="right-side-menu">
+                                    <li class="right-side">
+                                        <div class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <div class="search-box">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="right-side">
+                                        <a href="{% url 'contact' %}" class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                            </div>
+                                            <div class="delivery-detail">
+                                                <h6>24/7 Delivery</h6>
+                                                <h5>+234 903 292 9196</h5>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="right-side">
+                                        <a href="{% url 'wishlist' %}" class="btn p-0 position-relative header-wishlist">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        </a>
+                                    </li>
+                                    <li class="right-side">
+                                        <div class="onhover-dropdown header-badge">
+                                            <button type="button" class="btn p-0 position-relative header-wishlist" onclick="location.href=''">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                                <span class="position-absolute top-0 start-100 translate-middle badge cartlist">{{request.session.cartdata|length}}
+                                                    <span class="visually-hidden">unread messages</span>
+                                                </span>
+                                            </button>
+
+                                            <div class="onhover-div">
+                                                <ul class="cart-list">
+                                                    {% for product_id,item in cart_data.items %}
+                                                    <li class="product-box-contain">
+                                                        <div class="drop-cart">
+                                                            <a href="/shop/{{item.cat}}/{{item.title|slugify}}-{{product_id}}" class="drop-image">
+                                                                <img src="/media/{{item.img}}" class="blur-up lazyloaded" alt="">
+                                                            </a>
+
+                                                            <div class="drop-contain">
+                                                                <a href="/shop/{{item.cat}}/{{item.title|slugify}}-{{product_id}}">
+                                                                    <h5>{{item.title}}</h5>
+                                                                </a>
+                                                                <h6><span>{{item.qty}} x</span> &#8358; {{item.price|floatformat:2}}</h6>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+
+                                                </ul>
+
+                                                <div class="price-box">
+                                                    <h5>Total :</h5>
+                                                    <h4 class="theme-color fw-bold cart-total">&#8358; {{total_amt|floatformat:2}}</h4>
+                                                </div>
+
+                                                <div class="button-group">
+                                                    <a href="{% url 'cart' %}" class="btn btn-sm cart-button">View Cart</a>
+                                                    <a href="{% url 'checkout' %}" class="btn btn-sm cart-button theme-bg-color
+                                                    text-white">Checkout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="right-side onhover-dropdown">
+                                        <div class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            </div>
+                                        </div>
+                                        {% if user.is_authenticated %}
+                                        <div class="onhover-div onhover-div-login">
+                                            <ul class="user-box-name">
+                                                <li class="product-box-contain">
+                                                    <i></i>
+                                                    <h5><b>Hi, {{request.user}}</b></h5>
+                                                </li>
+                                                <li class="product-box-contain">
+                                                    <i></i>
+                                                    <a href="{% url 'user-dashboard' %}">Dashboard</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="{% url 'order-tracking' %}">Track order</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="{% url 'logout' %}">Logout</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        {% else %}
+                                        <div class="onhover-div onhover-div-login">
+                                            <ul class="user-box-name">
+                                                <li class="product-box-contain">
+                                                    <i></i>
+                                                    <a href="{% url 'login' %}">Log In</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="{% url 'register' %}">Register</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="forgot.html">Forgot Password</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-nav">
+                        <div class="header-nav">
+                            <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                                <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu" aria-hidden="true" style="visibility: hidden;">
+                                    <div class="offcanvas-header navbar-shadow">
+                                        <h5>Menu</h5>
+                                        <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="{% url 'home' %}">Home</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="{% url 'shop' %}">Shop</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="/vendor/list">Vendors</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="{% url 'faq' %}" >Help Center</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="{% url 'contact' %}" >Contact Us</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown d-md-none d-block">
+                                                <a class="nav-link dropdown-toggle" href="/vendor/become-seller">Sell on Excelcart</a>
+                                            </li>                                             
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="header-nav-right">
+                            <button onclick="location.href='/vendor/become-seller'" class="btn deal-button" data-bs-toggle="modal" data-bs-target="#deal-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                <h5>Become Seller</h5>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block mobilemenu %}
+<!-- mobile fix menu start -->
+    <div class="mobile-menu d-md-none d-block mobile-cart">
+        <ul>
+            <li>
+                <a href="{% url 'home' %}">
+                    <i class="iconly-Home icli"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li class="mobile-category">
+                <a href="{% url 'shop' %}">
+                    <i class="iconly-Category icli js-link"></i>
+                    <span>Shop</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'search' %}" class="search-box">
+                    <i class="iconly-Search icli"></i>
+                    <span>Search</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'wishlist' %}" class="notifi-wishlist">
+                    <i class="iconly-Heart icli"></i>
+                    <span>My Wish</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'cart' %}">
+                    <i class="iconly-Bag-2 icli fly-cate"></i>
+                    <span>Cart</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- mobile fix menu end -->
+
+{% endblock %}
