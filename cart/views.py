@@ -69,9 +69,14 @@ def delete_cart_item(request):
 	total_amt=0
 	for p_id,item in request.session['cartdata'].items():
 		total_amt+=int(item['qty'])*int(item['price'])
-		total = total_amt + 500
+		if total_amt > 5000:
+			delivery = total_amt * 11/100
+		else:
+			delivery = 500
+
+		total = total_amt + delivery
 	t=render_to_string('ajax/cart-list.html',
-		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'total':total})
+		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
 # Delete Cart Item
@@ -92,9 +97,14 @@ def update_cart_item(request):
 			request.session['cartdata']=cart_data			
 	for p_id,item in request.session['cartdata'].items():
 		total_amt+=int(item['qty'])*int(item['price'])
-		total = total_amt + 500
+		if total_amt > 5000:
+			delivery = total_amt * 11/100
+		else:
+			delivery = 500
+
+		total = total_amt + delivery
 	t=render_to_string('ajax/cart-list.html',
-		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'total':total})
+		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
 def add_wishlist(request):
@@ -199,7 +209,7 @@ def checkout(request):
 			p.sales = p.sales+1
 			p.save()
 
-			sales_num = Variation.objects.filter(product__name=item['title'])
+			sales_num = Product.objects.filter(name=item['title'])
 			for prod in sales_num:
 				prod.number = prod.number-1
 				prod.save()

@@ -88,7 +88,11 @@
                                 </li>
                                 <li class="align-items-start">
                                     <h4>Delivery</h4>
-                                    <h4 class="price text-end">&#8358; 500.00</h4>
+                                    {% if delivery %}
+                                    <h4 class="price text-end">&#8358; {{delivery|floatformat:2}}</h4>
+                                    {% else %}
+                                    <h4 class="price text-end">&#8358; 0.00</h4>
+                                    {% endif %}
                                 </li>
                             </ul>
                         </div>

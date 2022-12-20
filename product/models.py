@@ -24,6 +24,7 @@ class Product(models.Model):
         sub_category=models.ForeignKey(SubCategory,on_delete=models.CASCADE, null=True)	
         color = models.CharField(max_length=100, null=True, blank=True)
         brand = models.CharField(max_length=100, null=True, blank=True)
+        number=models.PositiveIntegerField(default=1, null=True, blank=True)
         ref=models.CharField(max_length=100, null=True, blank = True)
         description=RichTextField()
         date=models.DateTimeField(default=now)
@@ -67,7 +68,6 @@ SIZE = [
 class Variation(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     stock_status = models.CharField(choices=stock_status,default='In Stock',max_length=150)
-    number=models.PositiveIntegerField(default=1, null=True, blank=True)
     size_par = models.CharField(choices=SIZE,default='kilogramme',max_length=150, blank=True, null=True)
     size=models.CharField(max_length=100, null=True)
     price=models.PositiveIntegerField(default=0, null=True)

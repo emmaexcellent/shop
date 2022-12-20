@@ -70,10 +70,18 @@ class ProductForm(forms.ModelForm):
 			'name':"prod_desc",
 			'id':"prod_desc",
 			})
+		self.fields["number"].widget.attrs.update({
+			'required':'',
+			'class':"form-control",
+			'type':"text", 
+			'name':"prod_number",
+			'id':"prod_number",
+			'placeholder':"Product Number in Stock"
+			})
 
 	class Meta:
 		model= Product
-		fields=('name','short','category','sub_category','color','brand','description','thumb_nail')
+		fields=('name','short','category','sub_category','color','brand','number','description','thumb_nail')
 
 
 class VariationForm(forms.ModelForm):
@@ -86,14 +94,6 @@ class VariationForm(forms.ModelForm):
 			'name':"stock_status",
 			'id':"stock_status",
 			'placeholder':"Status of product",
-			})
-		self.fields["number"].widget.attrs.update({
-			'required':'',
-			'class':"form-control",
-			'type':"text", 
-			'name':"prod_number",
-			'id':"prod_number",
-			'placeholder':"Product Number in Stock"
 			})
 		self.fields["size"].widget.attrs.update({
 			'required':'',
@@ -122,7 +122,7 @@ class VariationForm(forms.ModelForm):
 
 	class Meta:
 		model= Variation
-		fields=('stock_status','number','size','price','dis_price')		
+		fields=('stock_status','size','price','dis_price')		
 
 
 class ProductInfoForm(forms.ModelForm):
