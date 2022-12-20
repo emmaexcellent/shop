@@ -154,7 +154,7 @@
                                     <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                     <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                     <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                    <input type="hidden" class="prod-image-{{p.id}}" value="{{p.productimage_set.first.image}}" />
+                                    <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" />
 
                                     <button class="btn btn-md bg-dark cart-add text-white w-50 add-to-cart update-item" data-index="{{p.id}}" data-item="{{p.id}}">Add To Cart</button>
                                 </div>
@@ -573,7 +573,7 @@
                                                 </a>
                                             </li>
                                             <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                <a href="wishlist.html" class="notifi-wishlist">
+                                                <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">>
                                                     <i data-feather="heart"></i>
                                                 </a>
                                             </li>
