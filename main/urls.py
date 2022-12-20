@@ -3,6 +3,7 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
+from django.conf.urls import handler400, handler403, handler404, handler500
 
 
 urlpatterns = [
@@ -24,6 +25,9 @@ urlpatterns = [
     path('accounts/change-password', views.change_password, name='change-password')
     
 ] 
+
+handler404 = 'main.views.handler404'
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

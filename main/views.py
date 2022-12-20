@@ -265,34 +265,8 @@ def change_password(request):
 
 
 
-def handler404(request, *args, **argv):
-    response = render('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
-
-
-def handler500(request, *args, **argv):
-    response = render('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 500
-    return response
-
-
-def handler400(request, *args, **argv):
-    response = render('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 400
-    return response
-
-
-def handler403(request, *args, **argv):
-    response = render('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 403
-    return response    
-
-
+def handler404(request, exception):
+    return render(request, '404.html', status=404)
 
 
 
