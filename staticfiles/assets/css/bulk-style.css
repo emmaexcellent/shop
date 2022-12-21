@@ -20,20 +20,20 @@
         url("../fonts/Iconly-light.woff") format("woff"),
         /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
         url("../fonts/Iconly-light.ttf") format("truetype"),
-        url("../fonts/Iconly-light.svg#Iconly-light") format("svg");
+        url("../fonts/Iconly-light.svg") format("svg");
 }
 
 @font-face {
     font-family: iconly;
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/Iconly-Broken.eot");
-    src: url("../fonts/Iconly-Broken.eot") format("embedded-opentype"),
+    src: url("");
+    src: url("") format("embedded-opentype"),
         /* IE6-8 */
-        url("../fonts/Iconly-Broken.woff") format("woff"),
+        url("") format("woff"),
         /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url("../fonts/Iconly-Broken.ttf") format("truetype"),
-        url("../fonts/Iconly-Broken.svg#Iconly-Broken") format("svg");
+        url("") format("truetype"),
+        url("") format("svg");
 }
 
 @font-face {
@@ -41,25 +41,25 @@
     font-style: normal;
     font-weight: 700;
     src: url("../fonts/Iconly-Bold.eot");
-    src: url("../fonts/Iconly-Bold.eot?#iefix") format("embedded-opentype"),
+    src: url("../fonts/Iconly-Bold.eot@") format("embedded-opentype"),
         /* IE6-8 */
         url("../fonts/Iconly-Bold.woff") format("woff"),
         /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
         url("../fonts/Iconly-Bold.ttf") format("truetype"),
-        url("../fonts/Iconly-Bold.svg#Iconly-Bold") format("svg");
+        url("../fonts/Iconly-Bold.svg") format("svg");
 }
 
 @font-face {
     font-family: iconly;
     font-style: normal;
     font-weight: 900;
-    src: url("../fonts/Iconly-bulk.eot");
-    src: url("../fonts/Iconly-bulk.eot?#iefix") format("embedded-opentype"),
+    src: url("");
+    src: url("") format("embedded-opentype"),
         /* IE6-8 */
-        url("../fonts/Iconly-bulk.woff") format("woff"),
+        url("") format("woff"),
         /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-        url("../fonts/Iconly-bulk.ttf") format("truetype"),
-        url("../fonts/Iconly-bulk.svg#Iconly-bulk") format("svg");
+        url("") format("truetype"),
+        url("") format("svg");
 }
 
 [class^="iconly-"],
