@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     
     'markdown',
     'ckeditor',
-    'colorfield'
+    'colorfield',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

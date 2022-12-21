@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 from django.utils.html import mark_safe
 from django.utils.timezone import now
@@ -16,7 +17,7 @@ class Vendor(models.Model):
 	description = models.TextField()
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 	address = models.CharField(max_length=300)
-	phone = models.IntegerField()
+	phone = PhoneNumberField(blank=True, null=True)
 	email = models.EmailField()
 	accept_terms = models.BooleanField(default=True)
 	date = models.DateTimeField(auto_now_add=True)
