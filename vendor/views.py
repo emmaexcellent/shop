@@ -112,6 +112,7 @@ def vendor_dashboard(request):
 			if prof_save.is_valid():
 				prof_save.save()
 				messages.success(request, "Profile Successfully Changed!")
+			return redirect('/vendor/dashboard')	
 
 		if 'vend_image' in request.POST:
 			vend_img = request.FILES.get('vendor_image')
@@ -121,6 +122,7 @@ def vendor_dashboard(request):
 			else:		
 				vend_img_edit.image = vend_img
 			vend_img_edit.save()
+			return redirect('/vendor/dashboard')
 
 		if 'product_edit' in request.POST:
 			pid = request.POST.get('pid')

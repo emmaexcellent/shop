@@ -337,7 +337,7 @@
                                                         {% endif %}
                                                     </td>
                                                     <td>
-                                                        <h6>{{p.variation_set.first.number}}</h6>
+                                                        <h6>{{p.number}}</h6>
                                                     </td>
                                                     <td>
                                                         <h6>{{p.sales}}</h6>
@@ -518,6 +518,10 @@
                                             <li>
                                                 <h5>Email Address :</h5>
                                                 <h5>{{vend.email}}</h5>
+                                            </li>
+                                            <li>
+                                                <h5>Contact :</h5>
+                                                <h5>{{vend.phone}}</h5>
                                             </li>
                                             <li>
                                                 <h5>Address :</h5>
@@ -742,11 +746,6 @@
                         <label for="dis-price">Product Discount Price</label>
                     </div>
 
-                    <div class="form-floating mb-4 theme-form-floating">
-                        <input type="hidden" name="pid" value="{{p.id}}">
-                        <input type="number" class="form-control" name="pnumber" id="number" value="0">
-                        <label for="number">Number Of Product</label>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
                         <button name="product_edit" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Save </button>
@@ -792,11 +791,6 @@
                         <label for="dis-price">Product Discount Price</label>
                     </div>
 
-                    <div class="form-floating mb-4 theme-form-floating">
-                        {{varform.number}}
-                        <input type="hidden" name="pid" value="{{p.id}}">
-                        <label for="number">Number Of Product</label>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
                         <button name="var_add" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Add</button>
