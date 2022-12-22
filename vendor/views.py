@@ -63,7 +63,10 @@ def vendor_list(request):
 def vendor_detail(request, name):
 	vendor = Vendor.objects.get(name = name)
 	products = Product.objects.filter(vendor= vendor)
-	vrating  = VendorReview.objects.filter(vendor=vendor).aggregate(avg_rating=Avg('rating'))
+
+	vrating = 0
+	if VendorReview.objects.filter(vendor=vendor).count() > 0:
+		vrating  = VendorReview.objects.filter(vendor=vendor).aggregate(avg_rating=Avg('rating'))
 	return render(request, 'vendor-detail.html', {'vendor':vendor, 'products':products,'vrating':vrating})	
 
 @login_required

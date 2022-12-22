@@ -19,6 +19,7 @@ def detail(request,id,slug,category_title):
 			text=request.POST.get('text'),
 			rating=request.POST.get('rating'),
 			)
+	avg_reviews=0		
 	if Review.objects.filter(product=p).count() > 0:	
 		avg_reviews=Review.objects.filter(product=p).aggregate(avg_rating=Avg('rating'))
 	related = Product.objects.filter(category = p.category_id)	
