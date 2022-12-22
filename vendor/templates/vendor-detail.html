@@ -47,25 +47,23 @@
                             <div class="review-title">
                                 <h4 class="fw-500">{{vendor.vendorreview_set.all.count}} Customer reviews</h4>
                             </div>
-                            {% if  vendor.vendorreview_set.all.count is not 0 %} 
+                            {% if  vendor.vendorreview_set.all.count == 0 %} 
+                            <div class="review-title">
+                                <h4 class="fw-700">Be the first to review this Vendor!</h4>
+                            </div>
+                            {% else %}
                             <div class="d-flex">
                                 <div class="product-rating">
                                     <ul class="rating">
-                                        {% if  vendor.vendorreview_set.all.count > 0 %}
                                         {% for star in vrating.avg_rating|floatformat:1|ljust:vrating.avg_rating %}
                                         <li>
                                             <i data-feather="star" class="fill"></i>
                                         </li>
                                         {% endfor %}
-                                        {% endif %}
                                     </ul>
                                 </div>
                                 <h6 class="ms-3">{{vrating.avg_rating|floatformat:1}} Out Of 5.0</h6>
-                            </div>
-                            {% else %}
-                            <div class="review-title">
-                                <h4 class="fw-700">Be the first to review this Vendor!</h4>
-                            </div>
+                            </div>                            
                             {% endif %}
                            <br> 
                             <div class="review-people">
@@ -108,7 +106,7 @@
                         <div class="row g-4">
                             <div class="col-xxl-2 col-md-3">
                                 <div class="vendor-logo">
-                                    <img src="/media/{{vendor.image}}" alt="">
+                                    <img src="{{vendor.image.url}}" alt="">
                                 </div>
                             </div>
 

@@ -54,7 +54,7 @@
                                     {% csrf_token %}
                                     <div class="profile-image">
                                         <div class="position-relative">
-                                            <img src="/media/{{vend.image}}"
+                                            <img src="{{vend.image.url}}"
                                                 class="blur-up lazyload update_img" alt="">                                              
                                             <div class="cover-icon">
                                                 <i class="fa-solid fa-pen">
