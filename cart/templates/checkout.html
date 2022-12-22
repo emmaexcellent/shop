@@ -164,7 +164,7 @@
                             <ul class="summery-contain">
                             	{% for product_id,item in cart_data.items %}
                                 <li>
-                                    <img src="{% static 'assets/' %}images/vegetable/product/1.png"
+                                    <img src="{{item.img}}"
                                         class="img-fluid blur-up lazyloaded checkout-image" alt="">
                                     <h4>{{item.title|truncatewords:3}} <span>X {{item.qty}}</span></h4>
                                     <h4 class="price">&#8358; {% widthratio item.price 1 item.qty %}.00</h4>

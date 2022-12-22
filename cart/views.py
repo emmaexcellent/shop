@@ -60,6 +60,7 @@ def delete_cart_item(request):
 	total_amt=0	
 	discount=0
 	total=0
+	delivery=0
 	p_id=str(request.GET.get('id'))
 	if 'cartdata' in request.session:
 		if p_id in request.session['cartdata']:
