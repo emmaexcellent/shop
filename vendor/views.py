@@ -67,7 +67,9 @@ def vendor_detail(request, name):
 	vrating = 0
 	if VendorReview.objects.filter(vendor=vendor).count() > 0:
 		vrating  = VendorReview.objects.filter(vendor=vendor).aggregate(avg_rating=Avg('rating'))
-	return render(request, 'vendor-detail.html', {'vendor':vendor, 'products':products,'vrating':vrating})	
+		return render(request, 'vendor-detail.html', {'vendor':vendor, 'products':products,'vrating':vrating})	
+	else:
+		return render(request, 'vendor-detail.html', {'vendor':vendor, 'products':products})	
 
 @login_required
 def vendor_dashboard(request):

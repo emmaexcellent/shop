@@ -6,6 +6,10 @@ from ckeditor.fields import RichTextField
 from django.utils.timezone import now
 from django.utils.html import mark_safe
 import secrets
+from gdstorage.storage import GoogleDriveStorage
+
+# Define Google Drive Storage
+gd_storage = GoogleDriveStorage()
 
 # Create your models here.
 
@@ -18,7 +22,7 @@ stock_status =(
 class Product(models.Model):
         vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE, null=True)
         name=models.CharField(max_length=200)
-        thumb_nail = models.ImageField(upload_to="product_img/", null=True)
+        thumb_nail = models.ImageField(upload_to="product_img/", null=True, storage=gd_storage)
         short = models.CharField(max_length=100, null=True)
         category=models.ForeignKey(Category,on_delete=models.CASCADE, null=True)
         sub_category=models.ForeignKey(SubCategory,on_delete=models.CASCADE, null=True)	
@@ -48,7 +52,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
-    image = models.FileField(upload_to="product_img/")
+    image = models.FileField(upload_to="product_img/", storage=gd_storage)
 
     class Meta:
         verbose_name_plural='Product Image'

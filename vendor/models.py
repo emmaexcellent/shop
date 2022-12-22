@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 from django.utils.html import mark_safe
 from django.utils.timezone import now
 from main.models import *
+rom gdstorage.storage import GoogleDriveStorage
+
+# Define Google Drive Storage
+gd_storage = GoogleDriveStorage()
+
 
 
 
@@ -13,7 +18,7 @@ from main.models import *
 class Vendor(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
 	name = models.CharField(max_length=200, unique=True)
-	image=models.ImageField(upload_to="vendor")
+	image=models.ImageField(upload_to="vendor", storage=gd_storage)
 	description = models.TextField()
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 	address = models.CharField(max_length=300)
