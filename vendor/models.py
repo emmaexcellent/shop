@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.html import mark_safe
 from django.utils.timezone import now
 from main.models import *
-rom gdstorage.storage import GoogleDriveStorage
+from gdstorage.storage import GoogleDriveStorage
 
 # Define Google Drive Storage
 gd_storage = GoogleDriveStorage()
