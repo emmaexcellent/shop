@@ -219,11 +219,13 @@
                                                         {% for p in popular_prod %}
                                                         <tr>
                                                             <td class="product-image">
+                                                                <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
                                                                 <img src="{{p.thumb_nail.url}}"
-                                                                    class="img-fluid" alt="">
+                                                                    class="img-fluid" alt=""></a>
                                                             </td>
                                                             <td>
-                                                                <h6>{{p.name}}</h6>
+                                                                <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                                                <h6>{{p.name}}</h6></a>
                                                             </td>
                                                             <td>
                                                                 {% if p.variation_set.first.discount %}
@@ -254,6 +256,7 @@
                                                             <tr>
                                                                 <th scope="col">Order ID</th>
                                                                 <th scope="col">Product Name</th>
+                                                                <th scope="col">Payment</th>
                                                                 <th scope="col">Status</th>
                                                             </tr>
                                                         </thead>
@@ -265,10 +268,17 @@
                                                                     <h6>{{item.item}}</h6>
                                                                 </td>
                                                                 <td>
-                                                                    {% if item.order.order_status == process %}
-                                                                    <label class="danger">Pending</label>
+                                                                    {% if item.order.paid_status == True %}
+                                                                    <label class="success"><i class="fa fa-check-square-o"></i></label>
                                                                     {% else %}
+                                                                    <label class="danger"><i class="fa fa-times-rectangle"></i></label>
+                                                                    {% endif %}                                                                    
+                                                                </td>
+                                                                <td>
+                                                                    {% if item.order.order_status == 'delivered' %}
                                                                     <label class="success">Delivered</label>
+                                                                    {% else %}
+                                                                    <label class="danger">Pending</label>
                                                                     {% endif %}                                                                    
                                                                 </td>
                                                             </tr>
@@ -315,6 +325,7 @@
                                                     <th scope="col">Price</th>
                                                     <th scope="col">Stock</th>
                                                     <th scope="col">Sales</th>
+                                                    <th scope="col">Vars</th>
                                                     <th scope="col">Add / Edit / Delete</th>
                                                 </tr>
                                             </thead>
@@ -327,7 +338,8 @@
                                                             class="img-fluid" alt=""></a>
                                                     </td>
                                                     <td>
-                                                        <h6>{{p.name}}</h6>
+                                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                                        <h6>{{p.name}}</h6></a>
                                                     </td>
                                                     <td>
                                                         {% if p.variation_set.first.discount %}
@@ -341,6 +353,10 @@
                                                     </td>
                                                     <td>
                                                         <h6>{{p.sales}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                                        <h6>{{p.variation_set.all.count}}</h6></a>
                                                     </td>
                                                     <td class="efit-delete">
                                                         <i data-bs-toggle="modal" data-bs-target="#product-var-{{p.id}}" class="fa fa-plus theme-color"></i>&nbsp;&nbsp;
@@ -360,7 +376,7 @@
                                 aria-labelledby="pills-order-tab">
                                 <div class="dashboard-order">
                                     <div class="title">
-                                        <h2>All Order</h2>
+                                        <h2>All Orders</h2>
                                         <span class="title-leaf title-leaf-gray">
                                             <svg class="icon-width bg-gray">
                                                 <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
@@ -387,10 +403,17 @@
                                                             <h6>{{item.item}}</h6>
                                                         </td>
                                                         <td>
-                                                            {% if item.order.order_status == process %}
-                                                            <label class="danger">Pending</label>
+                                                            {% if item.order.paid_status == True %}
+                                                            <label class="success"><i class="fa fa-check-square-o"></i></label>
                                                             {% else %}
+                                                            <label class="danger"><i class="fa fa-times-rectangle"></i></label>
+                                                            {% endif %}                                                                    
+                                                        </td>
+                                                        <td>
+                                                            {% if item.order.order_status == 'delivered' %}
                                                             <label class="success">Delivered</label>
+                                                            {% else %}
+                                                            <label class="danger">Pending</label>
                                                             {% endif %}                                                                    
                                                         </td>
                                                         <td>

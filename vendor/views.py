@@ -83,7 +83,7 @@ def vendor_dashboard(request):
 		vend_sale = CartOrderItems.objects.filter(vendor=ven)	
 		ord_pending = CartOrderItems.objects.filter(order__order_status='process', vendor=ven)	
 		popular_prod= Product.objects.filter(vendor__name=ven).order_by('-topic_views')[:6]
-		order_items = CartOrderItems.objects.filter(vendor=ven)[:10]
+		order_items = CartOrderItems.objects.filter(vendor=ven).order_by('-id')
 
 		payments = VendorPayment.objects.filter(vendor = v)
 

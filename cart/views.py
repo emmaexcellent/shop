@@ -142,6 +142,7 @@ def checkout(request):
 	totalAmt = 0
 	discount=0
 	total=0 
+	delivery=0
 
 	address= CustomerAddress.objects.filter(user = request.user)
 	if 'cartdata' in request.session:

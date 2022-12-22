@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.timezone import now
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
@@ -18,7 +19,7 @@ class CouponCode(models.Model):
 class CustomerAddress(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     address=models.TextField()
-    phone = models.PositiveIntegerField()
+    phone = PhoneNumberField(blank=True, null=True)
     name = models.CharField(max_length=30)
 
     class Meta:

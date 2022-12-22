@@ -139,7 +139,7 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="/shop/{{item.cat}}/{{item.title|slugify}}-{{product_id}}" class="drop-image">
-                                                                <img src="{{item.img}}" class="blur-up lazyloaded" alt="">
+                                                                <img src="/media/{{item.img}}" class="blur-up lazyloaded" alt="">
                                                             </a>
 
                                                             <div class="drop-contain">
@@ -147,6 +147,10 @@
                                                                     <h5>{{item.title}}</h5>
                                                                 </a>
                                                                 <h6><span>{{item.qty}} x</span> &#8358; {{item.price|floatformat:2}}</h6>
+                                                                <button class="close-button close_button delete-item" data-item="{{product_id}}">
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </li>
                                                     {% endfor %}
