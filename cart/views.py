@@ -6,6 +6,7 @@ from paystackpay.models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from main.forms import *
 
 
 # Create your views here.
@@ -177,11 +178,13 @@ def checkout(request):
 
 			total = total_amt + delivery	
 
+		formadd = AddressForm()	
 		if 'addform' in request.POST:
-			address2 = request.POST.get('address2')
-			phone = request.POST.get('phone')
-			place = request.POST.get('place')
-			CustomerAddress.objects.create(user=request.user, address=address2, phone=phone, name=place)
+			formadd = AddressForm(request.POST)
+			if formadd.is_valid:
+				add_form= formadd.save(commit=False)
+				add_form.user = request.user
+				add_form.save()
 
 		if 'order' in request.POST:
 			customer = request.user.username
@@ -236,8 +239,8 @@ def checkout(request):
 						 		 	
 		return render(request, 'checkout.html',
 			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,
-			'discount':discount,'total':total,'address':address})
+			'discount':discount,'total':total,'address':address,'formadd':formadd})
 		
 	else:
 		return render(request, 'checkout.html',
-			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address})
+			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address, 'formadd':formadd})

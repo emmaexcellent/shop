@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django import forms
 from .models import *
+from cart.models import *
 
 
 class SignupForm(UserCreationForm):
@@ -45,3 +46,37 @@ class SignupForm(UserCreationForm):
 	class Meta:
 		model=User
 		fields=('email','username','password1','password2')
+
+
+class AddressForm(UserCreationForm):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields["address"].widget.attrs.update({
+			'required':'',
+			'class':"form-control",
+			'type':"text", 
+			'name':"address",
+			'id':"address",
+			'placeholder':"Enter Address"
+			'rows':"4"
+			})
+		self.fields["phone"].widget.attrs.update({
+			'required':'',
+			'class':"form-control",
+			'type':"phone", 
+			'name':"phone",
+			'id':"phone",
+			'placeholder':"Enter Phone Number"
+			})
+		self.fields["name"].widget.attrs.update({
+			'required':'',
+			'class':"form-control",
+			'type':"text", 
+			'name':"name",
+			'id':"name",
+			'placeholder':"Enter the name of place"
+			})
+
+	class Meta:
+		model= CustomerAddress
+		fields=('address','phone','name')
