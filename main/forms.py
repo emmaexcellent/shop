@@ -57,7 +57,7 @@ class AddressForm(UserCreationForm):
 			'type':"text", 
 			'name':"address",
 			'id':"address",
-			'placeholder':"Enter Address"
+			'placeholder':"Enter Address",
 			'rows':"4"
 			})
 		self.fields["phone"].widget.attrs.update({
