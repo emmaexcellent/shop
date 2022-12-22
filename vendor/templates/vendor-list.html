@@ -39,7 +39,7 @@
                     <div class="seller-grid-box seller-grid-box-1">
                         <div class="grid-image">
                             <div class="image">
-                                <img src="/media/{{v.image}}" class="img-fluid" alt="">
+                                <img src="{{v.image.url}}" class="img-fluid" alt="">
                             </div>
 
                             <div class="contain-name">
@@ -83,7 +83,7 @@
                                 <ul class="product-image">
                                     {% for p in v.product_set.all|slice:5 %}
                                     <li>
-                                        <img src="/media/{{p.thumb_nail}}" class="img-fluid" alt="">
+                                        <img src="{{p.thumb_nail.url}}" class="img-fluid" alt="">
                                     </li>
                                     {% endfor %}
                                     {% if v.product_set.all.count > 5 %}

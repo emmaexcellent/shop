@@ -44,8 +44,8 @@
                                         <div class="product-main no-arrow">
                                             <div>
                                                 <div class="slider-image">
-                                                    <img src="/media/{{p.thumb_nail}}" data-zoom-image="/media/{{p.thumb_nail}}" alt="">
-                                                    <a class="" href="/media/{{p.thumb_nail}}" data-gallery="product-media-preview">
+                                                    <img src="{{p.thumb_nail.url}}" data-zoom-image="{{p.thumb_nail.url}}" alt="">
+                                                    <a class="" href="{{p.thumb_nail.url}}" data-gallery="product-media-preview">
                                                     
                                                 </a>
                                                 </div>
@@ -53,7 +53,7 @@
                                             {% for img in p.productimage_set.all %}
                                             <div>
                                                 <div class="slider-image">
-                                                    <img src="/media/{{img.image}}" id="img-{{img.id}}" data-zoom-image="/media/{{img.image}}" class="
+                                                    <img src="{{img.image.url}}" id="img-{{img.id}}" data-zoom-image="{{img.image.url}}" class="
                                                         img-fluid image_zoom_cls blur-up lazyload" alt="">
                                                 </div>
                                             </div>
@@ -72,7 +72,7 @@
                                             {% for img in p.productimage_set.all %}
                                             <div>
                                                 <div class="sidebar-image">
-                                                    <img src="/media/{{img.image}}"
+                                                    <img src="{{img.image.url}}"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@
                                     <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                     <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                     <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                    <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" />
+                                    <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />
 
                                     <button class="btn btn-md bg-dark cart-add text-white w-50 add-to-cart update-item" data-index="{{p.id}}" data-item="{{p.id}}">Add To Cart</button>
                                 </div>
@@ -289,14 +289,14 @@
                                     {% for p in trend|slice:2 %}
                                     <li>
                                         <div class="offer-product">
-                                            <a href="product-left-thumbnail.html" class="offer-image">
-                                                <img src="/media/{{p.thumb_nail}}"
+                                            <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}" class="offer-image">
+                                                <img src="{{p.thumb_nail.url}}"
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
 
                                             <div class="offer-detail">
                                                 <div>
-                                                    <a href="product-left-thumbnail.html">
+                                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
                                                         <h6 class="name">{{p.name}}</h6>
                                                     </a>
                                                     <span>{{p.variation_set.first.size}}</span>
@@ -561,7 +561,7 @@
                                 <div class="product-header">
                                     <div class="product-image">
                                         <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                            <img src="/media/{{p.thumb_nail}}"
+                                            <img src="{{p.thumb_nail.url}}"
                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
 

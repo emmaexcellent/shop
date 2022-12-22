@@ -75,7 +75,7 @@
                                 <div class="product-header">
                                     <div class="product-image">
                                         <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                            <img src="/media/{{p.thumb_nail}}"
+                                            <img src="{{p.thumb_nail.url}}"
                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
 
@@ -138,7 +138,7 @@
                                             <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                             <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                             <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" />
+                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />
                                             <h5 class="d-none prod-size-{{p.id}} active1">{{p.variation_set.first.size}}</h5>       
                                             <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}">Add
                                                 <span class="add-icon bg-light-gray">
@@ -183,7 +183,7 @@
                                 <div class="product-header">
                                     <div class="product-image">
                                         <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                            <img src="/media/{{p.thumb_nail}}"
+                                            <img src="{{p.thumb_nail.url}}"
                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
 
@@ -246,7 +246,7 @@
                                             <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                             <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                             <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" />{{p.variation_set.first.size}}</h5>       
+                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />{{p.variation_set.first.size}}</h5>       
                                             <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}">Add
                                                 <span class="add-icon bg-light-gray">
                                                     <i class="fa-solid fa-plus"></i>

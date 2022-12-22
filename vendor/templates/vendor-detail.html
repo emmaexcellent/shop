@@ -116,7 +116,7 @@
                                         <div class="vendor-list-name">
                                             <h3>{{vendor.name}}</h3>
                                             <div class="product-rating vendor-rating">
-                                                {% if vendor.vendorreview_set %}
+                                                {% if vendor.vendorreview_set > 0 %}
                                                 <ul class="rating">
                                                     {% for star in vrating.avg_rating|floatformat:1|ljust:vrating.avg_rating %}
                                                     <li>
@@ -162,7 +162,7 @@
                                 <div class="product-header">
                                     <div class="product-image">
                                         <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                            <img src="/media/{{p.thumb_nail}}"
+                                            <img src="{{p.thumb_nail.url}}"
                                                 class="img-fluid blur-up lazyload" alt="">
                                         </a>
 

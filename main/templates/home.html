@@ -62,7 +62,7 @@
                                 </a>
                                 <div class="category-box-view">
                                     <a href="/shop/{{cat.title}}-{{cat.id}}">
-                                        <img style="height: 130px; width: 130px" src="/media/{{cat.image}}" class="img-fluid blur-up lazyload" alt="">
+                                        <img style="height: 130px; width: 130px" src="{{cat.image.url}}" class="img-fluid blur-up lazyload" alt="">
                                     </a>
                                     <button onclick="location.href = '/shop/{{cat.title}}-{{cat.id}}'" class="btn shop-button">
                                         <span>Shop Now</span>
@@ -93,7 +93,7 @@
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <img src="/media/{{p.thumb_nail}}"
+                                        <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
 
@@ -160,7 +160,7 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" /> 
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
                                         <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
                                         <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
@@ -206,7 +206,7 @@
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <img src="/media/{{p.thumb_nail}}"
+                                        <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
 
@@ -273,7 +273,7 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" /> 
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
                                         <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
                                         <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
@@ -304,7 +304,7 @@
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <img src="/media/{{p.thumb_nail}}"
+                                        <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
 
@@ -371,7 +371,7 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" /> 
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
                                         <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
                                         <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
@@ -404,7 +404,7 @@
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <img src="/media/{{p.thumb_nail}}"
+                                        <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
 
@@ -471,7 +471,7 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" /> 
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
                                         <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
                                         <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
@@ -502,7 +502,7 @@
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <img src="/media/{{p.thumb_nail}}"
+                                        <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
 
@@ -569,7 +569,7 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" /> 
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
                                         <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
                                         <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
@@ -658,7 +658,7 @@
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <img src="/media/{{p.thumb_nail}}"
+                                        <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
 
@@ -725,7 +725,7 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" /> 
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
                                         <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
                                         <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
@@ -756,7 +756,7 @@
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <img src="/media/{{p.thumb_nail}}"
+                                        <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
 
@@ -823,7 +823,7 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" /> 
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
                                         <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
                                         <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
