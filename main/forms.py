@@ -63,7 +63,7 @@ class AddressForm(forms.ModelForm):
 		self.fields["phone"].widget.attrs.update({
 			'required':'',
 			'class':"form-control",
-			'type':"phone", 
+			'type':"number", 
 			'name':"phone",
 			'id':"phone",
 			'placeholder':"Enter Phone Number"

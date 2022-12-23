@@ -185,6 +185,8 @@ def checkout(request):
 				add_form= formadd.save(commit=False)
 				add_form.user = request.user
 				add_form.save()
+			else:
+				messages.error(request, "Add correct address details!")	
 
 		if 'order' in request.POST:
 			customer = request.user.username
