@@ -218,7 +218,7 @@ def checkout(request):
 
 			sales_num = Product.objects.filter(name=item['title'])
 			for prod in sales_num:
-				prod.number = prod.number-1
+				prod.number = prod.number- int(item['qty'])
 				prod.save()
 
 			if payment_choice == 'Cash':
