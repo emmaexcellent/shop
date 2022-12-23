@@ -58,7 +58,7 @@ class AddressForm(forms.ModelForm):
 			'name':"address",
 			'id':"address",
 			'placeholder':"Enter Address",
-			'rows':"4"
+			'rows': 4,
 			})
 		self.fields["phone"].widget.attrs.update({
 			'required':'',

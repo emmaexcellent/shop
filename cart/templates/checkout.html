@@ -233,18 +233,17 @@
                     <form method="post" action="{% url 'checkout' %}">
                         {% csrf_token %}
                         <div class="form-floating mb-4 theme-form-floating">
-                            <textarea class="form-control" name="address2" placeholder="" id="address"
-                                style="height: 100px"></textarea>
+                            {{formadd.address}}
                             <label for="address">Enter Address</label>
                         </div>
 
                         <div class="form-floating mb-4 theme-form-floating">
-                            {{formadd.address}}
+                            {{formadd.phone}}
                             <label for="pin">Phone </label>
                         </div>
 
                         <div class="form-floating mb-4 theme-form-floating">
-                            {{formadd.phone}}
+                            {{formadd.name}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
