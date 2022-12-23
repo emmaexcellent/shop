@@ -129,7 +129,7 @@ class Review(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)    
     product = models.ForeignKey(Product,on_delete=models.CASCADE)   
     text=models.TextField()
-    rating=models.CharField(choices=RATING,max_length=150)
+    rating=models.IntegerField(choices=RATING,default=1)
     date=models.DateTimeField(default=now)
 
     class Meta:
