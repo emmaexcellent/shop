@@ -67,11 +67,18 @@ def registerUser(request):
 
 	if request.method=='POST':
 		email_exist = User._meta.get_field('email')._unique=True
-		if email_exist:
-			messages.error(request,"User with email exist!")
 		username_exist = User._meta.get_field('username')._unique=True	
-		if username_exist:
-			messages.error(request,"User with username exist!")
+
+		username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if password1 != password2:
+        	messages.error(request, f"Oops! Your passwords does not match!.")
+        if User.objects.filter(username = username)
+        	messages.error(request, f"Oops! User with username exists!.")	
+        if User.objects.filter(email = email)
+        	messages.error(request, f"Oops! User with email exists!.")		
 			
 		form=SignupForm(request.POST)
 		if form.is_valid():
