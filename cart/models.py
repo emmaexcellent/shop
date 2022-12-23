@@ -19,7 +19,7 @@ class CouponCode(models.Model):
 class CustomerAddress(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     address=models.TextField()
-    phone = PhoneNumberField(blank=True, null=True)
+    phone =models.CharField(max_length=15)
     name = models.CharField(max_length=30)
 
     class Meta:
