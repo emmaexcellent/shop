@@ -228,11 +228,13 @@
                         <div class="vendor-box">
                             <div class="verndor-contain">
                                 <div class="vendor-image">
-                                    <img src="{{p.vendor.image.url}}" class="blur-up lazyload" alt="vendorimage">
+                                    <a href="/vendor/{{p.vendor.name}}">
+                                    <img src="{{p.vendor.image.url}}" class="blur-up lazyload" alt="vendorimage"></a>
                                 </div>
 
                                 <div class="vendor-name">
-                                    <h5 class="fw-500">{{p.vendor}}.</h5>
+                                    <a href="/vendor/{{p.vendor.name}}">
+                                    <h5 class="fw-500">{{p.vendor}}.</h5></a>
                                     <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
  
                                     <div class="product-rating mt-1">

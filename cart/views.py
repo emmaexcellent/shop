@@ -86,6 +86,7 @@ def update_cart_item(request):
 	total_amt=0	
 	discount=0
 	total=0
+	delivery=0
 	p_id=str(request.GET['id'])
 	p_qty=request.GET.get('qty')
 	p_size = request.GET.get('size')

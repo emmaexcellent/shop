@@ -72,9 +72,7 @@ def registerUser(request):
 		username_exist = User._meta.get_field('username')._unique=True	
 		if username_exist:
 			messages.error(request,"User with username exist!")
-		password_exist = User._meta.get_field('password1')._unique=True	
-		if password_exist:
-			messages.error(request, "Make your password more stronger!")
+			
 		form=SignupForm(request.POST)
 		if form.is_valid():
 			form.save()

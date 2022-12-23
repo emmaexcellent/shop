@@ -39,7 +39,8 @@
                     <div class="seller-grid-box seller-grid-box-1">
                         <div class="grid-image">
                             <div class="image">
-                                <img src="{{v.image.url}}" class="img-fluid" alt="">
+                                <a href="/vendor/{{v.name}}">
+                                <img src="{{v.image.url}}" class="img-fluid" alt=""></a>
                             </div>
 
                             <div class="contain-name">
@@ -47,7 +48,8 @@
                                     <div class="since-number">
                                         <h6>Since {{v.date|timesince}} ago</h6>
                                     </div>
-                                    <h3>{{v.name}}</h3>
+                                    <a href="/vendor/{{v.name}}">
+                                    <h3>{{v.name}}</h3></a>
                                 </div>
                                 <label class="product-label">{{v.product_set.all.count}} Product{{v.product_set.all|pluralize}}</label>
                             </div>
