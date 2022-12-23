@@ -48,7 +48,7 @@ class SignupForm(UserCreationForm):
 		fields=('email','username','password1','password2')
 
 
-class AddressForm(UserCreationForm):
+class AddressForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.fields["address"].widget.attrs.update({
