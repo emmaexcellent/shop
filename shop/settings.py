@@ -163,6 +163,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
 PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
 
+SQUAD_SECRET_KEY = os.getenv('SQUAD_SECRET_KEY')
+SQUAD_PUBLIC_KEY = os.getenv('SQUAD_PUBLIC_KEY')
+
 CKEDITOR_CONFIGS = {
     'default':{
         'width': 'full',

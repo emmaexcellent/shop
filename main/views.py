@@ -83,6 +83,7 @@ def registerUser(request):
 		form=SignupForm(request.POST)
 		if form.is_valid():
 			form.save()
+			new_user(username, email)			
 			username=form.cleaned_data.get('username')
 			pwd=form.cleaned_data.get('password1')
 			user=authenticate(username=username,password=pwd)

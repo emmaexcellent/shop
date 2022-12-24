@@ -136,9 +136,14 @@
                         </div>
                     </div>
                     <script src="https://js.paystack.co/v1/inline.js"></script>
+                    <script src="https://checkout.squadco.com/widget/squad.min.js"></script> 
                     <br>
                     <p style="color:red;">Click the button to pay via paystack popup...</p>
                     <button type="submit" class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold" onclick="payWithPaystack()">Confirm Order</button>
+                    <br>
+                    
+                    <p style="color:red;">Click the button to pay via squadco popup...</p>
+                    <button type="submit" class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold" onclick="SquadPay()">Confirm Order Squad</button>
                 </div>
 
                 <div class="col-xxl-3 col-lg-4">
@@ -246,6 +251,27 @@
         var handler = PaystackPop.setup(obj);
         handler.openIframe();
         console.log({currency,plan,ref})
+    }
+
+     function SquadPay() {
+ 
+      const squadInstance = new squad({
+        onClose: () => console.log("Widget closed"),
+        onLoad: () => console.log("Widget loaded successfully"),
+        onSuccess: () => console.log(`Linked successfully`),
+        key: '{{paystack_public_key}}',
+        //Change key (test_pk_sample-public-key-1) to the key on your Squad Dashboard
+        email: '{{ payment.email }}',
+        amount: '{{payment.amount_value}}',
+        //Enter amount in Naira or Dollar (Base value Kobo/cent already multiplied by 100)
+        currency_code: "NGN",
+        ref: "{{ payment.ref }}",
+        callback_url: function (response) {
+                window.location.href = "{% url 'verify' payment.ref %}";
+      });
+      squadInstance.setup();
+      squadInstance.open();
+
     }
 </script>
 
