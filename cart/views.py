@@ -238,7 +238,8 @@ def checkout(request):
 
 				return render(request, 'by_paystack.html',
 					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,
-					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
+					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
+					  'squad_pk': settings.SQUAD_PUBLIC_KEY})
 						 		 	
 		return render(request, 'checkout.html',
 			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,
