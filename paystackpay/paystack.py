@@ -28,7 +28,7 @@ class PayStack:
 
 
 class Squadco:
-	Squad_SECRET_KEY = settings.SQUAD_SECRET_KEY
+	SQUAD_SECRET_KEY = settings.SQUAD_SECRET_KEY
 
 	base_url = 'https://sandbox-api-d.squadco.com'
 
@@ -36,7 +36,7 @@ class Squadco:
 		path = f'/transaction/verify/{ref}'.format(ref)
 
 		headers = {
-			"Authorization": f"Bearer {self.Squad_SECRET_KEY}",
+			"Authorization": f"Bearer {self.SQUAD_SECRET_KEY}",
 			'Content-Type': 'application/json',
 		}
 		url = "{}{}".format(self.base_url, path)
@@ -50,4 +50,4 @@ class Squadco:
 			return response_data['status'], response_data['data']
 			
 		response_data = response.json()
-		return response_data["status"], response_data["message"]				
+		return response_data["status"], response_data["message"]		
