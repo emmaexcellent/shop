@@ -268,6 +268,7 @@
         ref: "{{ payment.ref }}",
         callback_url: function (response) {
                 window.location.href = "{% url 'verify' payment.ref %}";
+            } 
       });
       squadInstance.setup();
       squadInstance.open();
