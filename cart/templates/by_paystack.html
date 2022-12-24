@@ -253,28 +253,25 @@
         console.log({currency,plan,ref})
     }
 
-     function SquadPay() {
+    function SquadPay() {
  
       const squadInstance = new squad({
         onClose: () => console.log("Widget closed"),
         onLoad: () => console.log("Widget loaded successfully"),
         onSuccess: () => console.log(`Linked successfully`),
-        key: '{{squad_pk}}',
+        key: "{{squad_pk}}",
         //Change key (test_pk_sample-public-key-1) to the key on your Squad Dashboard
         email: '{{ payment.email }}',
         amount: '{{payment.amount_value}}',
         //Enter amount in Naira or Dollar (Base value Kobo/cent already multiplied by 100)
-        currency_code: "NGN",
-        ref: "{{ payment.ref }}",
-        callback_url: function (response) {
-                window.location.href = "{% url 'verify' payment.ref %}";
-            } 
+        currency_code: "NGN"
       });
       squadInstance.setup();
       squadInstance.open();
-      console.log({currency,amount,ref})
 
     }
+
+    
 </script>
 
 
