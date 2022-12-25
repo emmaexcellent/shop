@@ -25,29 +25,3 @@ class PayStack:
 			
 		response_data = response.json()
 		return response_data["status"], response_data["message"]
-
-
-class Squadco:
-	SQUAD_SECRET_KEY = settings.SQUAD_SECRET_KEY
-
-	base_url = 'https://sandbox-api-d.squadco.com'
-
-	def verify_payment(self, ref, *args, **kwargs):
-		path = f'/transaction/verify/{ref}'.format(ref)
-
-		headers = {
-			"Authorization": f"Bearer {self.SQUAD_SECRET_KEY}",
-			'Content-Type': 'application/json',
-		}
-		url = "{}{}".format(self.base_url, path)
-
-		response = requests.get(url, headers=headers)
-
-		response_data = response.json()
-
-		if response.status_code == 200:
-			response_data ==response.json()
-			return response_data['status'], response_data['data']
-			
-		response_data = response.json()
-		return response_data["status"], response_data["message"]		

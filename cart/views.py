@@ -213,14 +213,13 @@ def checkout(request):
 			payment = Payment.objects.create(
 				order_note=note, email=email, customer=customer, address_id=address, discount=discount, amount=total, payment_option=payment_choice
 				)
-			p = get_object_or_404(Product, name=item['title'])
+			p = get_object_or_404(Product, id= p_id )
 			p.sales = p.sales+1
 			p.save()
 
-			sales_num = Product.objects.filter(name=item['title'])
-			for prod in sales_num:
-				prod.number = prod.number- int(item['qty'])
-				prod.save()
+			prod = Product.objects.get(id= p_id)
+			prod.number = prod.number- int(item['qty'])
+			prod.save()
 
 			if payment_choice == 'Cash':
 
@@ -238,8 +237,7 @@ def checkout(request):
 
 				return render(request, 'by_paystack.html',
 					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,
-					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY,
-					  'squad_pk': settings.SQUAD_PUBLIC_KEY})
+					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
 						 		 	
 		return render(request, 'checkout.html',
 			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,

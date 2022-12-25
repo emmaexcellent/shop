@@ -136,19 +136,10 @@
                         </div>
                     </div>
                     <script src="https://js.paystack.co/v1/inline.js"></script>
-                    <script src="https://checkout.squadco.com/widget/squad.min.js"></script> 
                     <br>
                     <p style="color:red;">Click the button to pay via paystack popup...</p>
                     <button type="submit" class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold" onclick="payWithPaystack()">Confirm Order</button>
-                    <br>
-                    
-                    <div class="col-lg-4">
-                        <div class="form-submit">
-                          <button type="button" onclick="SquadPay()" class="btn btn-danger">Check Out</button><br><br>
-                        </div>
-                      </div>
                 </div>
-
                 <div class="col-xxl-3 col-lg-4">
                     <div class="row g-4">
                         <div class="col-lg-12 col-sm-6">
@@ -255,28 +246,7 @@
         handler.openIframe();
         console.log({currency,plan,ref})
     }
-
-
-    function SquadPay() {
- 
-      const squadInstance = new squad({
-        onClose: () => console.log("Widget closed"),
-        onLoad: () => console.log("Widget loaded successfully"),
-        onSuccess: () => console.log(`Linked successfully`),
-        key: "sandbox_pk_d3dbee5bb0a8496176af4e7717c3d4b3ef3c6836a6db",
-        //Change key (test_pk_sample-public-key-1) to the key on your Squad Dashboard
-        email: 'emmaexcellent030@gmail.com',
-        amount: '1000',
-        //Enter amount in Naira or Dollar (Base value Kobo/cent already multiplied by 100)
-        currency_code: "NGN"
-      });
-      squadInstance.setup();
-      squadInstance.open();
-
-    }
-
     
 </script>
-
 
 {% endblock content %}
