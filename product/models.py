@@ -35,6 +35,7 @@ class Product(models.Model):
         new=models.BooleanField(default=False)
         top_deals=models.BooleanField(default=False)
         sales = models.IntegerField(default=0)
+        avg_ratings = models.IntegerField(default=0)
         topic_views = models.IntegerField(default=0)
 
         class Meta:
