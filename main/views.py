@@ -75,16 +75,16 @@ def registerUser(request):
 		password2 = request.POST.get('password2')
 
 		form=SignupForm(request.POST)
-		if form.is_valid():	
-           	form.save()
-			new_user(username, email)			
+		if form.is_valid():
+			form.save()
+			new_user(username, email)	
 			username=form.cleaned_data.get('username')
 			pwd=form.cleaned_data.get('password1')
 			user=authenticate(username=username,password=pwd)
 			login(request, user)
 			return redirect('home')
 		else:
-    		error = form.errors.get('__all__')	
+			error = form.errors.get('__all__')	
 	form=SignupForm
 	return render(request, 'registration/register.html',{'form':form})
 
