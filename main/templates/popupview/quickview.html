@@ -118,21 +118,11 @@
                                 {% endif %}
                                 <div class="product-rating">
                                     <ul class="rating">
+                                        {% for star in p.avg_ratings|ljust:p.avg_ratings %}
                                         <li>
                                             <i data-feather="star" class="fill"></i>
                                         </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star"></i>
-                                        </li>
+                                        {% endfor %}
                                     </ul>
                                     <span class="ms-2">8 Reviews</span>
                                     <span class="ms-2 text-danger">6 sold in last 16 hours</span>

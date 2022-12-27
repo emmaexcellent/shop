@@ -101,8 +101,8 @@
 
                                     <div class="product-rating custom-rate">
                                         <ul class="rating">
-                                            {% if p.review_set.all.count > 0 %}
-                                            {% for star in avg_reviews.avg_rating|floatformat:1|ljust:avg_reviews.avg_rating %}
+                                            {% if p.avg_ratings > 0 %}
+                                            {% for star in p.avg_ratings|floatformat:1|ljust:p.avg_ratings %}
                                             <li>
                                                 <i data-feather="star" class="fill"></i>
                                             </li>
@@ -173,7 +173,7 @@
                                             <li>Product ID : <a href="javascript:void(0)">{{p.ref}}</a></li>
                                             <li>MFG : <a href="javascript:void(0)">Jun 4, 2022</a></li>
                                             <li>Stock : <a href="javascript:void(0)">{{p.number}} Items Left</a></li>
-                                            <li>Subcategory : <a href="javascript:void(0)">Cake,</a> <a
+                                            <li>Subcategory : <a href="javascript:void(0)">{{p.sub_category}}</a> <a
                                                     href="javascript:void(0)">{{p.subcategory}}</a></li>
                                         </ul>
                                     </div>
@@ -236,27 +236,18 @@
                                     <a href="/vendor/{{p.vendor.name}}">
                                     <h5 class="fw-500">{{p.vendor}}.</h5></a>
                                     <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
- 
+                                    {% if p.vendor.avg_ratings > 0 %}
                                     <div class="product-rating mt-1">
                                         <ul class="rating">
+                                            {% for star in p.vendor.avg_ratings|ljust:p.vendor.avg_ratings %}
                                             <li>
                                                 <i data-feather="star" class="fill"></i>
                                             </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
+                                            {% endfor %}
                                         </ul>
-                                        <span>(36 Reviews)</span>
+                                        <span>({{p.vendor.vendorrevoew_set.all.count}} Reviews)</span>
                                     </div>
+                                    {% endif %}
 
                                 </div>
                             </div>

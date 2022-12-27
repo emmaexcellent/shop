@@ -623,3 +623,20 @@ $(document).on('click','.update-item',function(){
 $(".printord").click(function() {
         window.print()
 });
+
+$(document).on('click', '#prod_cat',function() {
+
+      var prod_id = $(this).val();
+
+      $.ajax({                     
+        url: '/shop/subcat',  
+        data: {
+          'id': prod_id   
+        },
+        success: function (data) {   
+          $("#prod_sub_cat").html(data); 
+        }
+      });
+
+});
+

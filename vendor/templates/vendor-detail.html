@@ -55,14 +55,14 @@
                             <div class="d-flex">
                                 <div class="product-rating">
                                     <ul class="rating">
-                                        {% for star in vrating.avg_rating|floatformat:1|ljust:vrating.avg_rating %}
+                                        {% for star in vendor.avg_ratings|floatformat:1|ljust:vendor.avg_ratings %}
                                         <li>
                                             <i data-feather="star" class="fill"></i>
                                         </li>
                                         {% endfor %}
                                     </ul>
                                 </div>
-                                <h6 class="ms-3">{{vrating.avg_rating|floatformat:1}} Out Of 5.0</h6>
+                                <h6 class="ms-3">{{vendor.avg_ratings|floatformat:1}} Out Of 5.0</h6>
                             </div>                            
                             {% endif %}
                            <br> 
@@ -115,18 +115,18 @@
                                     <div>
                                         <div class="vendor-list-name">
                                             <h3>{{vendor.name}}</h3>
+                                            {% if vendor.avg_ratings > 0 %}
                                             <div class="product-rating vendor-rating">
-                                                {% if vendor.vendorreview_set > 0 %}
                                                 <ul class="rating">
-                                                    {% for star in vrating.avg_rating|floatformat:1|ljust:vrating.avg_rating %}
+                                                    {% for star in vendor.avg_ratings|ljust:vendor.avg_ratings %}
                                                     <li>
                                                         <i data-feather="star" class="fill"></i>
                                                     </li>
                                                     {% endfor %}
                                                 </ul>
-                                                <span>{{vrating.avg_rating|floatformat:1}} of 5</span>
-                                                {% endif %}
+                                                <span>{{vendor.avg_ratings|floatformat:1}} of 5</span>
                                             </div>
+                                            {% endif %}
                                         </div>
 
                                         <p>{{vendor.description}}</p>
@@ -191,23 +191,13 @@
                                         <div class="product-rating mt-2">
 
                                             <ul class="rating">
+                                                {% for star in p.avg_ratings|ljust:p.avg_ratings %}
                                                 <li>
                                                     <i data-feather="star" class="fill"></i>
                                                 </li>
-                                                <li>
-                                                    <i data-feather="star" class="fill"></i>
-                                                </li>
-                                                <li>
-                                                    <i data-feather="star" class="fill"></i>
-                                                </li>
-                                                <li>
-                                                    <i data-feather="star" class="fill"></i>
-                                                </li>
-                                                <li>
-                                                    <i data-feather="star"></i>
-                                                </li>
+                                                {% endfor %}
                                             </ul>
-                                            <span>(4.0)</span>
+                                            <span>({{p.avg_ratings}})</span>
                                         </div>
                                         <h6 class="unit prod-size-{{p.id}}">{{p.variation_set.first.size}}</h6>
                                         {% if p.variation_set.first.discount %}

@@ -75,9 +75,9 @@ def registerUser(request):
 		password2 = request.POST.get('password2')
 		if password1 != password2:
 			messages.error(request, f"Oops! Your passwords does not match!.")
-		if User.objects.filter(username = username):
+		if User.objects.filter(username = username).exists():
 			messages.error(request, f"Oops! User with username exists!.")
-		if User.objects.filter(email = email):
+		if User.objects.filter(email = email).exists():
 			messages.error(request, f"Oops! User with email exists!.")	
 			
 		form=SignupForm(request.POST)

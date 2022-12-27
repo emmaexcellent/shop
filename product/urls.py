@@ -4,10 +4,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-app_name = 'product'
-
 urlpatterns = [
-    path('<str:category_title>/<str:slug>-<str:id>', views.detail, name="detail"),    
+    path('<str:category_title>/<str:slug>-<str:id>', views.detail, name="detail"), 
+    path('subcat', views.listsub_cat, name="sub_cat" )   
 
 ] 
 
