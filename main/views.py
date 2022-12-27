@@ -82,6 +82,12 @@ def registerUser(request):
 			
 		form=SignupForm(request.POST)
 		if form.is_valid():
+			if form.password1 != form.password2:
+				messages.error(request, f"Oops! Your passwords does not match!.")
+			if User.objects.filter(username = form.username).exists():
+				messages.error(request, f"Oops! User with username exists!.")
+			if User.objects.filter(email = form.email).exists():
+				messages.error(request, f"Oops! User with email exists!.")	
 			form.save()
 			new_user(username, email)			
 			username=form.cleaned_data.get('username')
