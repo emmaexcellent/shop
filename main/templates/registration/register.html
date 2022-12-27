@@ -44,10 +44,8 @@
                         <div class="log-in-title">
                             <h3 style="text-align: center; color: #239698;">Welcome To <b>EXCEL</b></h3>
                             <h4>Create New Account</h4>
-                            {% if messages %}
-                            {% for message in messages %}
-                            <h5 style="color:orangered; font-size: 14;">{{ message }}</h5>
-                            {% endfor %}
+                            {% if error %}
+                            <h5 style="color:orangered; font-size: 14;">{{ error }}</h5>
                             {% endif %}
                         </div>
 

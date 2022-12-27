@@ -73,28 +73,18 @@ def registerUser(request):
 		email = request.POST.get('email')
 		password1 = request.POST.get('password1')
 		password2 = request.POST.get('password2')
-		if password1 != password2:
-			messages.error(request, f"Oops! Your passwords does not match!.")
-		if User.objects.filter(username = username).exists():
-			messages.error(request, f"Oops! User with username exists!.")
-		if User.objects.filter(email = email).exists():
-			messages.error(request, f"Oops! User with email exists!.")	
-			
+
 		form=SignupForm(request.POST)
-		if form.is_valid():
-			if form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
-				messages.error(request, f"Oops! Your passwords does not match!.")
-			if User.objects.filter(username = form.cleaned_data.get('username')).exists():
-				messages.error(request, f"Oops! User with username exists!.")
-			if User.objects.filter(email = form.cleaned_data.get('email')).exists():
-				messages.error(request, f"Oops! User with email exists!.")	
-			form.save()
+		if form.is_valid():	
+           	form.save()
 			new_user(username, email)			
 			username=form.cleaned_data.get('username')
 			pwd=form.cleaned_data.get('password1')
 			user=authenticate(username=username,password=pwd)
 			login(request, user)
 			return redirect('home')
+		else:
+    		error = form.errors.get('__all__')	
 	form=SignupForm
 	return render(request, 'registration/register.html',{'form':form})
 
