@@ -24,7 +24,6 @@ def seller_reg(request):
 		if request.method == 'POST':
 			vendorname = request.POST.get('vendorname')
 			vendorimage = request.FILES['vendorimage']
-			vendorcat = request.POST.get('vendorcat')
 			vendordesc = request.POST.get('vendordesc')
 			vendoradd = request.POST.get('vendoradd')
 			vendorcontact = request.POST.get('vendorcontact')
@@ -42,7 +41,6 @@ def seller_reg(request):
 						user= request.user,
 						name= vendorname,
 						image= vendorimage,
-						category = cat,
 						description= vendordesc,
 						address= vendoradd,
 						phone= vendorcontact,

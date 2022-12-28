@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block title %}
-    <title>Register</title>
+    <title>Register Vendor</title>
 {% endblock %}
 {% block content %}
     <!-- mobile fix menu end -->
@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadscrumb-contain">
-                        <h2>Sign In</h2>
+                        <h2>Vendor Form</h2>
                         <nav>
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item">
@@ -64,16 +64,6 @@
                                     <div class="form-floating theme-form-floating">
                                         <input name="vendorimage" type="file" class="form-control" id="vendorimage" accept="image/*" required>
                                         <label for="vendorimage">Vendor Image</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating theme-form-floating">
-                                        <select name="vendorcat" class="form-select" id="floatingSelect1" aria-label="Floating label select example">
-                                        {% for cat in categories %}
-                                            <option value="{{cat.title}}">{{cat.title}}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <label for="vendorcat">Product Category</label>
                                     </div>
                                 </div>
                                 <div class="col-12">

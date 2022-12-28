@@ -428,7 +428,7 @@
                                                 <div class="product-rating">
                                                     <ul class="rating">
                                                         {% if p.review_set.all.count > 0 %}
-                                                        {% for star in avg_reviews.avg_rating|floatformat:1|ljust:avg_reviews.avg_rating %}
+                                                        {% for star in p.avg_ratings|floatformat:1|ljust:p.avg_ratings %}
                                                         <li>
                                                             <i data-feather="star" class="fill"></i>
                                                         </li>
@@ -436,7 +436,7 @@
                                                         {% endif %}
                                                     </ul>
                                                 </div>
-                                                <h6 class="ms-3">{{avg_reviews.avg_rating|floatformat:1}} Out Of 5.0</h6>
+                                                <h6 class="ms-3">{{p.avg_ratings|floatformat:1}} Out Of 5.0</h6>
                                             </div>
                                             {% else %}
                                             <div class="review-title">
