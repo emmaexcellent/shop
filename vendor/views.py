@@ -30,8 +30,6 @@ def seller_reg(request):
 			vendormail = request.POST.get('vendormail')
 			accept = request.POST.get('accept')
 
-			cat = Category.objects.get(title = vendorcat)
-
 			if Vendor.objects.filter(name=vendorname).count() > 0:
 				messages.error(request, f"Vendor name already choosen!")
 				return redirect('/vendor/register')
@@ -109,11 +107,21 @@ def vendor_dashboard(request):
 			delete_vendorpay.delete()			
 
 		if 'profile_edit' in request.POST:
-			prof_save = VendorForm(request.POST, request.FILES, instance = v)
-			if prof_save.is_valid():
-				prof_save.save()
-				messages.success(request, "Profile Successfully Changed!")
-			return redirect('/vendor/dashboard')	
+			vend_name = request.POST.get('vend_name')
+			vend_email = request.POST.get('vend_email')
+			vend_phone = request.POST.get('vend_phone')
+			vend_desc = request.POST.get('vend_desc')
+			vend_add = request.POST.get('vend_add')
+
+			vend_edit = Vendor.objects.get(name = v.name)
+			vend_edit.name = vend_name
+			vend_edit.email = vend_email
+			vend_edit.phone = vend_phone
+			vend_edit.descriptionri = vend_desc	
+			vend_edit.address = vend_add	
+			vend_edit.save()
+			messages.success(request, "Profile Successfully Changed!")
+			return redirect('vendor-dashboard')
 
 		if 'vend_image' in request.POST:
 			vend_img = request.FILES.get('vendor_image')
@@ -175,8 +183,7 @@ def vendor_dashboard(request):
 				var_save.save()
 				if Variation.objects.filter(product=prod, size=var_save.size).count() > 1:
 					Variation.objects.get(pk = var_save.id,product=prod, size=var_save.size).delete()
-				
-		profile_edit = VendorForm(instance = v)	
+
 		varform = VariationForm()	
 
 		if 'prod_delete' in request.POST:

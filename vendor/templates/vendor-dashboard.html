@@ -530,25 +530,25 @@
                                         </div>
                                         {% for vend in vendor %}
                                         <ul>
-                                            <li>
-                                                <h5>Vendor Name :</h5>
-                                                <h5>{{vend.name}}</h5>
+                                            <li class="row">
+                                                <h5 class="col-4">Vendor Name :</h5>
+                                                <h5 class="col-lg-6">{{v.name}}</h5>
+                                            </li>
+                                            <li class="row">
+                                                <h5 class="col-4">Description :</h5>
+                                                <h5 class="col-lg-6">{{v.description}}</h5>
+                                            </li>
+                                            <li class="row">
+                                                <h5 class="col-4">Email Address :</h5>
+                                                <h5 class="col-lg-6">{{v.email}}</h5>
+                                            </li>
+                                            <li class="row">
+                                                <h5 class="col-4">Contact :</h5>
+                                                <h5 class="col-lg-6">{{v.phone}}</h5>
                                             </li>
                                             <li>
-                                                <h5>Description :</h5>
-                                                <h5>{{vend.description}}</h5>
-                                            </li>
-                                            <li>
-                                                <h5>Email Address :</h5>
-                                                <h5>{{vend.email}}</h5>
-                                            </li>
-                                            <li>
-                                                <h5>Contact :</h5>
-                                                <h5>{{vend.phone}}</h5>
-                                            </li>
-                                            <li>
-                                                <h5>Address :</h5>
-                                                <h5>{{vend.address}}</h5>
+                                                <h5 class="col-4">Address :</h5>
+                                                <h5 class="col-lg-6">{{v.address}}</h5>
                                             </li>
                                         </ul>
                                         {% endfor %}
@@ -685,27 +685,23 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="companyName" class="form-label">Vendor Name</label>
-                            {{profile_edit.name}}
+                            <input class="form-control" type="text" name="vend_name" id="vend_name" value="{{v.name}}" required>
                         </div>
                         <div class="mb-3">
                             <label for="emailAddress" class="form-label">Business Email</label>
-                            {{profile_edit.email}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="employees" class="form-label">About</label>
-                            {{profile_edit.description}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            {{profile_edit.category}}
-                        </div>
-                        <div class="mb-3">
-                            <label for="street" class="form-label">Address</label>
-                            {{profile_edit.address}}
+                            <input class="form-control" type="email" name="vend_email" id="vend_email" value="{{v.email}}" required>
                         </div>
                         <div class="mb-3">
                             <label for="city" class="form-label">Phone Contact</label>
-                            {{profile_edit.phone}}
+                            <input class="form-control" type="number" name="vend_phone" id="vend_phone" value="{{v.phone}}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employees" class="form-label">About</label>
+                            <textarea class="form-control" type="text" name="vend_desc" id="vend_desc" style="height: 150px;" required>{{v.description}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="street" class="form-label">Address</label>
+                            <textarea class="form-control" type="text" name="vend_add" id="vend_add" style="height: 80px;" required>{{v.address}}</textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-animation btn-md fw-bold"

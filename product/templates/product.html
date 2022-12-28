@@ -2,7 +2,7 @@
 {% load static %}
 {% load text_extras %}
 {% block title %}
-    <title>Product Details</title>
+    <title>{{p.name}}</title>
 {% endblock %}
 {% block content %}
 
@@ -160,7 +160,7 @@
                                 </div>
 
                                 <div class="buy-box">
-                                    <a href="{% url 'wishlist' %}">
+                                    <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
                                         <i data-feather="heart"></i>
                                         <span>Add To Wishlist</span>
                                     </a>

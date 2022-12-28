@@ -46,7 +46,7 @@ class Product(models.Model):
 
         def save(self, *args, **kwargs) -> None: 
             if self.ref == None:       
-                self.ref = secrets.token_urlsafe(10) 
+                self.ref = secrets.token_urlsafe(7) 
                 super().save(*args, **kwargs)  
             else:     
                 super().save(*args, **kwargs)
