@@ -68,7 +68,7 @@ def registerUser(request):
 	if request.method=='POST':
 		email_exist = User._meta.get_field('email')._unique=True
 		username_exist = User._meta.get_field('username')._unique=True	
-		
+
 		form=SignupForm(request.POST)
 		if form.is_valid():
 			form.save()
@@ -78,8 +78,6 @@ def registerUser(request):
 			user=authenticate(username=username,password=pwd)
 			login(request, user)
 			return redirect('home')
-		else:
-			error = form.errors.get('__all__')	
 	form=SignupForm
 	return render(request, 'registration/register.html',{'form':form})
 
