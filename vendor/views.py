@@ -195,7 +195,7 @@ def vendor_dashboard(request):
 
 	return render(request, 'vendor-dashboard.html', 
 		{'vendor':vendor,'vend_sale':vend_sale,'ord_pending':ord_pending,'popular_prod':popular_prod,
-		 'order_items':order_items,'products':products,'payments':payments,'profile_edit':profile_edit,'v':v,
+		 'order_items':order_items,'products':products,'payments':payments,'v':v,
 		 'varform':varform,'vend_approve':vend_approve
 
 		})	
