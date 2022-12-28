@@ -24,3 +24,16 @@ def change_password_success(name ,email):
 	receiver = [email]
 	send_mail(subject, message, email_from, receiver)
 	return True	
+
+
+def new_user(username, email):
+	html_template = 'newuser_email.html'
+	html_message = render_to_string(html_template, {'username':username})
+	subject = 'Welcome to Excelcart'
+	email_from = settings.EMAIL_HOST_USER
+	recipient_list = [email]
+	message = EmailMessage(subject, html_message,email_from, recipient_list)
+	message.content_subtype = 'html'
+	message.send()
+	return True	
+
