@@ -69,7 +69,7 @@ class CartOrderItems(models.Model):
         verbose_name_plural='Order Items'
 
     def image_tag(self):
-        return mark_safe('<img src="/media/%s" width="50" height="50" />' % (self.image))
+        return mark_safe('<img src="%s" width="50" height="50" />' % (self.image))
 
 class Wishlist(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)

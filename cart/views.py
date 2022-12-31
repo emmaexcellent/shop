@@ -190,13 +190,13 @@ def checkout(request):
 
 			for p_id,item in request.session['cartdata'].items():
 				total_amt+=int(item['qty'])*float(item['price'])
-				item_img = Product.objects.get(thumb_nail__url = item['img'])		
+					
 				items=CartOrderItems.objects.create(
 						order=order,
 						invoice_no='INV-'+str(order.id),
 						item=item['title'],
 						ref=item['ref'],
-						image= item_img.thumb_nail,
+						image= item['img'],
 						qty=item['qty'],
 						price=item['price'],
 						total=float(item['qty'])*float(item['price']),
