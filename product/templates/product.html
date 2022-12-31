@@ -85,7 +85,9 @@
 
                         <div class="col-xl-6 wow fadeInUp">
                             <div class="right-box-contain">
+                                {% if p.variation_set.first.discount is not None %}
                                 <h6 class="offer-top">{{p.variation_set.first.discount}}% Off</h6>
+                                {% endif %}
                                 <h2 class="name">{{p.name}} {% if p.color is not None %}({{p.color}}) {% endif %}</h2>
                                 <div class="price-rating">
                                     {% if p.variation_set.first.discount %}
