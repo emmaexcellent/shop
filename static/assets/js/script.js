@@ -515,6 +515,7 @@ $(document).on('click', ".add-to-cart",function(){
     var _productColor= $(".prod-color-"+_index).val();
     var _productSize= $(".prod-size-"+_index).text();
     var _productTitle= $(".prod-name-"+_index).val();
+    var _productRef= $(".prod-ref-"+_index).val();
     var _productCategory= $(".prod-cat-"+_index).val();
     var _productVendor= $(".prod-vendor-"+_index).val();
     var _productPrice= $(".prod-price-"+_index).val();
@@ -527,6 +528,7 @@ $(document).on('click', ".add-to-cart",function(){
             'img':_productImage,
             'qty':_qty,
             'title':_productTitle,
+            'ref':_productRef,
             'color':_productColor,
             'size':_productSize,
             'price':_productPrice,

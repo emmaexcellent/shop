@@ -7,4 +7,5 @@ from .models import*
 class PaymentAdmin(admin.ModelAdmin):
 	list_display=('customer','amount','payment_option','verified')
 	list_editable=('verified',)
+	search_fields = ("order__code__icontains","customer__icontains", )
 admin.site.register(Payment,PaymentAdmin)

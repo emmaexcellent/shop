@@ -89,7 +89,7 @@ def registerUser(request):
 			user=authenticate(username=username,password=pwd)
 			login(request, user)
 			return redirect('home')
-							
+
 	form=SignupForm
 	return render(request, 'registration/register.html',{'form':form})
 
@@ -208,7 +208,7 @@ def forgot_password(request):
 
 	if request.method=='POST':
 
-		email = request.POST.get('email')		
+		email = request.POST.get('email')	
 
 		if not User.objects.filter(email = email):
 			messages.error(request, 'No user found with this email')
@@ -216,9 +216,10 @@ def forgot_password(request):
 
 		token = str(uuid.uuid4())
 		user = User.objects.get(email = email)
-		user_obj= user.email			
+		user_obj= user.email
+		username = user.username			
 
-		forget_password_email(user_obj, token)
+		forget_password_email(username,user_obj, token)
 		UserToken.objects.create(user =user, token=token)
 		messages.error(request, 'Check your email to set up new password.')		
 		return redirect('forgot-password')

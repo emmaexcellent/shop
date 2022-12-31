@@ -159,11 +159,13 @@ def checkout(request):
 
 		for p_id,item in request.session['cartdata'].items():
 			total_amt+=int(item['qty'])*float(item['price'])
+			item_img = Product.objects.get(thumb_nail = item['img'])
 			items=CartOrderItems.objects.create(
 					order=order,
 					invoice_no='INV-'+str(order.id),
 					item=item['title'],
-					image=item['img'],
+					ref=item['ref'],
+					image= item_img.thumb_nail,
 					qty=item['qty'],
 					price=item['price'],
 					total=float(item['qty'])*float(item['price']),
@@ -179,7 +181,7 @@ def checkout(request):
 
 			total = total_amt + delivery	
 
-		formadd = AddressForm()	
+			formadd = AddressForm()
 		if 'addform' in request.POST:
 			formadd = AddressForm(request.POST)
 			if formadd.is_valid:
@@ -244,5 +246,6 @@ def checkout(request):
 			'discount':discount,'total':total,'address':address,'formadd':formadd})
 		
 	else:
+		formadd = AddressForm()
 		return render(request, 'checkout.html',
 			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address, 'formadd':formadd})
