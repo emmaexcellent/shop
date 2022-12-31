@@ -149,30 +149,9 @@ def checkout(request):
 
 	address= CustomerAddress.objects.filter(user = request.user)
 	if 'cartdata' in request.session:
-		for p_id,item in request.session['cartdata'].items():
-			totalAmt+=int(item['qty'])*int(item['price'])
-
-			order=CartOrder.objects.create(
-					user=request.user,
-					total_amt=totalAmt
-				)
 
 		for p_id,item in request.session['cartdata'].items():
 			total_amt+=int(item['qty'])*float(item['price'])
-			item_img = Product.objects.get(thumb_nail = item['img'])
-			items=CartOrderItems.objects.create(
-					order=order,
-					invoice_no='INV-'+str(order.id),
-					item=item['title'],
-					ref=item['ref'],
-					image= item_img.thumb_nail,
-					qty=item['qty'],
-					price=item['price'],
-					total=float(item['qty'])*float(item['price']),
-					size= item['size'],
-					color= item['color'],
-					vendor= item['vendor'],
-					)			
 
 			if total_amt > 5000:
 				delivery = total_amt * 11/100
@@ -200,7 +179,31 @@ def checkout(request):
 			note = request.POST.get('note')	
 			code = request.POST.get('code')	
 			time = request.POST.get('time')	
-			date = request.POST.get('date')				
+			date = request.POST.get('date')	
+			for p_id,item in request.session['cartdata'].items():
+				totalAmt+=int(item['qty'])*int(item['price'])
+
+				order=CartOrder.objects.create(
+						user=request.user,
+						total_amt=totalAmt
+					)			
+
+			for p_id,item in request.session['cartdata'].items():
+				total_amt+=int(item['qty'])*float(item['price'])
+				item_img = Product.objects.get(thumb_nail = item['img'])		
+				items=CartOrderItems.objects.create(
+						order=order,
+						invoice_no='INV-'+str(order.id),
+						item=item['title'],
+						ref=item['ref'],
+						image= item_img.thumb_nail,
+						qty=item['qty'],
+						price=item['price'],
+						total=float(item['qty'])*float(item['price']),
+						size= item['size'],
+						color= item['color'],
+						vendor= item['vendor'],
+						)					
 
 			coupon = CouponCode.objects.filter(code = code)
 			if coupon:
@@ -216,12 +219,21 @@ def checkout(request):
 				order_note=note, email=email, customer=customer, address_id=address, discount=discount, amount=total, payment_option=payment_choice
 				)
 			p = get_object_or_404(Product, id= p_id )
-			p.sales = p.sales+1
+			p.sales = p.sales+ int(item['qty'])
 			p.save()
 
 			prod = Product.objects.get(id= p_id)
 			prod.number = prod.number- int(item['qty'])
 			prod.save()
+
+			for p_id,item in request.session['cartdata'].items():
+				p = get_object_or_404(Product, ref= item['ref'])
+				p.sales = p.sales+int(item['qty'])
+				p.save()
+
+				prod = Product.objects.get(ref= item['ref'])
+				prod.number = prod.number- int(item['qty'])
+				prod.save()	
 
 			if payment_choice == 'Cash':
 

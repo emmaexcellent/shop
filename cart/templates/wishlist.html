@@ -69,7 +69,6 @@
                                 <h5 class="price">
                                     <span class="theme-color">&#8358; {{p.product.variation_set.first.dis_price|floatformat:2}}</span>
                                     <input type="hidden" class="prod-price-{{p.product.id}}" name="price" value="{{p.product.variation_set.first.dis_price}}">
-                                    <input type="hidden" class="prod-vendor-{{p.product.id}}" name="vendor" value="{{p.product.vendor}}">  
                                     <del>&#8358;{{p.product.variation_set.first.price|floatformat:2}}</del>
                                 </h5>
                                 {% else %}
@@ -80,6 +79,7 @@
                                 <div class="add-to-cart-box bg-white mt-2">
                                 	<input type="hidden" class="prod-id-{{p.product.id}}" value="{{p.product.id}}" />
                                     <input type="hidden" class="prod-name-{{p.product.id}}" value="{{p.product.name}}" />
+                                    <input type="hidden" class="prod-vendor-{{p.product.id}}" name="vendor" value="{{p.product.vendor}}">  
                                     <input type="hidden" class="prod-ref-{{p.product.id}}" value="{{p.product.ref}}" />
                                     <input type="hidden" class="prod-cat-{{p.product.id}}" value="{{p.product.category}}" />
                                     <input type="hidden" class="prod-color-{{p.product.id}}" value="{{p.product.color}}" />                                    
