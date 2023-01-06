@@ -4,6 +4,7 @@ from django.utils.timezone import now
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
 from product.models import *
+from main.manager import *
 
 # Create your models here.
 
@@ -37,6 +38,9 @@ class CartOrder(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     code = models.CharField(max_length=100, null=True, blank=True)
     total_amt=models.FloatField()
+    discount= models.IntegerField(default=0, null=True, blank=True)
+    delivery= models.IntegerField(default=0, null=True, blank=True)
+    total = models.IntegerField(default=0, null=True, blank=True)
     paid_status=models.BooleanField(default=False)    
     order_status=models.CharField(choices=status_choice,default='process',max_length=150)
     order_dt=models.DateTimeField(auto_now_add=True, null=True)
@@ -45,11 +49,14 @@ class CartOrder(models.Model):
         verbose_name_plural='Orders'
 
     def save(self, *args, **kwargs) -> None: 
-            if self.code == None:       
-                self.code = secrets.token_urlsafe(5) 
-                super().save(*args, **kwargs)  
-            else:     
-                super().save(*args, **kwargs)    
+        if self.code == None:    
+            self.code = secrets.token_urlsafe(5)                 
+            super().save(*args, **kwargs) 
+        elif self.order_status == 'delivered':
+            order_delivered(self)     
+
+        else:
+            super().save(*args, **kwargs)    
 
 # OrderItems
 class CartOrderItems(models.Model):

@@ -15,7 +15,7 @@ admin.site.register(CustomerAddress,CustomerAddressAdmin)
 class CartOrderAdmin(admin.ModelAdmin):
 	list_editable=('paid_status','order_status')
 	list_display=('id','user','total_amt','paid_status','order_dt','order_status')
-	search_fields = ("id__icontains","user__username__icontains", )
+	search_fields = ("id__icontains","user__username__icontains","ref__icontains" )
 admin.site.register(CartOrder,CartOrderAdmin)
 
 class CartOrderItemsAdmin(admin.ModelAdmin):

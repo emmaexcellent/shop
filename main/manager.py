@@ -1,5 +1,4 @@
 
-
 from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -42,3 +41,26 @@ def new_user(username, email):
 	message.send()
 	return True	
 
+
+def order_received(order, discount, delivery, total, email):
+	html_template = 'emails/order-received.html'
+	html_message = render_to_string(html_template, {'order':order,'discount':discount,'delivery':delivery,'total':total})
+	subject = 'Order Received'
+	email_from = settings.EMAIL_HOST_USER
+	recipient_list = [email]
+	message = EmailMessage(subject, html_message,email_from, recipient_list)
+	message.content_subtype = 'html'
+	message.send()
+	return True		
+
+
+def order_delivered(order):
+	html_template = 'emails/order-delivered.html'
+	html_message = render_to_string(html_template, {'order':order})
+	subject = 'Order Delivered'
+	email_from = settings.EMAIL_HOST_USER
+	recipient_list = [order.user.email]
+	message = EmailMessage(subject, html_message,email_from, recipient_list)
+	message.content_subtype = 'html'
+	message.send()
+	return True	

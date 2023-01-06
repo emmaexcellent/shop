@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from main.forms import *
+from main.manager import *
 
 
 # Create your views here.
@@ -17,6 +18,7 @@ def add_to_cart(request):
 	cart_p[str(request.GET.get('id'))]={
 		'img':request.GET.get('img'),
 		'title':request.GET.get('title'),
+		'ref':request.GET.get('ref'),
 		'color':request.GET.get('color'),
 		'size':request.GET.get('size'),
 		'qty':request.GET.get('qty'),
@@ -186,7 +188,7 @@ def checkout(request):
 				order=CartOrder.objects.create(
 						user=request.user,
 						total_amt=totalAmt
-					)			
+					)
 
 			for p_id,item in request.session['cartdata'].items():
 				total_amt+=int(item['qty'])*float(item['price'])
@@ -208,23 +210,21 @@ def checkout(request):
 			coupon = CouponCode.objects.filter(code = code)
 			if coupon:
 				for c in coupon:
-					discount = int(c.per_off) * total_amt/100
+					discount = int(c.per_off) * order.total_amt/100
 			else:
 				discount=0
 				messages.error(request, f"Oops! Coupon code is invalid.")
 		
-			total = total_amt + delivery - discount	
+			total = order.total_amt + delivery - discount	
+
+			order.discount = discount
+			order.delivery = delivery
+			order.total = total
+			order.save()
 
 			payment = Payment.objects.create(
 				order_note=note, email=email, customer=customer, address_id=address, discount=discount, amount=total, payment_option=payment_choice
 				)
-			p = get_object_or_404(Product, id= p_id )
-			p.sales = p.sales+ int(item['qty'])
-			p.save()
-
-			prod = Product.objects.get(id= p_id)
-			prod.number = prod.number- int(item['qty'])
-			prod.save()
 
 			for p_id,item in request.session['cartdata'].items():
 				p = get_object_or_404(Product, ref= item['ref'])
@@ -235,22 +235,24 @@ def checkout(request):
 				prod.number = prod.number- int(item['qty'])
 				prod.save()	
 
+			order_received(order, discount, delivery, total, request.user.email)
+
 			if payment_choice == 'Cash':
 
 				return render(request, 'by_cash.html',
-					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,
+					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'order':order,
 					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address})
 
 			elif payment_choice == 'Transfer':
 
 				return render(request, 'by_transfer.html',
-					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,
+					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'order':order,
 					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address})
 
 			elif payment_choice == 'Paystack':
 
 				return render(request, 'by_paystack.html',
-					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,
+					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'order':order,
 					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
 						 		 	
 		return render(request, 'checkout.html',
