@@ -30,7 +30,7 @@ class Product(models.Model):
         brand = models.CharField(max_length=100, null=True, blank=True)
         number=models.PositiveIntegerField(default=1, null=True, blank=True)
         ref=models.CharField(max_length=100, null=True, blank = True)
-        description=RichTextField()
+        description=models.TextField()
         date=models.DateTimeField(default=now)
         new=models.BooleanField(default=False)
         top_deals=models.BooleanField(default=False)

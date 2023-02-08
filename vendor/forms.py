@@ -7,6 +7,7 @@ from product.models import *
 class ProductForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+		self.fields["sub_category"].queryset = SubCategory.objects.none()
 		self.fields["name"].widget.attrs.update({
 			'required':'',
 			'class':"form-control",
@@ -48,7 +49,6 @@ class ProductForm(forms.ModelForm):
 			'placeholder':"Choose Sub-Category",
 			})
 		self.fields["color"].widget.attrs.update({
-			'required':'',
 			'class':"form-control",
 			'type':"text", 
 			'name':"prod_color",
@@ -56,7 +56,6 @@ class ProductForm(forms.ModelForm):
 			'placeholder':"Product Color",
 			})
 		self.fields["brand"].widget.attrs.update({
-			'required':'',
 			'class':"form-control",
 			'type':"text", 
 			'name':"prod_brand",
@@ -101,7 +100,7 @@ class VariationForm(forms.ModelForm):
 			'type':"text", 
 			'name':"prod_size",
 			'id':"prod_size",
-			'placeholder':"Size of product according to product unit size"
+			'placeholder':"Size of Product"
 			})
 		self.fields["price"].widget.attrs.update({
 			'required':'',

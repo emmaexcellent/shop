@@ -15,5 +15,7 @@ admin.site.register(Contact)
 admin.site.register(Faq)
 admin.site.register(UserToken)
 
+admin.site.site_header = "ExcelCart Admin "
+admin.site.index_title = "Welcome to ExcelCart Admin"
 
 

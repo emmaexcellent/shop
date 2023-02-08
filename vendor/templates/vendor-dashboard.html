@@ -139,7 +139,11 @@
                                         <p class="text-content">From your Seller Account Dashboard you have the ability to
                                             view a snapshot of your recent account activity and information about your products.</p>
                                         {% else %}
-                                        <h4 style="color: orangered;" class="text-content">Your Vendor account have not been approved! Our Teams are confirming your details to ensure trust within the site...</h4>  
+                                        <h4 style="color: orangered;" class="text-content">Your Vendor account have not been approved! Our Teams are confirming your details to ensure trust within the site...
+                                            <br>
+                                            <a href="{% url 'contact' %}">Contact Us</a> If your account is not approved within 24 hours!
+
+                                        </h4>  
                                         <i>You will not be able to take any action until your vendor account is approved. Thanks!</i>
                                         {% endif %}    
                                     </div>
@@ -787,6 +791,9 @@
             <div class="modal-body">
                 <form method="post" action="/vendor/dashboard">
                     {% csrf_token %}
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <i class="theme-color">Add unit of the product to the size  (KG, G, M, XL, X, CM..., etc)</i>
+                    </div>
                     <div class="form-floating mb-4 theme-form-floating">
                         {{varform.size}}
                         <label for="name">Product Size</label>

@@ -49,7 +49,7 @@ def seller_reg(request):
 	return render(request, 'seller-form.html', {})
 
 def vendor_list(request):
-	vendors = Vendor.objects.all().order_by('-name')
+	vendors = Vendor.objects.filter(approve=True).order_by('-name')
 
 	paginator=Paginator(vendors,30)
 	page_num=request.GET.get('page',1)
