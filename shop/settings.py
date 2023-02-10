@@ -35,11 +35,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['excelcart-production.up.railway.app']
+ALLOWED_HOSTS = ['excelcart-production.up.railway.app','excelcart.com.ng']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -182,7 +183,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #DEPLOYMENT 
 
-CSRF_TRUSTED_ORIGINS = ['https://excelcart-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://excelcart-production.up.railway.app','excelcart.com.ng']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
