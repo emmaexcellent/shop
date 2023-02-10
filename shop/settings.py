@@ -183,7 +183,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #DEPLOYMENT 
 
-CSRF_TRUSTED_ORIGINS = ['https://excelcart-production.up.railway.app','excelcart.com.ng']
+CSRF_TRUSTED_ORIGINS = ['https://excelcart-production.up.railway.app','https://excelcart.com.ng']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
