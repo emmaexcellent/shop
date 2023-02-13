@@ -1,3 +1,5 @@
+
+django-store-372412-a6affc2d3975.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -60,6 +62,8 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+
+
 
 # Flask stuff:
 instance/
