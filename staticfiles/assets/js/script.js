@@ -626,7 +626,6 @@ $(".printord").click(function() {
         window.print()
 });
 
-
 $(document).on('click', '#prod_cat',function() {
 
       var prod_id = $(this).val();
@@ -642,3 +641,4 @@ $(document).on('click', '#prod_cat',function() {
       });
 
 });
+
