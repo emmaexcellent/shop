@@ -44,6 +44,9 @@ class Product(models.Model):
         def __str__(self): 
             return self.name    
 
+        def get_absolute_url(self):
+            return f'/shop/{self.category}/{self.name}-{self.id}'    
+
         def save(self, *args, **kwargs) -> None: 
             if self.ref == None:       
                 self.ref = secrets.token_urlsafe(7) 

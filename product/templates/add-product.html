@@ -4,6 +4,23 @@
 {% block title %}
     <title>Add Product</title>
 {% endblock %}
+
+{% block meta %}
+    <meta name="description" property="og:description" content="Streamline your product management process with Excelcart. Our add product page is designed to save you time and hassle, so you can focus on what matters most">    
+    <meta name="keywords" content="Online store, Add product, Product inventory, Product options and customizations, Product tags, Product weight ans dimensions, Poduct reviews and ratings, Product availablity, Product title. product information, product title, product description">
+    <meta name="author" content="Emmanuel Excellent">
+    <meta property="og:url" content="https://excelcart.com.ng/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+    <meta property="og:title" content="Excelcart No.1 Online Shopping Website">
+    <meta property="og:image" content="">
+    <meta property="og:image:alt" content="Excelcart Graphics">
+
+    <meta property="twitter:image" content="">
+    <meta property="twitter:image:alt" content="Excelcart Graphics">
+    <meta property="twitter:card" content="excelcart">
+    <meta property="twitter:site" content="@Excelcart">
+
+{% endblock %}
+
 {% block content %}
 
 <!-- Breadcrumb Section Start -->

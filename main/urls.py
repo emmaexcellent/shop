@@ -4,6 +4,15 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.conf.urls import handler400, handler403, handler404, handler500
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import *
+
+
+sitemaps = {
+    'products':ProductSitemap,
+    'cats': CategorySitemap,
+    'vend': VendorSitemap,
+}
 
 
 urlpatterns = [
@@ -22,7 +31,8 @@ urlpatterns = [
 
     path('accounts/forgot-password',views.forgot_password, name='forgot-password'),
     path('accounts/reset-password/<token>/',views.reset_password, name='reset-password'),
-    path('accounts/change-password', views.change_password, name='change-password')
+    path('accounts/change-password', views.change_password, name='change-password'),
+    path('sitemap.xml', sitemap,{'sitemaps':sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     
 ] 
 

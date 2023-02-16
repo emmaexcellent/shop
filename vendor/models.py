@@ -31,6 +31,9 @@ class Vendor(models.Model):
 	def image_tag(self):
 		return mark_safe('<img src="%s" width="80" height="50" />'%(self.image.url))
 
+	def get_absolute_url(self):
+            return f'/vendor/{self.name}'		
+
 	def __str__(self):
 		return self.name
 
