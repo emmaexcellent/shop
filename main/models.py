@@ -2,13 +2,17 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
+from gdstorage.storage import GoogleDriveStorage
+
+# Define Google Drive Storage
+gd_storage = GoogleDriveStorage()
 
 # Create your models here.
 
 class Category(models.Model):
 	title=models.CharField(max_length=60)
-	image=models.ImageField(upload_to="category")
-	svg = models.FileField(upload_to="svg", null = True , blank= True)
+	image=models.ImageField(upload_to="category", storage=gd_storage)
+	svg = models.FileField(upload_to="svg", null = True , blank= True, storage=gd_storage)
 
 	class Meta:
 		verbose_name_plural='Categories'
