@@ -120,7 +120,7 @@
                                     <h4 class="price">&#8358; {{total_amt|floatformat:2}}</h4>
                                 </li>
                                 <li class="align-items-start">
-                                    <h4>Shipping</h4>
+                                    <h4>Delivery</h4>
                                     {% if delivery %}
                                     <h4 class="price text-end">&#8358; {{delivery|floatformat:2}}</h4>
                                     {% else %}
@@ -145,7 +145,7 @@
                             <ul>
                                 <li>
                                     <button onclick="location.href = '{% url 'checkout' %}';"
-                                        class="btn btn-animation proceed-btn fw-bold">Process To Checkout</button>
+                                        class="btn btn-animation proceed-btn fw-bold">Proceed To Checkout</button>
                                 </li>
 
                                 <li>
