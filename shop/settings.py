@@ -178,7 +178,7 @@ CKEDITOR_CONFIGS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST='smtp.gmail.com'
-EMAIL_HOST_USER='eduscopeonline01@gmail.com'
+EMAIL_HOST_USER='excelcartmail@gmail.com'
 EMAIL_HOST_PASSWORD=os.getenv('SENDGRID_API_KEY')
 EMAIL_PORT= 465
 EMAIL_USE_TLS = False
