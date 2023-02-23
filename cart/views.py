@@ -254,9 +254,9 @@ def checkout(request):
 						 		 	
 		return render(request, 'checkout.html',
 			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,
-			'discount':discount,'total':total,'address':address,'formadd':formadd})
+			'discount':discount,'total':total,'address':address})
 		
 	else:
-		formadd = AddressForm()
+		
 		return render(request, 'checkout.html',
 			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address})
