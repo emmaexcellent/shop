@@ -45,14 +45,47 @@
 
 <body class="theme-color-3 dark">
     <header class="pb-md-4 pb-0">
-        <div style="padding: 3px;" class="header-top">
+        <div style="padding: 5px;" class="header-top">
             <div class="container-fluid-lg">
                 <div class="row">
-                    <div class="col-xxl-3 d-xxl-block d-none">
-                        <div class="top-left-header">
-                            <i class="iconly-Location icli text-white"></i>
-                            <span class="text-white">support@excelcart.com.ng</span>
-                        </div>
+                    <div class="col-lg-3">
+                        <ul class="about-list right-nav-about">
+                            <li class="right-nav-list">
+                                <div class="dropdown theme-form-select">
+                                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="iconly-Location icli text-white"></i>
+                                        <span>Delivery Locations</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        {% for l in locations %}
+                                        <li>
+                                            <a class="dropdown-item" id="{{l.id}}">
+                                                <i class="iconly-Location icli theme-color"></i>
+                                                <span>{{l.name}}</span>
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="right-nav-list">
+                                <div class="dropdown theme-form-select">
+                                    <button class="btn dropdown-toggle" type="button" id="select-language" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span>Delivery STATE</span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="select-language" style="">
+                                        {% for s in states|slice:1 %}
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)" id="{{s.id}}">
+                                                <i class="iconly-Location icli theme-color"></i>
+                                                <span>{{s.name}}</span>
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -129,34 +162,6 @@
                                             </button>
 
                                             <div class="onhover-div">
-                                                <ul class="cart-list">
-                                                    {% for product_id,item in cart_data.items %}
-                                                    <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="/shop/{{item.cat}}/{{item.title|slugify}}-{{product_id}}" class="drop-image">
-                                                                <img src="{{item.img}}" class="blur-up lazyloaded" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="/shop/{{item.cat}}/{{item.title|slugify}}-{{product_id}}">
-                                                                    <h5>{{item.title}}</h5>
-                                                                </a>
-                                                                <h6><span>{{item.qty}} x</span> &#8358; {{item.price|floatformat:2}}</h6>
-                                                                <button class="close-button close_button delete-item" data-item="{{product_id}}">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    {% endfor %}
-
-                                                </ul>
-
-                                                <div class="price-box">
-                                                    <h5>Total :</h5>
-                                                    <h4 class="theme-color fw-bold cart-total">&#8358; {{total_amt|floatformat:2}}</h4>
-                                                </div>
-
                                                 <div class="button-group">
                                                     <a href="{% url 'cart' %}" class="btn btn-sm cart-button">View Cart</a>
                                                     <a href="{% url 'checkout' %}" class="btn btn-sm cart-button theme-bg-color

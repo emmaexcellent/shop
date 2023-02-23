@@ -162,15 +162,12 @@ def checkout(request):
 
 			total = total_amt + delivery	
 
-			formadd = AddressForm()
 		if 'addform' in request.POST:
-			formadd = AddressForm(request.POST)
-			if formadd.is_valid:
-				add_form= formadd.save(commit=False)
-				add_form.user = request.user
-				add_form.save()
-			else:
-				messages.error(request, "Add correct address details!")	
+			city = request.POST.get('city')
+			address2 = request.POST.get('address2')
+			phone = request.POST.get('phone')
+			place = request.POST.get('place')
+			CustomerAddress.objects.create(user=request.user, city=city, address=address2, phone=phone, name=place)
 
 		if 'order' in request.POST:
 			customer = request.user.username

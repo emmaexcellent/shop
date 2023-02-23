@@ -149,19 +149,22 @@ def user_dash(request):
 		return redirect('/accounts/dashboard')
 
 	if 'addform' in request.POST:
+		city = request.POST.get('city')
 		address = request.POST.get('address')
 		phone = request.POST.get('phone')
 		place = request.POST.get('place')
-		CustomerAddress.objects.create(user=request.user, address=address, phone=phone, name=place)	
+		CustomerAddress.objects.create(user=request.user, city = city, address=address, phone=phone, name=place)	
 		return redirect('/accounts/dashboard')
 
 	if 'add_edit' in request.POST:
+		city = request.POST.get('city')
 		address = request.POST.get('address')
 		phone = request.POST.get('phone')
 		place = request.POST.get('place')
 		add_id = request.POST.get('addid')
 
 		edit_add = CustomerAddress.objects.get(pk = add_id)
+		edit_add.city =  city
 		edit_add.address = address
 		edit_add.phone = phone
 		edit_add.name = place

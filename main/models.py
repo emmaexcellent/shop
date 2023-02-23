@@ -78,4 +78,28 @@ class UserToken(models.Model):
 		return self.user.username
 
 
+class Country(models.Model):
+	name = models.CharField(max_length=200)
 
+	class Meta:
+		verbose_name_plural='Countries'
+
+	def __str__(self):
+		return self.name
+
+class State(models.Model):
+	name = models.CharField(max_length=200)
+	country = models.ForeignKey(Country,on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.name
+
+class City(models.Model):
+	name = models.CharField(max_length=200)
+	sate = models.ForeignKey(State,on_delete=models.CASCADE)
+
+	class Meta:
+		verbose_name_plural='Cities'
+
+	def __str__(self):
+		return self.name		

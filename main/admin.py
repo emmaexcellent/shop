@@ -14,6 +14,9 @@ admin.site.register(SubCategory,SubCategoryAdmin)
 admin.site.register(Contact)
 admin.site.register(Faq)
 admin.site.register(UserToken)
+admin.site.register(Country)
+admin.site.register(State)
+admin.site.register(City)
 
 admin.site.site_header = "ExcelCart Admin "
 admin.site.index_title = "Welcome to ExcelCart Admin"

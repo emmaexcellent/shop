@@ -98,12 +98,18 @@
                                     data-bs-target="#pills-profile" type="button" role="tab"
                                     aria-controls="pills-profile" aria-selected="false"><i data-feather="user"></i>
                                     Profile</button>
-
+                            </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-address-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-address" type="button" role="tab"
                                     aria-controls="pills-address" aria-selected="false"><i class="fa fa-money-bill"></i>&nbsp;
                                     Payment Details</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button onclick="location.href='https://chat.whatsapp.com/JeROro7JKBIFSDC8Pd4BoG'" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false"><i class="fa fa-whatsapp"></i>&nbsp;
+                                    Join Vendors On WhatsApp</button>
                             </li>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -135,7 +141,7 @@
 
                                     <div class="dashboard-user-name">
                                         <h6 class="text-content">Hello, <b class="text-title">{{vend.name}}</b></h6>
-                                        <h6 class="text-content">Golden No: &nbsp;&nbsp; <b style="color:darkgoldenrod;">{{vend.id}}</b></h6>
+                                        <h6 class="text-content">Golden No:&nbsp;<b style="color:darkgoldenrod;">{{vend.id}}</b></h6>
                                         {% if vend_approve %}
                                         <p class="text-content">From your Seller Account Dashboard you have the ability to
                                             view a snapshot of your recent account activity and information about your products.</p>

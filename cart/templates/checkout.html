@@ -94,7 +94,7 @@
                                                                 <li>
                                                                     <p class="text-content"><span
                                                                             class="text-title">Address
-                                                                            : </span>{{add.address}}</p>
+                                                                            : </span>{{add.address}}, {{add.city}}</p>
                                                                 </li>
                                                                 <li>
                                                                     <h6 class="text-content mb-0"><span
@@ -246,22 +246,33 @@
                 <div class="modal-body"> 
                     <h5 class="theme-color">Delivery within Ibogun Address Only!<br> <i style="color:orangered;">We are working towards making our delivery available for other places...</i></h5>
                 </div> 
-                <div class="modal-body">
+                <div class="modal-body">                    
                     <form method="post" action="{% url 'checkout' %}">
                         {% csrf_token %}
                         <div class="form-floating mb-4 theme-form-floating">
-                            {{formadd.address}}
+                            <select class="form-select" aria-label="Locations" name="city">
+                                {% for l in locations %}
+                                <option value="{{l.name}}" id="{{l.id}}">{{l.name}}</option>
+                                {% endfor %}
+                            </select> 
+                            <label for="pin">Select Location </label>
+                        </div>
+
+                        <div class="form-floating mb-4 theme-form-floating">
+                            <textarea class="form-control" name="address2" placeholder="" id="address"
+                                style="height: 100px"></textarea>
                             <label for="address">Enter Address</label>
                         </div>
 
                         <div class="form-floating mb-4 theme-form-floating">
-                            {{formadd.phone}}
-                            <label for="phone">Phone </label>
+                            <input type="number" name="phone" class="form-control" id="pin" placeholder="Enter Phone Number">
+                            <label for="pin">Phone </label>
                         </div>
 
                         <div class="form-floating mb-4 theme-form-floating">
-                            {{formadd.name}}
-                            <label for="name">Phone </label>
+                            <textarea class="form-control" name="place" placeholder="Enter the name of place here" id="address"
+                                style="height: 100px"></textarea>
+                            <label for="address">Name of Place</label>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
