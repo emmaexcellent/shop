@@ -259,4 +259,4 @@ def checkout(request):
 	else:
 		formadd = AddressForm()
 		return render(request, 'checkout.html',
-			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address, 'formadd':formadd})
+			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address})
