@@ -306,9 +306,15 @@
                     absolutely free. All you need is to register, list your catalogue and start selling your
                     products.</p>
             </div>
+            {% if vendors.count == 52 %}
+            <div class="col-12">
+                <button class="btn btn-md mt-3 theme-bg-color text-white" disabled>Vendor Registration Closed!</button>
+            </div>
+            {% else %}
             <div class="col-12">
                 <button onclick="location.href='/vendor/register'" class="btn btn-md mt-3 theme-bg-color text-white">Start Selling</button>
             </div>
+            {% endif %}
         </div>
     </section>
     <!-- Selling Section End -->

@@ -648,7 +648,11 @@
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "{{p.avg_ratings|floatformat:1}}",
+            {% if p.review_set.all.count == 0 %}
+             "reviewCount": "1"
+             {% else %}
             "reviewCount": "{{p.review_set.all.count}}"
+            {% endif %}
           },
           "description": "{{p.short}}",
           "name": "{{p.name}}",

@@ -12,7 +12,8 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 def become_seller(request):
-	return render(request, 'become-seller.html', {})
+	vendors = Vendor.objects.all()
+	return render(request, 'become-seller.html', {'vendors':vendors})
 
 @login_required
 def seller_reg(request):
@@ -21,7 +22,10 @@ def seller_reg(request):
 		return redirect('/vendor/dashboard')
 
 	else:	
-		if request.method == 'POST':
+		if Vendor.objects.all().count() == 52:
+			return redirect('/vendor/become-seller')
+
+		elif request.method == 'POST':
 			vendorname = request.POST.get('vendorname')
 			vendorimage = request.FILES['vendorimage']
 			vendordesc = request.POST.get('vendordesc')
