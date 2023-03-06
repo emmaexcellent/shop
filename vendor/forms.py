@@ -7,7 +7,6 @@ from product.models import *
 class ProductForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.fields["sub_category"].queryset = SubCategory.objects.none()
 		self.fields["name"].widget.attrs.update({
 			'required':'',
 			'class':"form-control",
