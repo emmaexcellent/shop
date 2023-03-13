@@ -4,7 +4,7 @@
     <section class="cart-section section-b-space" id="cartList">
         <div class="container-fluid-lg">
             <div class="row g-sm-5 g-3">
-                <div class="col-xxl-9">
+                <div class="col-12">
                     <div class="cart-table">
                         <div class="table-responsive-xl">
                             <table class="table">
@@ -14,7 +14,7 @@
                                         <td class="product-detail">
                                             <div class="product border-0">
                                                 <a href="/shop/{{item.cat}}/{{item.title|slugify}}-{{product_id}}" class="product-image">
-                                                    <img src="/media/{{item.img}}"
+                                                    <img src="{{item.img}}"
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
                                                 <div class="product-detail">
@@ -27,7 +27,7 @@
                                                                 By:</span> {{item.vendor}}</li>
 
                                                         <li class="text-content"><span
-                                                                class="text-title">Size</span> - <span class="active1">{{item.size}}</span></li>
+                                                                class="text-title">Size</span> - <span class="prod-size-{{product_id}}">{{item.size}}</span></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -37,7 +37,10 @@
                                             <h4 class="table-title text-content">Price</h4>
                                             <h5>&#8358; {{item.price|floatformat:2}}</h5>
                                         </td>
+
                                         <input type="hidden" class="prod-price-{{product_id}}" name="price" value="{{item.price}}">
+                                        <input type="hidden" class="prod-stock-{{product_id}}" value="{{item.stock}}" />
+                                        
                                         <td class="quantity">
                                             <h4 class="table-title text-content">Qty</h4>
                                             <div class="quantity-price">
@@ -46,11 +49,18 @@
                                                         <button type="button" class="btn update-item" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" data-item="{{product_id}}">
                                                             <i class="fa fa-minus ms-0" aria-hidden="true"></i>
                                                         </button>
+                                                        {% for p in prods %} 
+                                                        {% if p.ref == item.ref %}                                                         
                                                         <input class="form-control input-number qty-input prod-qty-{{product_id}}" type="number"
-                                                            name="quantity" value="{{item.qty}}" min="1">
+                                                            name="quantity" value="{{item.qty}}" min="1" max="{{p.number}}" readonly>
+
+                                                        {% endif %}    
+                                                        {% endfor %}    
+
                                                         <button type="button" class="btn update-item" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" data-item="{{product_id}}">
                                                             <i class="fa fa-plus ms-0" aria-hidden="true"></i>
-                                                        </button>
+                                                        </button> 
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -74,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="col-xxl-3">
+                <div class="col-12">
                     <div class="summery-box p-sticky">
                         <div class="summery-header">
                             <h3>Cart Total</h3>

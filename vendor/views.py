@@ -23,7 +23,8 @@ def seller_reg(request):
 
 	else:	
 		if Vendor.objects.all().count() == 52:
-			return redirect('/vendor/become-seller')
+			messages.error(request,'Contact the Admin to start selling on Execlecart')
+			return redirect('contact')
 
 		elif request.method == 'POST':
 			vendorname = request.POST.get('vendorname')

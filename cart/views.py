@@ -24,12 +24,15 @@ def add_to_cart(request):
 		'qty':request.GET.get('qty'),
 		'price':request.GET.get('price'),
 		'cat':request.GET.get('cat'),
-		'vendor':request.GET.get('vendor')		
+		'vendor':request.GET.get('vendor'),
+		'stock':request.GET.get('stock')	
 	}
 	if 'cartdata' in request.session:
 		if str(request.GET.get('id')) in request.session['cartdata']:
 			cart_data=request.session['cartdata']
 			cart_data[str(request.GET.get('id'))]['qty']=int(cart_p[str(request.GET.get('id'))]['qty'])
+			cart_data[str(request.GET.get('id'))]['size']=str(cart_p[str(request.GET.get('id'))]['size'])
+			cart_data[str(request.GET.get('id'))]['price']=str(cart_p[str(request.GET.get('id'))]['price'])
 			cart_data.update(cart_data)
 			request.session['cartdata']=cart_data
 		else:
@@ -46,16 +49,19 @@ def cart_list(request):
 	delivery=0
 	if 'cartdata' in request.session:
 		for p_id,item in request.session['cartdata'].items():
-			total_amt+=int(item['qty'])*int(item['price'])
+			total_amt+=int(item['qty'])*float(item['price'])
 
 			if total_amt > 5000:
 				delivery = total_amt * 11/100
 			else:
 				delivery = 500
 
-			total = total_amt + delivery		
+			total = total_amt + delivery
+
+		prods = Product.objects.all()
+
 		return render(request, 'cart.html',
-			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,'total':total})
+			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,'total':total,'prods':prods})
 	else:
 		return render(request, 'cart.html',{'cart_data':'','totalitems':0,'total_amt':total_amt})	
 
@@ -79,8 +85,10 @@ def delete_cart_item(request):
 			delivery = 500
 
 		total = total_amt + delivery
+
+	prods = Product.objects.all()	
 	t=render_to_string('ajax/cart-list.html',
-		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total})
+		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total,'prods':prods})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
 # Delete Cart Item
@@ -93,12 +101,14 @@ def update_cart_item(request):
 	p_qty=request.GET.get('qty')
 	p_size = request.GET.get('size')
 	p_price = request.GET.get('price')
+	p_stock = request.GET.get('stock')
 	if 'cartdata' in request.session:
 		if p_id in request.session['cartdata']:
 			cart_data=request.session['cartdata']
 			cart_data[str(request.GET['id'])]['qty']= p_qty
 			cart_data[str(request.GET['id'])]['size']= p_size
 			cart_data[str(request.GET['id'])]['price']= p_price
+			cart_data[str(request.GET['id'])]['stock']= p_stock
 			request.session['cartdata']=cart_data			
 	for p_id,item in request.session['cartdata'].items():
 		total_amt+=int(item['qty'])*int(item['price'])
@@ -108,8 +118,11 @@ def update_cart_item(request):
 			delivery = 500
 
 		total = total_amt + delivery
+
+	prods = Product.objects.all()
+		
 	t=render_to_string('ajax/cart-list.html',
-		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total})
+		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total,'prods':prods})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
 def add_wishlist(request):
@@ -167,8 +180,11 @@ def checkout(request):
 			address2 = request.POST.get('address2')
 			phone = request.POST.get('phone')
 			place = request.POST.get('place')
-			CustomerAddress.objects.create(user=request.user, city=city, address=address2, phone=phone, name=place)
-
+			if CustomerAddress.objects.filter(user=request.user, city=city, address=address2, phone=phone, name=place).exists():
+				redirect('checkout')
+			else:	
+				CustomerAddress.objects.create(user=request.user, city=city, address=address2, phone=phone, name=place)
+				
 		if 'order' in request.POST:
 			customer = request.user.username
 			address = request.POST.get('address')
@@ -210,8 +226,7 @@ def checkout(request):
 					discount = int(c.per_off) * order.total_amt/100
 			else:
 				discount=0
-				messages.error(request, f"Oops! Coupon code is invalid.")
-		
+
 			total = order.total_amt + delivery - discount	
 
 			order.discount = discount
@@ -219,9 +234,14 @@ def checkout(request):
 			order.total = total
 			order.save()
 
-			payment = Payment.objects.create(
-				order_note=note, email=email, customer=customer, address_id=address, discount=discount, amount=total, payment_option=payment_choice
-				)
+			if address is not None:
+				payment = Payment.objects.create(
+					order=order, order_note=note, email=email, customer=customer, address_id=address, discount=discount, amount=total, payment_option=payment_choice
+					)
+			else:
+				payment=[]
+				messages.error(request,"Delivery Address Is Required!!!")
+				return redirect('checkout')	
 
 			for p_id,item in request.session['cartdata'].items():
 				p = get_object_or_404(Product, ref= item['ref'])

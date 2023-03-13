@@ -497,14 +497,16 @@ $(".left-box").click(function () {
 
 
 $(".choose-size").on('click',function(){
-    $(".choose-size").removeClass('active1');
+    var _vm= $(this);
+    var _id=_vm.attr('data-select');
+    $(".choose-size").removeClass('prod-size-'+_id);
     $(".dis-price").hide();
-    $(this).addClass('active1');
+    $(this).addClass('prod-size-'+_id);
 
     var _price=$(this).attr('data-price');
     $(".product-price").text(_price);
     $(".product-price-h").val(_price);
-    })
+})
 
 $(document).on('click', ".add-to-cart",function(){
     var _vm= $(this);
@@ -519,6 +521,7 @@ $(document).on('click', ".add-to-cart",function(){
     var _productCategory= $(".prod-cat-"+_index).val();
     var _productVendor= $(".prod-vendor-"+_index).val();
     var _productPrice= $(".prod-price-"+_index).val();
+    var _productStock= $(".prod-stock-"+_index).val();
     
     //Ajax
     $.ajax({
@@ -534,6 +537,7 @@ $(document).on('click', ".add-to-cart",function(){
             'price':_productPrice,
             'cat':_productCategory,
             'vendor':_productVendor,
+            'stock':_productStock,
             
         },
         dataType:'json',
@@ -577,7 +581,8 @@ $(document).on('click','.update-item',function(){
     var _pId=$(this).attr('data-item');
     var _pQty=$(".prod-qty-"+_pId).val();
     var _pPrice= $(".prod-price-"+_pId).val();
-    var _pSize=$(".active1").text();
+    var _pSize=$(".prod-size-"+_pId).text();
+    var _pStock= $(".prod-stock-"+_pId).val();
     var _vm=$(this);
     // Ajax
     $.ajax({
@@ -586,7 +591,8 @@ $(document).on('click','.update-item',function(){
             'id':_pId,
             'qty':_pQty,
             'size':_pSize,
-            'price':_pPrice
+            'price':_pPrice,
+            'stock':_pStock,
         },
         dataType:'json',
         beforeSend:function(){

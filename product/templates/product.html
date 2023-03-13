@@ -163,7 +163,7 @@
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </button>
                                             <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number"
-                                                name="quantity" value="1" min="1">
+                                                name="quantity" value="1" min="1" max="{{p.number}}" readonly>
                                             <button type="button" class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                 <i class="fa fa-minus" aria-hidden="true"></i>
                                             </button>
@@ -171,11 +171,16 @@
                                     </div>
                                     <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
                                     <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                    <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                     <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                     <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
                                     <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />
-
-                                    <button class="btn btn-md bg-dark cart-add text-white w-50 add-to-cart update-item" data-index="{{p.id}}" data-item="{{p.id}}">Add To Cart</button>
+                                    <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                    {% if p.number == 0 %}
+                                    <button class="btn btn-md bg-dark cart-add text-white w-5" disabled>Out Of Stock</button>
+                                    {% else %}
+                                    <button class="btn btn-md bg-dark cart-add text-white w-50 add-to-cart" data-index="{{p.id}}" data-item="{{p.id}}">Add To Cart</button>
+                                    {% endif %}
                                 </div>
 
                                 <div class="buy-box">

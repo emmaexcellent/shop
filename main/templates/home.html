@@ -134,35 +134,42 @@
                                     </h5>
                                     {% endif %} 
                                     <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
                                         <div class="counter-number">
                                             <div class="counter">
-                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </div>
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
-                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}">
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
                                             </div>
                                         </div>
                                         <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
-                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
-                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
-                                        {% if p.number == 0 %}
-                                        <button class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-white m-0">Not Available</i>
-                                        </button>
-                                        {% else %}
-                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" max="{{p.number}}" readonly />
+                                        <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -235,8 +242,7 @@
                                     </a>
                                     {% if p.variation_set.first.discount %}
                                     <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">                                                                     
                                     <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
                                     </h5>
                                     {% else %}
@@ -245,13 +251,21 @@
                                     </h5>
                                     {% endif %} 
                                     <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
                                         <div class="counter-number">
                                             <div class="counter">
-                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </div>
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
-                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}">
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
                                             </div>
@@ -260,19 +274,19 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
-                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
-                                        {% if p.number == 0 %}
-                                        <button class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-white m-0">Not Available</i>
-                                        </button>
-                                        {% else %}
-                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" max="{{p.number}}" readonly />
+                                        <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -330,8 +344,7 @@
                                     </a>
                                     {% if p.variation_set.first.discount %}
                                     <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">                                                                     
                                     <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
                                     </h5>
                                     {% else %}
@@ -340,13 +353,21 @@
                                     </h5>
                                     {% endif %} 
                                     <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
                                         <div class="counter-number">
                                             <div class="counter">
-                                                <div class="qty-left-minus">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </div>
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
-                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}">
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
                                             </div>
@@ -355,19 +376,19 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
-                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
-                                        {% if p.number == 0 %}
-                                        <button class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-white m-0">Not Available</i>
-                                        </button>
-                                        {% else %}
-                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" max="{{p.number}}" readonly />
+                                        <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -427,8 +448,7 @@
                                     </a>
                                     {% if p.variation_set.first.discount %}
                                     <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">                                                                     
                                     <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
                                     </h5>
                                     {% else %}
@@ -437,13 +457,21 @@
                                     </h5>
                                     {% endif %} 
                                     <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
                                         <div class="counter-number">
                                             <div class="counter">
-                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </div>
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
-                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}">
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
                                             </div>
@@ -452,19 +480,19 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
-                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
-                                        {% if p.number == 0 %}
-                                        <button class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-white m-0">Not Available</i>
-                                        </button>
-                                        {% else %}
-                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" max="{{p.number}}" readonly />
+                                        <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -522,8 +550,7 @@
                                     </a>
                                     {% if p.variation_set.first.discount %}
                                     <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">                                                                     
                                     <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
                                     </h5>
                                     {% else %}
@@ -532,13 +559,21 @@
                                     </h5>
                                     {% endif %} 
                                     <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
                                         <div class="counter-number">
                                             <div class="counter">
-                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </div>
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
-                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}">
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
                                             </div>
@@ -547,19 +582,19 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
-                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
-                                        {% if p.number == 0 %}
-                                        <button class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-white m-0">Not Available</i>
-                                        </button>
-                                        {% else %}
-                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" max="{{p.number}}" readonly />
+                                        <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -675,8 +710,7 @@
                                     </a>
                                     {% if p.variation_set.first.discount %}
                                     <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">                                                                     
                                     <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
                                     </h5>
                                     {% else %}
@@ -685,13 +719,21 @@
                                     </h5>
                                     {% endif %} 
                                     <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
                                         <div class="counter-number">
                                             <div class="counter">
-                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </div>
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
-                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}">
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
                                             </div>
@@ -700,19 +742,19 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
-                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
-                                        {% if p.number == 0 %}
-                                        <button class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-white m-0">Not Available</i>
-                                        </button>
-                                        {% else %}
-                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" max="{{p.number}}" readonly />
+                                        <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -770,8 +812,7 @@
                                     </a>
                                     {% if p.variation_set.first.discount %}
                                     <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">                                                                     
                                     <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
                                     </h5>
                                     {% else %}
@@ -780,13 +821,21 @@
                                     </h5>
                                     {% endif %} 
                                     <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
                                         <div class="counter-number">
                                             <div class="counter">
-                                                <div class="qty-left-minus" data-type="minus" data-field="">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </div>
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1">
-                                                <div class="qty-right-plus" data-type="plus" data-field="">
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}">
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
                                             </div>
@@ -795,19 +844,19 @@
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
-                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <h5 class="d-none prod-size-{{p.id}}">{{p.variation_set.first.size}}</h5> 
-                                        {% if p.number == 0 %}
-                                        <button class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-white m-0">Not Available</i>
-                                        </button>
-                                        {% else %}
-                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart update-item" data-item="{{p.id}}" data-index="{{p.id}}">
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" max="{{p.number}}" readonly />
+                                        <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
                                             <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>

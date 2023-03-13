@@ -139,7 +139,7 @@ def user_dash(request):
 	orders = CartOrder.objects.filter(user = request.user).order_by('-id')
 	false_ord = CartOrder.objects.filter(user = request.user, paid_status = False)
 	address = CustomerAddress.objects.filter(user = request.user)
-	wishlist = Wishlist.objects.filter(user=request.user).order_by('-id')[:4]
+	wishlist = Wishlist.objects.filter(user=request.user).order_by('-id')[:10]
 	is_vendor = Vendor.objects.filter(user=request.user)
 
 	if 'delete-wish' in request.POST:
@@ -153,8 +153,11 @@ def user_dash(request):
 		address = request.POST.get('address')
 		phone = request.POST.get('phone')
 		place = request.POST.get('place')
-		CustomerAddress.objects.create(user=request.user, city = city, address=address, phone=phone, name=place)	
-		return redirect('/accounts/dashboard')
+		if CustomerAddress.objects.filter(user=request.user, city=city, address=address, phone=phone, name=place).exists():
+			return redirect('/accounts/dashboard')
+		else:
+			CustomerAddress.objects.create(user=request.user, city=city, address=address, phone=phone, name=place)
+			return redirect('/accounts/dashboard')
 
 	if 'add_edit' in request.POST:
 		city = request.POST.get('city')

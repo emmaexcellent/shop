@@ -65,6 +65,14 @@
                                     <h3>Get In Touch</h3>
                                 </div>
 
+                                <div class="col-xl-12">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <i style="color:orangered; font-size: 16;">{{ message }}</i>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+
                                 <div class="contact-detail">
                                     <div class="row g-4">
                                         <div class="col-xxl-6 col-lg-12 col-sm-6">
@@ -93,6 +101,21 @@
 
                                                 <div class="contact-detail-contain">
                                                     <p>support@excelcart.com.ng</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                            <div class="contact-detail-box">
+                                                <div class="contact-icon">
+                                                    <i class="fa fa-whatsapp"></i>
+                                                </div>
+                                                <div class="contact-detail-title">
+                                                    <h4>WhatsApp</h4>
+                                                </div>
+
+                                                <div class="contact-detail-contain">
+                                                    <p>(+234) 903 2929 196</p>
                                                 </div>
                                             </div>
                                         </div>

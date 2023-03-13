@@ -54,7 +54,8 @@ class CartOrder(models.Model):
             self.code = secrets.token_urlsafe(5)                 
             super().save(*args, **kwargs) 
         elif self.order_status == 'delivered':
-            order_delivered(self)     
+            order_delivered(self) 
+            super().save(*args, **kwargs)     
 
         else:
             super().save(*args, **kwargs)    

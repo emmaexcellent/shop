@@ -130,35 +130,36 @@
                                         <div class="add-to-cart-box bg-white">
                                             <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
                                             <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
-                                            <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                             <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                             <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                             <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-
+                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />
+                                            <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                            <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                             {% if p.number == 0 %}
                                             <button class="btn btn-add-cart addcart-button" disabled>Out Of Stock
                                                 <span class="add-icon bg-light-gray">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </span>
                                             </button>
-                                            {% else %} 
+                                            {% else %}
                                             <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}">Add
                                                 <span class="add-icon bg-light-gray">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </span>
                                             </button>
                                             {% endif %}
+                                            
                                             <div class="cart_qty qty-box">
                                                 <div class="input-group bg-white">
-                                                    <button type="button" class="qty-left-minus bg-gray"
-                                                        data-type="minus" data-field="">
-                                                        <i class="fa fa-minus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                    <button type="button" class="bg-gray" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                        <i class="fa fa-minus add-to-cart" data-item="{{p.id}}" aria-hidden="true"></i>
                                                     </button>
-                                                    <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number"
-                                                        name="quantity" value="0">
-                                                    <button type="button" class="qty-right-plus bg-gray" data-type="plus" data-field="">
-                                                        <i class="fa fa-plus update-item" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                    <input class="form-control prod-qty-{{p.id}}" type="number"
+                                                        name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+
+                                                    <button type="button" class="bg-gray" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                        <i class="fa fa-plus add-to-cart" data-item="{{p.id}}" aria-hidden="true" data-index="{{p.id}}"></i>
                                                     </button>
                                                 </div>
                                             </div>

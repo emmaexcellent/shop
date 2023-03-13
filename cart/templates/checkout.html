@@ -110,9 +110,11 @@
                                             </div>
                                         </div>
                                          <br>
-                                        <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
+                                        <a class="theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
                                             data-bs-toggle="modal" data-bs-target="#add-address"><i data-feather="plus"
-                                                class="me-2"></i> Add New Address</button>
+                                                class="me-2"></i> Add New Address
+
+                                        </a>
                                     </div>
                                 </li>                                
 
@@ -133,35 +135,28 @@
                                         <div class="checkout-detail">
                                             <div class="accordion accordion-flush custom-accordion"
                                                 id="accordionFlushExample">
-                                                <div class="accordion-item">
-                                                    <div class="accordion-header" id="flush-headingTwo">
-                                                        <div class="accordion-button collapsed"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#flush-collapseTwo">
-                                                            <div class="custom-form-check form-check mb-0">
-                                                                <label class="form-check-label" for="transfer">
-                                                                    <input class="form-check-input mt-0" type="radio" name="payment" value="Transfer" id="transfer" required>Bank Transfer
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
                                                 <div class="accordion-item">
                                                     <div class="accordion-header" id="flush-headingThree">
-                                                        <div class="accordion-button collapsed"
+                                                        <div class="accordion-button collapsed" aria-expanded="true"
                                                             data-bs-toggle="collapse"
                                                             data-bs-target="#flush-collapseThree">
                                                             <div class="custom-form-check form-check mb-0">
                                                                 <label class="form-check-label" for="paystack">
-                                                                    <input class="form-check-input mt-0" type="radio" name="payment" value="Paystack" id="paystack">Pay Online [Secured]
+                                                                    <input class="form-check-input mt-0" type="radio" name="payment" value="Paystack" id="paystack" checked>Pay With Your Choice
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div id="flush-collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">
+                                                            <p class="cod-review">Pay digitally with Transfer, Credit/Debit Card,. <a href="javascript:void(0)">Know more.</a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                  <label for="note">Note:</label>
-                                                <textarea class="form-control" placeholder="Write something about your order..." name="note" id="note" style="height: 100px" ></textarea>
+                                                <textarea class="form-control" placeholder="Write something about your order..." name="note" id="note" style="height: 100px" required></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -235,7 +230,7 @@
     <!-- Add address modal box start -->
     <div class="modal fade theme-modal" id="add-address" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add a new address</h5>
@@ -260,18 +255,18 @@
 
                         <div class="form-floating mb-4 theme-form-floating">
                             <textarea class="form-control" name="address2" placeholder="" id="address"
-                                style="height: 100px"></textarea>
+                                style="height: 100px" required></textarea>
                             <label for="address">Enter Address</label>
                         </div>
 
                         <div class="form-floating mb-4 theme-form-floating">
-                            <input type="number" name="phone" class="form-control" id="pin" placeholder="Enter Phone Number">
+                            <input type="number" name="phone" class="form-control" id="pin" placeholder="Enter Phone Number" required>
                             <label for="pin">Phone </label>
                         </div>
 
                         <div class="form-floating mb-4 theme-form-floating">
                             <textarea class="form-control" name="place" placeholder="Enter the name of place here" id="address"
-                                style="height: 100px"></textarea>
+                                style="height: 100px" required></textarea>
                             <label for="address">Name of Place</label>
                         </div>
                         <div class="modal-footer">
