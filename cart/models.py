@@ -17,6 +17,14 @@ class CouponCode(models.Model):
 	def __str__(self): 
 		return self.code
 
+class UsedCoupon(models.Model):
+    user = models.CharField(max_length=200, null=True)
+    code = models.CharField(max_length=200, null=True)
+    date = models.DateTimeField(default=now, editable=True)
+
+    def __str__(self): 
+        return self.user         
+               
 class CustomerAddress(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     city = models.CharField(max_length=200, null=True)

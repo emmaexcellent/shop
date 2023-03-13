@@ -4,6 +4,7 @@ from .models import *
 # Register your models here.
 
 admin.site.register(CouponCode)
+admin.site.register(UsedCoupon)
 admin.site.register(Wishlist)
 admin.site.register(Tracking)
 

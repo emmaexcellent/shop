@@ -222,9 +222,14 @@ def checkout(request):
 
 			coupon = CouponCode.objects.filter(code = code)
 			if coupon:
-				for c in coupon:
-					discount = int(c.per_off) * order.total_amt/100
-			else:
+				usedcode = UsedCoupon.objects.filter(user=request.user.username, code=code).exists()
+				if usedcode:
+					discount=0
+				else:
+					for c in coupon:
+						discount = int(c.per_off) * order.total_amt/100
+						UsedCoupon.objects.create(user=request.user.username, code=c.code)	
+			elif coupon == None:
 				discount=0
 
 			total = order.total_amt + delivery - discount	
