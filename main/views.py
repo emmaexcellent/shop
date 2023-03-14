@@ -89,7 +89,7 @@ def registerUser(request):
     else:
         form = SignupForm()
 
-    return render(request, 'registration/register.html', {'form': form})
+        return render(request, 'registration/register.html',{'form':form})
 
 def loginView(request):
     # restrict login page for logged in user 
