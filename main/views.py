@@ -87,9 +87,9 @@ def registerUser(request):
 			login(request, user)
 			messages.success(request, "Registration successful." )
 			return redirect('home')
-
-	form=SignupForm
-	return render(request, 'registration/register.html',{'form':form})
+	else:
+		form=SignupForm
+		return render(request, 'registration/register.html',{'form':form})
 
 def loginView(request):
     # restrict login page for logged in user 
