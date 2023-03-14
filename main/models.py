@@ -9,6 +9,9 @@ gd_storage = GoogleDriveStorage()
 
 # Create your models here.
 
+User._meta.get_field('email')._unique=True
+User._meta.get_field('username')._unique=True	
+
 class Category(models.Model):
 	title=models.CharField(max_length=60)
 	image=models.ImageField(upload_to="category", storage=gd_storage)

@@ -66,9 +66,6 @@ def registerUser(request):
 		return redirect('home')
 
 	if request.method=='POST':
-		email_exist = User._meta.get_field('email')._unique=True
-		username_exist = User._meta.get_field('username')._unique=True	
-
 		username = request.POST.get('username')
 		email = request.POST.get('email')
 		password1 = request.POST.get('password1')
