@@ -73,10 +73,13 @@ def registerUser(request):
 
         if password1 != password2:
             messages.error(request, "Passwords do not match.")
+            return redirect('register')
         elif User.objects.filter(username=username).exists():
             messages.error(request, "A user with this username already exists.")
+            return redirect('register')
         elif User.objects.filter(email=email).exists():
             messages.error(request, "A user with this email already exists.")
+            return redirect('register')
         else:
             form = SignupForm(request.POST)
             if form.is_valid():
