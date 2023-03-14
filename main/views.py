@@ -89,6 +89,9 @@ def registerUser(request):
                 user = authenticate(username=username, password=password1)
                 login(request, user)
                 return redirect('home')
+            else:
+            	messages.error(request, "Make sure your username does not contain any space...e.g @Excel.")
+            	return redirect('register')    
     else:
         form = SignupForm()
 
