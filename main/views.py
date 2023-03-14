@@ -85,6 +85,7 @@ def registerUser(request):
 			pwd=form.cleaned_data.get('password1')
 			user=authenticate(username=username,password=pwd)
 			login(request, user)
+			messages.success(request, "Registration successful." )
 			return redirect('home')
 
 	form=SignupForm
