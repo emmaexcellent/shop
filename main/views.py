@@ -62,34 +62,34 @@ def category_product_list(request,cat_id,title):
 		{'products':products,'cats':cats,'category':category,})		
 
 def registerUser(request):
-	if request.user.is_authenticated:
-		return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('home')
 
-	if request.method=='POST':
-		username = request.POST.get('username')
-		email = request.POST.get('email')
-		password1 = request.POST.get('password1')
-		password2 = request.POST.get('password2')
-		if password1 != password2:
-			messages.error(request, f"Oops! Your passwords does not match!.")
-		if User.objects.filter(username = username).exists():
-			messages.error(request, f"Oops! User with username exists!.")
-		if User.objects.filter(email = email).exists():
-			messages.error(request, f"Oops! User with email exists!.")	
-			
-		form=SignupForm(request.POST)
-		if form.is_valid():
-			form.save()
-			new_user(username, email)			
-			username=form.cleaned_data.get('username')
-			pwd=form.cleaned_data.get('password1')
-			user=authenticate(username=username,password=pwd)
-			login(request, user)
-			messages.success(request, "Registration successful." )
-			return redirect('home')
-	else:
-		form=SignupForm
-		return render(request, 'registration/register.html',{'form':form})
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        if password1 != password2:
+            messages.error(request, "Passwords do not match.")
+        elif User.objects.filter(username=username).exists():
+            messages.error(request, "A user with this username already exists.")
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, "A user with this email already exists.")
+        else:
+            form = SignupForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.set_password(password1)
+                user.save()
+                user = authenticate(username=username, password=password1)
+                login(request, user)
+                return redirect('home')
+    else:
+        form = SignupForm()
+
+    return render(request, 'registration/register.html', {'form': form})
 
 def loginView(request):
     # restrict login page for logged in user 
