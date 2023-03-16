@@ -3,8 +3,8 @@ from .models import *
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
-	list_display=('name','ref','vendor','category','brand','new','top_deals')
-	list_editable=('new','top_deals')
+	list_display=('name','ref','vendor','category','brand','new','top_deals','approve')
+	list_editable=('new','top_deals','approve')
 	search_fields = ("name__startswith", "ref__startswith" )
 admin.site.register(Product,ProductAdmin)
 

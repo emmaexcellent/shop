@@ -108,12 +108,12 @@
                                 <h2 class="name">{{p.name}} {% if p.color is not None %}({{p.color}}) {% endif %}</h2>
                                 <div class="price-rating">
                                     {% if p.variation_set.first.discount %}
-                                    <h3 class="theme-color">&#8358; <span class="product-price price">{{p.variation_set.first.dis_price}}</span>.00 
+                                    <h3 class="theme-color">&#8358; <span class="product-price price">{{p.variation_set.first.dis_price|floatformat:2}}</span>
                                     <input type="hidden" class="product-price-h prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                    <del class="text-content dis-price">&#8358;{{p.variation_set.first.price}}.00</del>
+                                    <del class="text-content dis-price">&#8358;{{p.variation_set.first.price|floatformat:2}}</del>
                                     </h3>                                    
                                     {% else %}
-                                    <h3 class="theme-color">&#8358; <span class="product-price price">{{p.variation_set.first.price}} </span>.00
+                                    <h3 class="theme-color">&#8358; <span class="product-price price">{{p.variation_set.first.price|floatformat:2}} </span>
                                     <input type="hidden" class="product-price-h prod-price-{{p.id}}" name="price" value="{{p.variation_set.dis_first.price}}">
                                     </h3>
                                     {% endif %}
@@ -145,9 +145,9 @@
                                         <li>
                                             <a href="javascript:void(0)" class="choose-size color{{size.id}} prod-size-{{p.id}}"
                                             {% if s.discount %}
-                                            data-price="{{s.dis_price}}"
+                                            data-price="{{s.dis_price|floatformat:2}}"
                                             {% else %}
-                                            data-price="{{s.price}}"
+                                            data-price="{{s.price|floatformat:2}}"
                                             {% endif %}
                                              >{{s.size}}</a>
                                         </li>
@@ -176,7 +176,9 @@
                                     <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
                                     <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />
                                     <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
-                                    {% if p.number == 0 %}
+                                    {% if p.approve == False %}
+                                    <button class="btn btn-md bg-dark cart-add text-white w-5" disabled><i>Pending</i></button>
+                                    {% elif p.number == 0 %}
                                     <button class="btn btn-md bg-dark cart-add text-white w-5" disabled>Out Of Stock</button>
                                     {% else %}
                                     <button class="btn btn-md bg-dark cart-add text-white w-50 add-to-cart" data-index="{{p.id}}" data-item="{{p.id}}">Add To Cart</button>
@@ -304,6 +306,7 @@
 
                                 <ul class="product-list product-right-sidebar border-0 p-0">
                                     {% for p in trend|slice:2 %}
+                                    {% if p.variation_set.all.count != 0 %}
                                     <li>
                                         <div class="offer-product">
                                             <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}" class="offer-image">
@@ -322,6 +325,7 @@
                                             </div>
                                         </div>
                                     </li>
+                                    {% endif %}
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -573,6 +577,7 @@
                 <div class="col-12">
                     <div class="slider-6_1 product-wrapper">
                         {% for p in related %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-3 h-100 wow fadeInUp">
                                 <div class="product-header">
@@ -637,6 +642,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
 
                     </div>

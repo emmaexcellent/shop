@@ -89,6 +89,7 @@
                 <div class="col-12">
                     <div class="slider-7_1 arrow-slider img-slider">
                         {% for p in grocery %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
@@ -173,6 +174,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
 
                     </div>
@@ -206,6 +208,7 @@
                 <div class="col-12">
                     <div class="slider-7_1 arrow-slider img-slider">
                         {% for p in health %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
@@ -290,6 +293,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -308,6 +312,7 @@
                 <div class="col-12">
                     <div class="slider-7_1 arrow-slider img-slider">
                         {% for p in beauty %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
@@ -392,6 +397,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -412,6 +418,7 @@
                 <div class="col-12">
                     <div class="slider-7_1 arrow-slider img-slider">
                         {% for p in fashion %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
@@ -496,6 +503,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -514,6 +522,7 @@
                 <div class="col-12">
                     <div class="slider-7_1 arrow-slider img-slider">
                         {% for p in electronic %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
@@ -598,6 +607,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -674,6 +684,7 @@
                 <div class="col-12">
                     <div class="slider-7_1 arrow-slider img-slider">
                         {% for p in stationery %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
@@ -758,6 +769,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -776,6 +788,7 @@
                 <div class="col-12">
                     <div class="slider-7_1 arrow-slider img-slider">
                         {% for p in accessory %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
                                 <div class="product-image product-image-2">
@@ -860,6 +873,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>

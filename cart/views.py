@@ -14,6 +14,14 @@ from main.manager import *
 
 # Add to cart
 def add_to_cart(request):
+	if request.GET.get('size') == '':
+		p = Variation.objects.get(product__ref = request.GET.get('ref'))
+		price = p.price
+		size= p.size
+	else:
+		price = request.GET.get('price')
+		size = request.GET.get('size') 
+		
 	cart_p={}
 	cart_p[str(request.GET.get('id'))]={
 		'img':request.GET.get('img'),

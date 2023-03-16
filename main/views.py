@@ -17,14 +17,14 @@ import uuid
 # Create your views here.
 
 def home(request):
-	products = Product.objects.all().order_by('-id')
-	grocery = Product.objects.filter(category_id = 1).order_by('-id')
-	health = Product.objects.filter(category_id = 2).order_by('-id')
-	beauty = Product.objects.filter(category_id = 3).order_by('-id')
-	accessory= Product.objects.filter(category_id = 4).order_by('-id')
-	electronic= Product.objects.filter(category_id = 5).order_by('-id')
-	fashion = Product.objects.filter(category_id = 6).order_by('-id')
-	stationery = Product.objects.filter(category_id = 7).order_by('-id')
+	products = Product.objects.filter(approve = True).order_by('-id')
+	grocery = Product.objects.filter(category_id = 1, approve = True).order_by('-id')
+	health = Product.objects.filter(category_id = 2, approve = True).order_by('-id')
+	beauty = Product.objects.filter(category_id = 3, approve = True).order_by('-id')
+	accessory= Product.objects.filter(category_id = 4, approve = True).order_by('-id')
+	electronic= Product.objects.filter(category_id = 5, approve = True).order_by('-id')
+	fashion = Product.objects.filter(category_id = 6, approve = True).order_by('-id')
+	stationery = Product.objects.filter(category_id = 7, approve = True).order_by('-id')
 
 	return render(request,'home.html', 
 		{'products':products,'grocery':grocery,'health':health,'beauty':beauty,
@@ -36,11 +36,11 @@ def search(request):
 	if searched == None:
 		products=[]
 	else:
-		products=Product.objects.all().filter(name__icontains=searched).order_by('name')	
+		products=Product.objects.filter(name__icontains=searched, approve = True).order_by('name')	
 	return render(request, 'search.html', {'products':products, 'searched':searched,'prods':prods})
 
 def shop(request):
-	products = Product.objects.all().order_by('name')
+	products = Product.objects.filter(approve = True).order_by('name')
 
 	paginator=Paginator(products, 30)
 	page_num=request.GET.get('page',1)
@@ -51,7 +51,7 @@ def shop(request):
 def category_product_list(request,cat_id,title):
 	page = 'category-product-list'
 	category=Category.objects.get(id=cat_id)
-	products=Product.objects.filter(category=category).order_by('-id')
+	products=Product.objects.filter(category=category, approve = True).order_by('-id')
 	cats=Category.objects.all().exclude(id=cat_id)
 
 	paginator=Paginator(products,30)

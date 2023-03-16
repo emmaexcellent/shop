@@ -337,6 +337,7 @@
                                                     <th scope="col">Stock</th>
                                                     <th scope="col">Sales</th>
                                                     <th scope="col">Vars</th>
+                                                    <th scope="col">Status</th>
                                                     <th scope="col">Add / Edit / Delete</th>
                                                 </tr>
                                             </thead>
@@ -368,6 +369,13 @@
                                                     <td>
                                                         <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
                                                         <h6>{{p.variation_set.all.count}}</h6></a>
+                                                    </td>
+                                                    <td>
+                                                        {% if p.approve == True %}
+                                                        <label class="theme-color" style="background-color: rgba(var(--theme-color-rgb), 0.1);">Active</label>
+                                                        {% else %}
+                                                        <label style="background-color: rgba(255,114,114,.1); color: #ff7272;">Pending</label>
+                                                        {% endif %}                                                                    
                                                     </td>
                                                     <td class="efit-delete">
                                                         <i data-bs-toggle="modal" data-bs-target="#product-var-{{p.id}}" class="fa fa-plus theme-color"></i>&nbsp;&nbsp;

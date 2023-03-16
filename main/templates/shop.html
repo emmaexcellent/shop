@@ -75,6 +75,7 @@
                     </div>
                     <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-2 product-list-section">
                         {% for p in products %}
+                        {% if p.variation_set.all.count != 0 %}
                         <div>
                             <div class="product-box-3 h-100 wow fadeInUp">
                                 <div class="product-header">
@@ -168,6 +169,7 @@
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
 
