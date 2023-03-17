@@ -83,9 +83,10 @@ def registerUser(request):
         else:
             form = SignupForm(request.POST)
             if form.is_valid():
-                user = form.save(commit=False)
-                user.set_password(password1)
+                user = form.save()
+                user.refresh_from_db()
                 user.save()
+                new_user(username, email)
                 user = authenticate(username=username, password=password1)
                 login(request, user)
                 return redirect('home')

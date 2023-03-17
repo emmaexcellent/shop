@@ -648,3 +648,54 @@ $(document).on('click', '#prod_cat',function() {
 
 });
 
+
+// Check password validity
+
+$(document).ready(function() {
+  var passwordInput = $('input[name="password1"]');
+  var passwordLengthMessage = $('#password-length-message');
+  var passwordValidityMessage = $('#password-validity-message');
+
+  // Check password length
+  passwordInput.on('input', function() {
+    var password = $(this).val();
+    if (password.length < 8) {
+      passwordLengthMessage.show();
+    } else {
+      passwordLengthMessage.hide();
+    }
+  });
+
+  // Check password validity
+  passwordInput.on('input', function() {
+    var password = $(this).val();
+    var hasUppercase = /[A-Z]/.test(password);
+    var hasLowercase = /[a-z]/.test(password);
+    var hasNumber = /\d/.test(password);
+    var hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+    if (hasUppercase && hasLowercase && hasNumber && hasSpecial) {
+      passwordValidityMessage.hide();
+    } else {
+      passwordValidityMessage.show();
+    }
+  });
+});
+
+//Check confirm password
+
+$(document).ready(function() {
+  // Listen for changes in the password and confirm password fields
+  $('#password1, #password2').on('keyup', function() {
+    var password = $('#password1').val();
+    var confirm_password = $('#password2').val();
+    // Compare the two values and show an error message if they don't match
+    if (password != confirm_password) {
+      $('#password2').addClass('is-notvalid');
+      $('#password-help').html('Passwords do not match.');
+    } else {
+      $('#password2').removeClass('is-notvalid');
+      $('#password-help').html('');
+    }
+  });
+});
+

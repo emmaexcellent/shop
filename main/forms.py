@@ -7,6 +7,11 @@ from cart.models import *
 
 
 class SignupForm(UserCreationForm):
+	password1 = forms.CharField(
+        label="Password",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'id': 'password1'}))
+	
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.fields["username"].widget.attrs.update({

@@ -68,6 +68,15 @@
                                 </div>
 
                                 <div class="col-12">
+                                    <i class="theme-color" id="password-length-message" style="display: none;">
+                                        Password must be at least 8 characters long.
+                                    </i>
+                                    <i class="theme-color" id="password-validity-message" style="display: none;">
+                                        Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*_-+=;:,.?...).
+                                    </i>
+                                </div>
+                                
+                                <div class="col-12">
                                     <div class="form-floating theme-form-floating">
                                     	{{form.password1}}
                                         <label for="password">Password</label>
