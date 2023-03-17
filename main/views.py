@@ -84,15 +84,12 @@ def registerUser(request):
             form = SignupForm(request.POST)
             if form.is_valid():
                 user = form.save()
-                user.refresh_from_db()
                 user.save()
                 new_user(username, email)
                 user = authenticate(username=username, password=password1)
                 login(request, user)
                 return redirect('home')
-            else:
-            	messages.error(request, "Make sure your username does not contain any space...e.g @Excel.")
-            	return redirect('register')    
+                
     else:
         form = SignupForm()
 
