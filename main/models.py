@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 from gdstorage.storage import GoogleDriveStorage
 
 # Define Google Drive Storage
@@ -38,7 +39,7 @@ class SubCategory(models.Model):
 
 class Faq(models.Model):
 	question = models.CharField(max_length=300)
-	answer = models.TextField()
+	answer = RichTextField()
 
 	def __str__(self):
 		return self.question

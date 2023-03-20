@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load text_extras %}
 {% block title %}
     <title>FAQ</title>
 {% endblock %}
@@ -150,7 +151,7 @@
                                 <div id="collapse{{faq.id}}" class="accordion-collapse collapse"
                                     aria-labelledby="heading{{faq.id}}" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <p>{{faq.answer}}</p>
+                                        <p>{{faq.answer|safe}}</p>
                                     </div>
                                 </div>
                             </div>
