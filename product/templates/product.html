@@ -652,47 +652,54 @@
     </section>
     <!-- Releted Product Section End -->
 
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Product",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "{{p.avg_ratings|floatformat:1}}",
-            {% if p.review_set.all.count == 0 %}
-             "reviewCount": "1"
-             {% else %}
-            "reviewCount": "{{p.review_set.all.count}}"
-            {% endif %}
-          },
-          "description": "{{p.short}}",
-          "name": "{{p.name}}",
-          "image": "{{p.thumb_nail.url}}",
-          "offers": {
-            "@type": "Offer",
-            "availability": "https://schema.org/InStock",
-            "price": "{{p.variation_set.first.price}}.00",
-            "priceCurrency": "NGN"
-          },
-
-          "review": [
-            {% for r in p.review_set.all %}
-            {
-              "@type": "Review",
-              "author": "{{r.user}}",
-              "datePublished": "{{r.date|timesince}} ago",
-              "reviewBody": "{{r.text}}",
-              "name": "{{r.user}}",
-              "reviewRating": {
-                "@type": "Rating",
-                "bestRating": "5",
-                "ratingValue": "{{r.rating}}",
-                "worstRating": "1"
-              }
-            },
-            {% endfor %}
-          ]
-        }
-    </script>
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Product",
+      "name": "{{p.name}}",
+      "image": "{{p.thumb_nail.url}}",
+      "description": "{{p.short}}",
+      "url": "https://excelcart.com.ng/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}",
+      "brand": {
+        "@type": "Brand",
+        {% if p.brand is not None %}
+        "name": "{{p.brand}}",
+        {% else %}
+        "name": "Excel",
+        {% endif %}
+        "logo": "https://excelcart.com.ng/static/assets/images/logo/logo.png"
+      },
+      "offers": {
+        "@type": "Offer",
+        {% if p.variation_set.first.discount %}
+        "price": "₦{{p.variation_set.first.dis_price|floatformat:2}}"
+        {% else %}
+        "price": "₦{{p.variation_set.first.price|floatformat:2}}"
+        {% endif %}
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{p.avg_ratings|floatformat:1}}",
+        "bestRating": "5",
+        "ratingCount": "{{p.review_set.all.count}}"
+      },
+      {% for r in review %}
+      "review": {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "{{r.user}}"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "{{r.rating}}",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "reviewBody": "{{r.text}}"
+      }
+      {% endfor %}
+    }
+</script>
 
 {% endblock %}

@@ -26,12 +26,13 @@ def detail(request,id,slug,category_title):
 
 	related = Product.objects.filter(category = p.category_id).exclude(id=p.id)	
 	trend = Product.objects.order_by('-topic_views')[:4]	
+	review = Review.objects.filter(product=p, rating='5')[:1]
 
 	if Review.objects.filter(product=p).count() > 0:	
 		p.avg_ratings = Review.objects.filter(product=p).aggregate(Avg('rating'))['rating__avg']
 		p.save()
 	
-	return render(request, 'product.html',{'p':p,'related':related,'trend':trend,'form':form})	
+	return render(request, 'product.html',{'p':p,'related':related,'trend':trend,'form':form, 'review':review})	
 
 def listsub_cat(request):
 	cat_id = request.GET.get('id')
