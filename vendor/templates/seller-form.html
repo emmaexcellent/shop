@@ -46,7 +46,7 @@
                             <br>
                             {% if messages %}
                             {% for message in messages %}
-                            <h4 style="color:orangered;">{{ message }}</h4>
+                            <i style="color:orangered;">{{ message }}</i>
                             {% endfor %}
                             {% endif %}
                             <h4>Register your vendor</h4>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating theme-form-floating">
-                                        <input name="vendormail" type="email" class="form-control" id="vendormail" placeholder="Business Email">
+                                        <input name="vendormail" type="email" class="form-control" id="vendormail" placeholder="Business Email" required>
                                         <label for="vendormail">Business Email</label>
                                     </div>
                                 </div>

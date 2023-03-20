@@ -35,9 +35,25 @@ def seller_reg(request):
 			vendormail = request.POST.get('vendormail')
 			accept = request.POST.get('accept')
 
-			if Vendor.objects.filter(name=vendorname).count() > 0:
+			if vendordesc == '':
+				messages.error(request,'Description Field Cannot Be Empty!')
+				return redirect('seller-form')		
+
+			elif vendoradd == '':
+				messages.error(request,'Address Field Cannot Be Empty!')
+				return redirect('seller-form')	
+
+			elif vendorcontact == '':
+				messages.error(request,'Phone Contact Field Cannot Be Empty!')
+				return redirect('seller-form')	
+
+			elif vendormail == '':
+				messages.error(request,'Business Email Field Cannot Be Empty!')
+				return redirect('seller-form')	
+
+			elif Vendor.objects.filter(name=vendorname).exists():
 				messages.error(request, f"Vendor name already choosen!")
-				return redirect('/vendor/register')
+				return redirect('/vendor/register')	
 
 			else:
 				vendor= Vendor.objects.create(
@@ -81,7 +97,7 @@ def vendor_dashboard(request):
 			venid = v.id
 		vend_sale = CartOrderItems.objects.filter(vendor=ven)	
 		ord_pending = CartOrderItems.objects.filter(order__order_status='process', vendor=ven)	
-		popular_prod= Product.objects.filter(vendor__name=ven).order_by('-topic_views')[:6]
+		popular_prod= Product.objects.filter(vendor__name=ven).order_by('-sales')[:6]
 		order_items = CartOrderItems.objects.filter(vendor=ven).order_by('-id')
 
 		payments = VendorPayment.objects.filter(vendor = v)
