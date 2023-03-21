@@ -672,9 +672,9 @@
       "offers": {
         "@type": "Offer",
         {% if p.variation_set.first.discount %}
-        "price": "₦{{p.variation_set.first.dis_price}}"
+        "price": "₦{{p.variation_set.first.dis_price}}",
         {% else %}
-        "price": "₦{{p.variation_set.first.price}}"
+        "price": "₦{{p.variation_set.first.price}}",
         {% endif %}
         "priceCurrency": "NGN",
         "availability": "https://schema.org/InStock",
