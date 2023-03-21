@@ -671,13 +671,13 @@
       },
       "offers": {
         "@type": "Offer",
+        "availability": "https://schema.org/InStock",
         {% if p.variation_set.first.discount %}
         "price": "₦{{p.variation_set.first.dis_price}}",
         {% else %}
         "price": "₦{{p.variation_set.first.price}}",
         {% endif %}
-        "priceCurrency": "NGN",
-        "availability": "https://schema.org/InStock",
+        "priceCurrency": "NGN",        
       },
       "aggregateRating": {
         "@type": "AggregateRating",
