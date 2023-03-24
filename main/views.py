@@ -65,6 +65,8 @@ def registerUser(request):
     if request.user.is_authenticated:
         return redirect('home')
 
+    top_deals = Product.objects.filter(top_deals=True, approve=True)     
+
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -85,7 +87,7 @@ def registerUser(request):
             if form.is_valid():
                 user = form.save()
                 user.save()
-                new_user(username, email)
+                new_user(username, email, top_deals)
                 user = authenticate(username=username, password=password1)
                 login(request, user)
                 return redirect('home')

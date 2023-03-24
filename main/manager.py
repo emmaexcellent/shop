@@ -30,9 +30,9 @@ def change_password_success(username,email):
 	return True	
 
 
-def new_user(username, email):
-	html_template = 'emails/newuser_email.html'
-	html_message = render_to_string(html_template, {'username':username})
+def new_user(username, email, top_deals):
+	html_template = 'emails/new.html'
+	html_message = render_to_string(html_template, {'username':username, 'top_deals':top_deals})
 	subject = 'Welcome to Excelcart'
 	email_from = settings.EMAIL_HOST_USER
 	recipient_list = [email]
@@ -41,6 +41,16 @@ def new_user(username, email):
 	message.send()
 	return True	
 
+def new_vendor(vendor, token):
+	html_template = 'emails/new_vend.html'
+	html_message = render_to_string(html_template, {'vendor':vendor, 'token':token})
+	subject = 'Confirm your vendor registration on Excelcart!'
+	email_from = settings.EMAIL_HOST_USER
+	recipient_list = [vendor.email]
+	message = EmailMessage(subject, html_message,email_from, recipient_list)
+	message.content_subtype = 'html'
+	message.send()
+	return True		
 
 def order_received(order, discount, delivery, total, email):
 	html_template = 'emails/order-received.html'

@@ -37,6 +37,13 @@ class Vendor(models.Model):
 	def __str__(self):
 		return self.name
 
+class VendorToken(models.Model):
+	vendor= models.OneToOneField(Vendor,on_delete=models.CASCADE)
+	token = models.CharField(max_length=150)
+
+	def __str__(self):
+		return self.vendor.name
+
 class VendorPayment(models.Model):
 	vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
 	bank = models.CharField(max_length=50)

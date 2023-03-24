@@ -48,6 +48,14 @@
                                     <img src="{{p.product.thumb_nail.url}}" class="img-fluid blur-up lazyload"
                                         alt="">
                                 </a>
+
+                                <form method="post" action="{% url 'wishlist' %}" class="product-header-top">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delID" value="{{p.id}}">
+                                    <button type="submit" class="btn wishlist-button close_button">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <div class="product-footer">

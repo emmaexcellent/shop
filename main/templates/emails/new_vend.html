@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confirm Your Email!</title>
+  <style>
+    @keyframes excel {
+      0%   {color: #00ab9b;}
+      25%  {color: yellow;}
+      50%  {color: blue;}
+      25%  {color: orange;}
+      100% {color: green;}
+    }
+
+    /* Reset styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    /* Main container */
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      background-color: #ffff;
+      padding: 20px;
+    }
+    section {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #e1f0ed;
+    }
+
+    /* Header */
+    .header {
+      padding: 2px;
+      text-align: center;
+    }
+    /* Logo */
+    .line {
+      height: 5px;
+      width: 100%;
+      background-color: #00ab9b;
+    }
+    .logo {
+      width: 180px;
+      height: auto;
+      font-family: sans-serif;
+      font-size: 15px;
+      color: #555;
+
+    }
+    /* Discount */
+    .discount {
+      background-color: #edcfac63;
+      text-align: center;
+      padding: 1px;
+      margin-bottom: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section>
+      <hr class="line">
+      <div class="header">
+        <a href="https://excelcart.com.ng/"> 
+          <img class="logo" src="https://excelcart.com.ng/static/assets/images/logo/logo.png" alt="Logo">
+        </a>       
+      </div>
+
+      <table style="background-color:#fff" width="100%">
+        <tbody>
+          <tr>
+            <td aria-hidden="true" height="10px" style="font-size:0; line-height:0; background-color:#f7f7f7">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="discount" style="background-color: #f7f7f7;">
+        <h1>Welcome on Board!</h1>
+        <h3 style="color: #333030e6;">
+          We are glad you join the Excelcart Vendors. Your vendor account has been created successfully with the following details:
+        </h3>
+      </div>
+
+      <div class="discount">
+        <h3 style="color: #333030e6;">
+          Vendor Name :  {{vendor.name}}
+          <br>
+          Address :  {{vendor.address}}
+          <br>
+          phone :  {{vendor.phone}}
+        </h3>
+      </div>
+
+      <div class="discount" style="background-color: #f7f7f7;">
+        <h4 style="color: #333030e6;">
+          Please click on the link to confirm your registration:
+          <a href="https://excelcart.com.ng/vendor/register/confirm-email/{{token}}/">https://excelcart.com.ng/vendor/register/confirm-email/{{token}}/</a>
+        </h4>
+        <p>If you have any questions, concerns or disputes, kindly <a href="https://wa.me/message/G6VZDGPMOSK6P1"> live chat </a> or call our support lines on <br> <b> &nbsp; +2349032929196 </b>between 8 am and 7 pm from Monday to Friday. We are always available to take your calls :)</p>
+      </div>
+
+      <table style="background-color:#f7f7f7" width="100%">
+        <tbody>
+          <tr>
+            <td align="center">
+              <br>
+              <table align="center", cellpadding="0" cellspacing="0">
+                <tbody>
+                  <tr>
+                    <td align="center">
+                      <!-- Social Links -->
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://web.facebook.com/excelcart.com.ng">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/fb.png" style="display:block;width:55px!important;height:35px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/twi.png" style="display:block;width:30px!important;height:34px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://www.instagram.com/excelcart.com.ng/">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/ins.jfif" style="display:block;width:30px!important;height:35px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://youtube.com/@ExcelCart-zs2ql">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/yt.png" style="display:block;width:35px!important;height:35px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://wa.me/message/G6VZDGPMOSK6P1">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/wa.png" style="display:block;width:30px!important;height:30px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table cellpadding="10" cellspacing="0" role="presentation" width="100%">
+        <tr>
+          <td>
+            <div style="font-family: sans-serif">
+              <div style="font-size: 12px; mso-line-height-alt: 18px; color: #555555; line-height: 1.5; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif;">
+                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">
+                  <span style="color:#12b862;">
+                    <strong>Excel
+                      <span style="color:#000000;">
+                        <u>cart</u>
+                      </span>
+                    </strong>
+                  </span> - 
+                  <em>We provide you with a large variety of brands and designs, complete convenience with our 24/7 online access from your home or workplace, great customer care support, quick delivery, and returns after seven days, among many other things.</em></p>
+                  <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 18px;"> </p>
+                  <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">OOU Ibogun Campus, Ifo, Ogun State, Nigeria</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <table cellpadding="10" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style=" width: 100%; height:20px; background-color: #00ab9b;">
+              <p style="margin:0; color: white; text-align: center;"><b>Please note</b>: Excelcart will never ask you for your password, PIN, CVV or full card details over the phone or via email.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </section>
+    
+  </div>
+</body>
+</html>

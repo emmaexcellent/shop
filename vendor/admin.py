@@ -8,6 +8,8 @@ class VendorAdmin(admin.ModelAdmin):
 	list_editable=('approve',)
 admin.site.register(Vendor,VendorAdmin)
 
+admin.site.register(VendorToken)
+
 admin.site.register(VendorPayment)
 admin.site.register(VendorReview)
 

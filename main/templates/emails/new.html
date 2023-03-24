@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New User Prome For You!</title>
+  <style>
+    @keyframes excel {
+      0%   {color: #00ab9b;}
+      25%  {color: yellow;}
+      50%  {color: blue;}
+      25%  {color: orange;}
+      100% {color: green;}
+    }
+
+    /* Reset styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    /* Main container */
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      background-color: #ffff;
+      padding: 20px;
+    }
+    section {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #e1f0ed;
+    }
+
+    /* Header */
+    .header {
+      padding: 2px;
+      text-align: center;
+    }
+    /* Logo */
+    .line {
+      height: 5px;
+      width: 100%;
+      background-color: #00ab9b;
+    }
+    .logo {
+      width: 180px;
+      height: auto;
+      font-family: sans-serif;
+      font-size: 15px;
+      color: #555;
+
+    }
+    .links {
+      text-transform: uppercase;
+      width: 100%;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 11px;
+      font-family: Roboto,Helvetica,Arial,Sans-Serif;
+      font-weight: 800;
+      background-color: #edcfac63;
+    }
+
+    .links a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .i_t {
+      position: relative; 
+      text-align: center;
+      width: 100%;
+    }
+
+    .img1 {
+      width: 100%;
+      max-width: 680px;
+      height: auto;
+      font-family: sans-serif;
+      font-size: 15px;
+      line-height: 15px;
+      margin: auto;
+      display: block;
+    }
+
+    .img1_abs {
+      height: 100%;
+      position: absolute;
+      top: 0%;
+      left: 0;
+      padding: calc(25px + 30*(100vw - 320px)/1600);
+    }
+
+    .heading-1 {
+      font-size:22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 13px;
+      margin-top: 7px;
+      width: 100%;
+    }
+    .excel {
+      color: #00ab9b;
+      font-weight: 800;
+      animation-name: excel;
+      animation-duration: 6s;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+    }
+    .user {
+      font-size: 20px;
+      font-family: "Public Sans",sans-serif;;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    /* Discount */
+    .discount {
+      background-color: #edcfac63;
+      text-align: center;
+      padding: 1px;
+      margin-bottom: 10px;
+    }
+
+    /* Category grid */
+    .cats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      grid-gap: 10px;
+    }
+
+    /* Category card */
+    .cat {
+      background-color: #ffffff;
+      position: relative;
+      padding: 1px;
+      text-align: center;
+    }
+    .cat img {      
+      max-width: 100%;
+      margin: auto;
+      opacity: 0.5;
+    }
+    .cat h3 {
+      position: absolute;
+      top: 25%;
+      left: 27px;
+      background-color: floralwhite;
+      padding: 3px;
+      color: black;
+    }
+    .cat p {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    /* Product grid */
+    .products {
+      font-size: 0;
+      padding: 1px;
+      background-color: #f7f7f7;
+    }
+    /* Product card */
+    .product {
+      display: inline-block!important;
+      width: 100%!important;
+      max-width: 33%!important;
+      direction: ltr!important;
+    }
+    .product table {
+      border-spacing: 0!important;
+      border-collapse: collapse!important;
+      table-layout: fixed!important;
+      margin: 0 auto!important;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: 100%;
+    }
+
+    .prod_text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+    }
+
+    .product p {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section>
+      <hr class="line">
+      <div class="header">
+        <a href="https://excelcart.com.ng/"> 
+          <img class="logo" src="https://excelcart.com.ng/static/assets/images/logo/logo.png" alt="Logo">
+        </a>       
+      </div>
+      <table class="links">
+        <tbody>
+          <tr>
+            <td>
+              <a href="https://excelcart.com.ng/shop">Shop</a>              
+            </td>
+            <td>
+              <a href="https://excelcart.com.ng/vendor/list">Vendors</a>              
+            </td>
+            <td>
+              <a href="https://excelcart.com.ng/vendor/become-seller">Become Vendor</a>              
+            </td>
+            <td>
+              <a href="https://excelcart.com.ng/faq">Help Center</a>              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="i_t">
+        <img class="img1" src="https://excelcart.com.ng/static/assets/images/grocery/banner/ban11.avif">
+        <br> 
+        <div class="img1_abs">
+          <h1 class="heading-1">Welcome To <b class="excel">Excelcart</b>!</h1>
+          <h3 class="user">Hi {{username}},</h3><br>
+          <i>Use the code</i> <b>NEWuser099</b> <i>to get 15% off <br>your purchase.</i><br><br>
+          <button style="background-color: #239698; color: white; font-size:18px;" onclick="location.href ='https://excelcart.com.ng/shop'">Shop Now! </button>
+        </div>        
+      </div> 
+
+      <div class="discount">
+        <h3 style="font-style: italic;">Shop By Categories</h3>
+      </div> 
+
+      <div class="cats">
+        <a href="https://excelcart.com.ng/shop/Food%20&%20Grocery-1" class="cat">
+          <img src="https://excelcart.com.ng/static/assets/images/shop/1.jpg" alt="Cat 1" height="100%" width="100%">
+          <h3><i>Groceries</i></h3>
+        </a>
+        <a href="https://excelcart.com.ng/shop/Fashion-6" class="cat">
+          <img src="https://excelcart.com.ng/static/assets/images/shop/4.jpg" alt="Cat 2" height="100%" width="100%">
+          <h3><i>Fashion</i></h3>
+        </a>
+        <a href="https://excelcart.com.ng/shop/Electronics-5" class="cat">
+          <img src="https://excelcart.com.ng/static/assets/images/shop/5.jfif" alt="Cat 3" height="100%" width="100%">
+          <h3><i>Electronics</i></h3>
+        </a>
+        <a href="https://excelcart.com.ng/shop/Beauty-3" class="cat">
+          <img src="https://excelcart.com.ng/static/assets/images/shop/7.jpg" alt="Cat 4" height="100%" width="100%">
+          <h3><i>Beauty</i></h3>
+        </a>
+      </div>
+      <br>     
+
+      <div class="discount">
+        <h3 style="font-style: italic;">Featured Products</h3>
+      </div>
+      
+      <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;">
+        <tbody>
+          <tr align="center">
+            <td valign="top" class="products">
+
+              {% for p in top_deals %}
+              <div class="product">
+                <table role="presentation" cellspacing="0" cellpadding="0" width="100%">
+                  <tbody>
+                    <tr>
+                      <td style="padding:5px">
+                        <a style="text-decoration: none; color: #282828;" href="https://excelcart.com.ng/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                          <table style="width: 100%; padding: 10px; background-color: #fff;">
+                            <tbody>
+                              <tr>
+                                <td height="10px" style="text-align: center; width: 100%;">                                  
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="text-align:center; vertical-align:middle">
+                                  <img src="{{p.thumb_nail.url}}" alt="Product 1" style="height:183px; width: 183px; max-height:225px;max-width:99%" data-bit="iit">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="text-align:center;width:100%">
+                                  <hr color="#eeeeee" size="1px" width="100%" style="margin-bottom:10px">           
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="text-align:center;vertical-align:middle;color:#282828;font-size:13px;font-family:Roboto,Helvetica,Arial,Sans-Serif">
+                                  <span>{{p.category}}</span>
+                                  
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="prod_text" style="padding:5px;text-align:center;vertical-align:middle;padding-bottom:0;height:30px;color:#727272;font-size:11px;font-family:Roboto,Helvetica,Arial,Sans-Serif">
+                                  {{p.name}}
+                                </td>
+                              </tr>
+                              {% if p.variation_set.first.discount %}
+                              <tr>
+                                <td style="text-align:center;vertical-align:top;color:#333;font-size:14px;font-family:Roboto,Helvetica,Arial,Sans-Serif">
+                                  <b style="color:#239698;">&#8358; 
+                                    {{p.variation_set.first.dis_price|floatformat:2}}
+                                  </b> 
+                                  <strike style="font-size: 12px"><i >&#8358; {{p.variation_set.first.price|floatformat:2}}</i></strike> 
+                                  
+                                </td>
+                              </tr>
+                              {% else %}
+                              <tr>
+                                <td style="text-align:center;vertical-align:top;color:#333;font-size:14px;font-family:Roboto,Helvetica,Arial,Sans-Serif">
+                                  <b style="color:#239698;">&#8358; 
+                                    {{p.variation_set.first.price|floatformat:2}}
+                                  </b>                                   
+                                </td>
+                              </tr>
+                              {% endif %} 
+                              <tr>
+                                <td height="10px" style="text-align:center;width:100%"></td>
+                              </tr>                                 
+                              
+                            </tbody>
+                          </table> 
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>                  
+                </table>
+              </div>
+              {% endfor %}
+              
+            </td>
+          </tr>  
+        </tbody> 
+      </table>
+
+      <table style="background-color:#fff" width="100%">
+        <tbody>
+          <tr>
+            <td aria-hidden="true" height="10px" style="font-size:0; line-height:0; background-color:#f7f7f7">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="background-color:#f7f7f7" width="100%">
+        <tbody>
+          <tr>
+            <td align="center">
+              <br>
+              <table align="center", cellpadding="0" cellspacing="0">
+                <tbody>
+                  <tr>
+                    <td align="center">
+                      <!-- Social Links -->
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://web.facebook.com/excelcart.com.ng">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/fb.png" style="display:block;width:55px!important;height:35px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/twi.png" style="display:block;width:30px!important;height:34px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://www.instagram.com/excelcart.com.ng/">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/ins.jfif" style="display:block;width:30px!important;height:35px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://youtube.com/@ExcelCart-zs2ql">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/yt.png" style="display:block;width:35px!important;height:35px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <table style="display:inline-block">
+                        <tbody>
+                          <tr>
+                            <td style="padding:5px 10px">
+                              <a href="https://wa.me/message/G6VZDGPMOSK6P1">
+                                <img src="https://excelcart.com.ng/static/assets/images/shop/wa.png" style="display:block;width:30px!important;height:30px!important">
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table cellpadding="10" cellspacing="0" role="presentation" width="100%">
+        <tr>
+          <td>
+            <div style="font-family: sans-serif">
+              <div style="font-size: 12px; mso-line-height-alt: 18px; color: #555555; line-height: 1.5; font-family: Lato, Tahoma, Verdana, Segoe, sans-serif;">
+                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">
+                  <span style="color:#12b862;">
+                    <strong>Excel
+                      <span style="color:#000000;">
+                        <u>cart</u>
+                      </span>
+                    </strong>
+                  </span> - 
+                  <em>We provide you with a large variety of brands and designs, complete convenience with our 24/7 online access from your home or workplace, great customer care support, quick delivery, and returns after seven days, among many other things.</em></p>
+                  <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 18px;"> </p>
+                  <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">OOU Ibogun Campus, Ifo, Ogun State, Nigeria</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <table cellpadding="10" cellspacing="0" role="presentation" width="100%">
+        <tbody>
+          <tr>
+            <td style=" width: 100%; height:20px; background-color: #00ab9b;">
+              <p style="margin:0; color: white; text-align: center;"><b>Please note</b>: Excelcart will never ask you for your password, PIN, CVV or full card details over the phone or via email.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </section>
+    
+  </div>
+</body>
+</html>

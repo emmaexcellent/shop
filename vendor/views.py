@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+from django.db.models import Avg,Count
+from django.contrib import messages
+from product.models import *
+from main.manager import *
+from cart.models import *
 from .models import *
 from .forms import *
-from cart.models import *
-from product.models import *
-from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-from django.db.models import Avg,Count
-from django.core.paginator import Paginator
+import uuid
 
 # Create your views here.
 
@@ -65,6 +67,10 @@ def seller_reg(request):
 						phone= vendorcontact,
 						email= vendormail,
 						)
+
+				token = str(uuid.uuid4())
+				new_vendor(vendor, token)
+				VendorToken.objects.create(vendor =vendor, token=token)
 				return redirect('/vendor/dashboard')
 
 	return render(request, 'seller-form.html', {})
@@ -76,6 +82,18 @@ def vendor_list(request):
 	page_num=request.GET.get('page',1)
 	vendors=paginator.page(page_num)
 	return render(request, 'vendor-list.html', {'vendors':vendors})
+
+def confirm_email(request, token):
+	vend = VendorToken.objects.get(token = token)
+	if vend:
+		vendor = Vendor.objects.get(id=vend.vendor.id)
+		vendor.approve = True
+		vendor.save()
+		return redirect('vendor-dashboard')
+	else:
+		Vendor.objects.filter(user=request.user).delete()
+		messages.success(request, "Please enter a valid email!")
+		return redirect('seller-form')	
 
 def vendor_detail(request, name):
 	vendor = Vendor.objects.get(name = name)

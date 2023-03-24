@@ -13,6 +13,8 @@ urlpatterns = [
     path('list', views.vendor_list, name="vendor-list"),
     path('<name>', views.vendor_detail, name="vendor-detail"),
 
+    path('register/confirm-email/<token>/',views.confirm_email, name='confirm-email'),
+
     path('new/add-product', views.add_product, name='add-product')
 
 ] 
