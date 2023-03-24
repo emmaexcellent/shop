@@ -456,12 +456,8 @@
                         {% csrf_token %}
                         
                         <div class="form-floating mb-4 theme-form-floating">
-                            <select class="form-select" aria-label="Locations" name="city">
-                                {% for l in locations %}
-                                <option value="{{l.name}}" id="{{l.id}}">{{l.name}}</option>
-                                {% endfor %}
-                            </select> 
-                            <label for="pin">Select Location </label>
+                            <input type="text" name="city" class="form-control" id="pin" placeholder="Enter Phone Number" required>
+                            <label for="pin">State </label>
                         </div>
 
                         <div class="form-floating mb-4 theme-form-floating">

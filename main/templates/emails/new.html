@@ -42,7 +42,7 @@
       background-color: #00ab9b;
     }
     .logo {
-      width: 180px;
+      width: 120px;
       height: auto;
       font-family: sans-serif;
       font-size: 15px;
@@ -120,37 +120,6 @@
       margin-bottom: 10px;
     }
 
-    /* Category grid */
-    .cats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      grid-gap: 10px;
-    }
-
-    /* Category card */
-    .cat {
-      background-color: #ffffff;
-      position: relative;
-      padding: 1px;
-      text-align: center;
-    }
-    .cat img {      
-      max-width: 100%;
-      margin: auto;
-      opacity: 0.5;
-    }
-    .cat h3 {
-      position: absolute;
-      top: 25%;
-      left: 27px;
-      background-color: floralwhite;
-      padding: 3px;
-      color: black;
-    }
-    .cat p {
-      margin-top: 5px;
-      font-size: 14px;
-    }
 
     /* Product grid */
     .products {
@@ -201,16 +170,6 @@
         <tbody>
           <tr>
             <td>
-              <a href="https://excelcart.com.ng/shop">Shop</a>              
-            </td>
-            <td>
-              <a href="https://excelcart.com.ng/vendor/list">Vendors</a>              
-            </td>
-            <td>
-              <a href="https://excelcart.com.ng/vendor/become-seller">Become Vendor</a>              
-            </td>
-            <td>
-              <a href="https://excelcart.com.ng/faq">Help Center</a>              
             </td>
           </tr>
         </tbody>
@@ -221,38 +180,13 @@
         <br> 
         <div class="img1_abs">
           <h1 class="heading-1">Welcome To <b class="excel">Excelcart</b>!</h1>
-          <h3 class="user">Hi {{username}},</h3><br>
+          <h4 class="user">Hi {{username}},</h4><br>
           <i>Use the code</i> <b>NEWuser099</b> <i>to get 15% off <br>your purchase.</i><br><br>
           <button style="background-color: #239698; color: white; font-size:18px;" onclick="location.href ='https://excelcart.com.ng/shop'">Shop Now! </button>
         </div>        
       </div> 
-
       <div class="discount">
-        <h3 style="font-style: italic;">Shop By Categories</h3>
-      </div> 
-
-      <div class="cats">
-        <a href="https://excelcart.com.ng/shop/Food%20&%20Grocery-1" class="cat">
-          <img src="https://excelcart.com.ng/static/assets/images/shop/1.jpg" alt="Cat 1" height="100%" width="100%">
-          <h3><i>Groceries</i></h3>
-        </a>
-        <a href="https://excelcart.com.ng/shop/Fashion-6" class="cat">
-          <img src="https://excelcart.com.ng/static/assets/images/shop/4.jpg" alt="Cat 2" height="100%" width="100%">
-          <h3><i>Fashion</i></h3>
-        </a>
-        <a href="https://excelcart.com.ng/shop/Electronics-5" class="cat">
-          <img src="https://excelcart.com.ng/static/assets/images/shop/5.jfif" alt="Cat 3" height="100%" width="100%">
-          <h3><i>Electronics</i></h3>
-        </a>
-        <a href="https://excelcart.com.ng/shop/Beauty-3" class="cat">
-          <img src="https://excelcart.com.ng/static/assets/images/shop/7.jpg" alt="Cat 4" height="100%" width="100%">
-          <h3><i>Beauty</i></h3>
-        </a>
-      </div>
-      <br>     
-
-      <div class="discount">
-        <h3 style="font-style: italic;">Featured Products</h3>
+        <h3 style="font-style: italic;">Shop Our Featured Products</h3>
       </div>
       
       <table cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;">
