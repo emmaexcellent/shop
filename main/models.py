@@ -97,7 +97,8 @@ class State(models.Model):
 
 class City(models.Model):
 	name = models.CharField(max_length=200)
-	sate = models.ForeignKey(State,on_delete=models.CASCADE)
+	state = models.ForeignKey(State,on_delete=models.CASCADE, null=True)
+	price = models.IntegerField(null=True, blank=True)
 
 	class Meta:
 		verbose_name_plural='Cities'

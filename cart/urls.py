@@ -13,6 +13,8 @@ urlpatterns = [
     path('add-wishlist',views.add_wishlist, name='add_wishlist'),
     path('account/dashboard/wishlist',views.wishlist, name='wishlist'),
 
+    path('delivery_price',views.delivery_price, name='delivery'),
+
 
 ] 
 

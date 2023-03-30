@@ -87,30 +87,12 @@
                 <div class="col-12">
                     <div class="summery-box p-sticky">
                         <div class="summery-header">
-                            <h3>Cart Total</h3>
+                            <h3></h3>
                         </div>
-
-                        <div class="summery-contain">
-                            <ul>
-                                <li>
-                                    <h4>Subtotal</h4>
-                                    <h4 class="price">&#8358; {{total_amt|floatformat:2}}</h4>
-                                </li>
-                                <li class="align-items-start">
-                                    <h4>Delivery</h4>
-                                    {% if delivery %}
-                                    <h4 class="price text-end">&#8358; {{delivery|floatformat:2}}</h4>
-                                    {% else %}
-                                    <h4 class="price text-end">&#8358; 0.00</h4>
-                                    {% endif %}
-                                </li>
-                            </ul>
-                        </div>
-
                         <ul class="summery-total">
                             <li class="list-total border-top-0">
-                                <h4>Total</h4>
-                                <h4 class="price theme-color">&#8358; {{total|floatformat:2}}</h4>
+                                <h4>Cart Total</h4>
+                                <h4 class="price theme-color">&#8358; {{total_amt|floatformat:2}}</h4>
                             </li>
                         </ul>
 

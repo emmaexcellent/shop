@@ -110,7 +110,6 @@ class VariationForm(forms.ModelForm):
 			'placeholder':"Product Original Price"
 			})
 		self.fields["dis_price"].widget.attrs.update({
-			'required':'',
 			'class':"form-control",
 			'type':"number", 
 			'name':"prod_discount",
@@ -127,7 +126,6 @@ class ProductInfoForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.fields["manufacturer"].widget.attrs.update({
-			'required':'',
 			'class':"form-control",
 			'type':"text", 
 			'name':"prod_manu",
@@ -150,7 +148,6 @@ class ProductInfoForm(forms.ModelForm):
 			'placeholder':"Number written on Product",
 			})
 		self.fields["prod_date"].widget.attrs.update({
-			'required':'',
 			'class':"form-control",
 			'type':"date", 
 			'name':"prod_date",

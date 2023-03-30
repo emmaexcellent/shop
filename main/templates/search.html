@@ -51,22 +51,7 @@
     <section class="search-section">
         <div class="container-fluid-lg">
             <div class="row">
-                <div class="col-xxl-6 col-xl-8 mx-auto">
-                	{% if searched %}
-                    <div class="title d-block text-center">                        
-                        {% if products.count == 0 %}	
-                        <h2>No result found for "{{searched}}" <h2>
-                        	{% else %}
-                        	<h2>Your result for "{{searched}}" <h2>
-                        	{% endif %}
-                        <span class="title-leaf">
-                            <svg class="icon-width">
-                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
-                            </svg>
-                        </span>
-                    </div>
-                    {% endif %}
-
+                <div class="col-xxl-6 col-xl-8 mx-auto">   
                     <div class="search-box d-md-none d-block">
                         <form method="get" class="input-group">
                             <input type="text" class="form-control" name="q" values="{{request.GET.q}}" placeholder="I'm searching for..." aria-label="Example text with button addon">
@@ -74,6 +59,24 @@
                                 id="button-addon1">Search</button>
                         </form>
                     </div>
+                    {% if searched %}
+                    <div class="title d-block text-center">                        
+                        {% if products.count == 0 %}
+                        <h3>We're working on getting the product with "{{searched}}" available!,<br><br><h4> Contact Us Directly To Get The Product! <h3>   
+                            <br>
+
+                        <button onclick="location.href='https://wa.me/message/G6VZDGPMOSK6P1'" class="btn w-100 theme-bg-color text-white">Get It Now!</button> 
+                        
+                            {% else %}
+                            <h2>Products with "{{searched}}" <h2>
+                            {% endif %}
+                        <span class="title-leaf">
+                            <svg class="icon-width">
+                                <use xlink:href="{% static 'assets/' %}svg/leaf.svg#leaf"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

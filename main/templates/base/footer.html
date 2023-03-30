@@ -98,6 +98,46 @@
     <!-- Footer End -->
 
    {% include 'popupview/quickview.html' %}
+
+    <div class="modal location-modal fade theme-modal" id="locationModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Our Current Delivery Locations</h5>
+                    <p class="mt-1 text-content">Enter your address and find out the cost to get your delivery.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="location-list">
+                        <div class="search-input">
+                            <input type="search" class="form-control" placeholder="Search Your Area">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+
+                        <ul class="location-select custom-height">
+                            {% for l in locations %}
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <h6>{{l.name}}</h6>
+                                    {% if l.price == None %}
+                                    <span>Not Available</span>
+                                    {% elif l.price == 0 %}
+                                    <span>Free</span>
+                                    {% else %}
+                                    <span>&#8358; {{l.price|floatformat:2}}</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Tap to top start -->
     <div class="theme-option">
         

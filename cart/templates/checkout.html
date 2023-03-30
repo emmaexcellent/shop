@@ -78,7 +78,7 @@
                                                     <div class="delivery-address-box">
                                                         <div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="address" value="{{add.id}}" 
+                                                                <input class="form-check-input location" type="radio" name="address" value="{{add.id}}" data-item="{{add.id}}" 
                                                                     id="flexRadioDefault{{add.id}}" required>
                                                             </div>
 
@@ -184,19 +184,21 @@
                                 {% endfor %}
                             </ul>
 
-                            <ul class="summery-total">
+                            <ul class="summery-total" id="del_price">
                                 <li>
                                     <h4>Subtotal</h4>
                                     <h4 class="price">&#8358; {{total_amt|floatformat:2}}</h4>
+                                    <input type="hidden" class="sub_price" value="{{total_amt}}">
                                 </li>
                                 <li>
                                     <h4>Delivery</h4>
-                                    <h4 class="price">&#8358; {{delivery|floatformat:2}}</h4>
+                                    <h4 class="price">&#8358; {{price|floatformat:2}}</h4>
                                 </li>
 
                                 <li>
                                     <h4>Coupon code</h4>
                                     <h4 class="price">- &#8358; {{discount|floatformat:2}}</h4>
+                                    <input type="hidden" class="code_price" value="{{discount}}">
                                 </li>
                                 
                                 <li class="list-total">

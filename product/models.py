@@ -80,7 +80,7 @@ class Variation(models.Model):
     size_par = models.CharField(choices=SIZE,default='kilogramme',max_length=150, blank=True, null=True)
     size=models.CharField(max_length=100, null=True)
     price=models.PositiveIntegerField(default=0, null=True)
-    dis_price=models.PositiveIntegerField(default=0, null=True)
+    dis_price=models.PositiveIntegerField(default=0, null=True, blank=True)
     discount=models.IntegerField(null=True, blank=True)
 
     class Meta:
@@ -99,12 +99,12 @@ class Variation(models.Model):
 
 class ProductInformation(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    manufacturer=models.CharField(max_length=100, null=True)
+    manufacturer=models.CharField(max_length=100, null=True, blank = True)
     ingredients = models.CharField(max_length=300, null=True, blank = True)
     package = models.CharField(max_length=300, null=True, blank=True)
     item_number=models.CharField(max_length=300, null=True, blank=True)
-    prod_date=models.DateTimeField(default=now, editable=True)
-    expiry_date=models.DateTimeField(default=now, editable=True)
+    prod_date=models.DateTimeField(default=now, editable=True, blank=True)
+    expiry_date=models.DateTimeField(default=now, editable=True, blank=True)
 
     class Meta:
         verbose_name_plural='Product Info'

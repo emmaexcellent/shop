@@ -607,6 +607,29 @@ $(document).on('click','.update-item',function(){
     // End
 });
 
+
+// delivery 
+$(document).on('click', '.location',function() {
+  var _pId=$(this).attr('data-item');
+  var _city=$(".loc_price-"+_pId).text();
+  var _subtotal=$(".sub_price").val();
+  var _discount=$(".code_price").val();
+
+  $.ajax({                     
+    url: '/delivery_price',  
+    data: {
+      'city': _city,
+      'subtotal': _subtotal,
+      'discount': _discount, 
+    },
+    success: function (data) {   
+      $("#del_price").html(data); 
+    }
+  });
+
+});
+
+
 // Add wishlist
     $(document).on('click',".add-wishlist",function(){
         var _pid=$(this).attr('data-product');

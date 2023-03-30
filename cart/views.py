@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .models import *
+from main.models import *
 from paystackpay.models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -53,58 +54,41 @@ def add_to_cart(request):
 
 def cart_list(request):
 	total_amt=0
-	total=0
-	delivery=0
+
 	if 'cartdata' in request.session:
 		for p_id,item in request.session['cartdata'].items():
 			total_amt+=int(item['qty'])*float(item['price'])
 
-			if total_amt > 5000:
-				delivery = total_amt * 11/100
-			else:
-				delivery = 500
-
-			total = total_amt + delivery
-
 		prods = Product.objects.all()
 
 		return render(request, 'cart.html',
-			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,'total':total,'prods':prods})
+			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'prods':prods})
 	else:
 		return render(request, 'cart.html',{'cart_data':'','totalitems':0,'total_amt':total_amt})	
 
 def delete_cart_item(request):
 	total_amt=0	
-	discount=0
-	total=0
-	delivery=0
 	p_id=str(request.GET.get('id'))
 	if 'cartdata' in request.session:
 		if p_id in request.session['cartdata']:
 			cart_data=request.session['cartdata']
 			del request.session['cartdata'][p_id]
 			request.session['cartdata']=cart_data
-	total_amt=0
+
 	for p_id,item in request.session['cartdata'].items():
 		total_amt+=int(item['qty'])*int(item['price'])
-		if total_amt > 5000:
-			delivery = total_amt * 11/100
-		else:
-			delivery = 500
 
 		total = total_amt + delivery
 
 	prods = Product.objects.all()	
 	t=render_to_string('ajax/cart-list.html',
-		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total,'prods':prods})
+		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'prods':prods})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
 # Delete Cart Item
 def update_cart_item(request):
 	total_amt=0	
 	discount=0
-	total=0
-	delivery=0
 	p_id=str(request.GET['id'])
 	p_qty=request.GET.get('qty')
 	p_size = request.GET.get('size')
@@ -120,17 +104,11 @@ def update_cart_item(request):
 			request.session['cartdata']=cart_data			
 	for p_id,item in request.session['cartdata'].items():
 		total_amt+=int(item['qty'])*int(item['price'])
-		if total_amt > 5000:
-			delivery = total_amt * 11/100
-		else:
-			delivery = 500
-
-		total = total_amt + delivery
 
 	prods = Product.objects.all()
 		
 	t=render_to_string('ajax/cart-list.html',
-		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'delivery':delivery,'total':total,'prods':prods})
+		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'discount':discount,'prods':prods})
 	return JsonResponse({'data':t,'totalitems':len(request.session['cartdata'])})
 
 def add_wishlist(request):
@@ -175,11 +153,6 @@ def checkout(request):
 
 		for p_id,item in request.session['cartdata'].items():
 			total_amt+=int(item['qty'])*float(item['price'])
-
-			if total_amt > 5000:
-				delivery = total_amt * 11/100
-			else:
-				delivery = 500
 
 			total = total_amt + delivery	
 
@@ -240,6 +213,10 @@ def checkout(request):
 			elif coupon == None:
 				discount=0
 
+			city = CustomerAddress.objects.get(pk=address)	
+			city_price = City.objects.get(name = city.city)
+			delivery = city_price.price		
+
 			total = order.total_amt + delivery - discount	
 
 			order.discount = discount
@@ -293,3 +270,15 @@ def checkout(request):
 		
 		return render(request, 'checkout.html',
 			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address})
+
+
+def delivery_price(request):
+	city = request.GET.get('city')
+	total_amt = request.GET.get('subtotal')
+	discount = request.GET.get('discount')
+
+	city_price = City.objects.get(name = city)
+	price = city_price.price
+	total = float(total_amt) + float(discount) + float(price)
+	return render(request,'ajax/delivery_price.html', {'price':price,'total':total, 'discount':discount, 'total_amt':total_amt})	
+

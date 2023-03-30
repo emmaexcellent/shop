@@ -45,52 +45,6 @@
 
 <body class="theme-color-3 dark">
     <header class="pb-md-4 pb-0">
-        <div style="padding: 5px;" class="header-top">
-            <div class="container-fluid-lg">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <ul class="about-list right-nav-about">
-                            <li class="right-nav-list">
-                                <div class="dropdown theme-form-select">
-                                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="iconly-Location icli text-white"></i>
-                                        <span>Delivery Locations</span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        {% for l in locations %}
-                                        <li>
-                                            <a class="dropdown-item" id="{{l.id}}">
-                                                <i class="iconly-Location icli theme-color"></i>
-                                                <span>{{l.name}}</span>
-                                            </a>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="right-nav-list">
-                                <div class="dropdown theme-form-select">
-                                    <button class="btn dropdown-toggle" type="button" id="select-language" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span>Delivery STATE</span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="select-language" style="">
-                                        {% for s in states|slice:1 %}
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)" id="{{s.id}}">
-                                                <i class="iconly-Location icli theme-color"></i>
-                                                <span>{{s.name}}</span>
-                                            </a>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="top-nav top-header sticky-header">
             <div class="container-fluid-lg">
                 <div class="row">

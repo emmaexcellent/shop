@@ -1,0 +1,26 @@
+<ul class="summery-total" id="del_price">
+	<li>
+	    <h4>Subtotal</h4>
+	    <h4 class="price">&#8358; {{total_amt|floatformat:2}}</h4>
+	    <input type="hidden" class="sub_price" value="{{total_amt}}">
+	</li>
+	<li>
+	    <h4>Delivery</h4>
+	    {% if price == 0 %}
+		<h4 class="price theme-color">Free</h4>
+		{% else %}
+		<h4 class="price">&#8358; {{price|floatformat:2}}</h4>
+		{% endif %}
+	</li>
+
+	<li>
+	    <h4>Coupon code</h4>
+	    <h4 class="price">- &#8358; {{discount|floatformat:2}}</h4>
+	    <input type="hidden" class="code_price" value="{{discount}}">
+	</li>
+
+	<li class="list-total">
+	    <h4>Total</h4>
+	    <h4 class="price">&#8358; {{total|floatformat:2}}</h4>
+	</li>
+</ul>
