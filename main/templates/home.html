@@ -1,287 +1,33 @@
+{% extends 'base/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="icon" href="{% static 'assets/' %}images/favicon/logo1.png" type="image/x-icon">
+    {% block mobilemenu %}
 
-    <!-- Google font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    {% endblock %}
 
-    <!-- bootstrap css -->
-    <link id="rtl-link" rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/bootstrap.css">
-
-    <!-- wow css -->
-    <link rel="stylesheet" href="{% static 'assets/' %}css/animate.min.css" />
-
-    <!-- font-awesome css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/font-awesome.css">
-
-    <!-- feather icon css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/feather-icon.css">
-
-    <!-- Plugin CSS file with desired skin css -->
-    <link rel="stylesheet" href="{% static 'assets/' %}css/vendors/ion.rangeSlider.min.css">
-
-    <!-- slick css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/vendors/slick/slick-theme.css">
-
-    <!-- animation css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/font-style.css">
-
-    <!-- Template css -->
-    <link id="color-link" rel="stylesheet" type="text/css" href="{% static 'assets/' %}css/style.css">
-</head>
-
-<body>
-
-    <!-- Header Start -->
-    <header class="header-compact header-absolute">
-        <div class="top-nav top-header sticky-header">
-            <div class="container-fluid-lg">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="navbar-top">
-                            <button class="navbar-toggler d-xl-none d-inline navbar-menu-button me-3" type="button"
-                                data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
-                                <span class="navbar-toggler-icon">
-                                    <i class="fa-solid fa-bars"></i>
-                                </span>
-                            </button>
-                            <div>
-                                <a href="{% url 'home' %}" class="web-logo nav-logo">
-                                    <img src="{% static 'assets/' %}images/logo/logo.png" class="img-fluidlazyload" alt="">
-                                </a>
-                            </div>
-
-                            <div class="">
-                                <div class="col-12 position-relative">
-                                    <div class="main-nav nav-left-align">
-                                    <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
-                                        <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
-                                            <div class="offcanvas-header navbar-shadow">
-                                                <h5>Menu</h5>
-                                                <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="offcanvas-body">
-                                        <ul class="navbar-nav">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="{% url 'home' %}">Home</a>
-                                            </li>
-
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="{% url 'shop' %}">Shop</a>
-                                            </li>
-
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="/vendor/list">Vendors</a>
-                                            </li>
-
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="{% url 'faq' %}" >Help Center</a>
-                                            </li>
-
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="{% url 'contact' %}" >Contact Us</a>
-                                            </li>
-
-                                            <li class="nav-item dropdown d-md-none d-block">
-                                                <a class="nav-link dropdown-toggle" href="/vendor/become-seller">Sell on Excelcart</a>
-                                            </li>                                             
-                                            
-                                        </ul>
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                             </div>
-
-                            <div class="rightside-box">
-                                <div class="location-box">
-                                    <button class="btn location-button" data-bs-toggle="modal"
-                                        data-bs-target="#locationModal">
-                                        <span class="location-arrow">
-                                            <i data-feather="map-pin"></i>
-                                        </span>
-                                        <span class="locat-name">Locations</span>
-                                        <i class="fa-solid fa-angle-down"></i>
-                                    </button>
-                                </div>
-                                <ul class="right-side-menu">
-                                    <li class="right-side">
-                                        <div class="delivery-login-box">
-                                            <div class="delivery-icon">
-                                                <div class="search-box">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="right-side">
-                                        <a href="{% url 'contact' %}" class="delivery-login-box">
-                                            <div class="delivery-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone-call"><path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                                            </div>
-                                            <div class="delivery-detail">
-                                                <h6>24/7 Delivery</h6>
-                                                <h5>+234 903 292 9196</h5>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="right-side">
-                                        <a href="{% url 'wishlist' %}" class="btn p-0 position-relative header-wishlist">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        </a>
-                                    </li>
-                                    <li class="right-side">
-                                        <div class="onhover-dropdown header-badge">
-                                            <button type="button" class="btn p-0 position-relative header-wishlist" onclick="location.href='{% url 'cart' %}'">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                                                <span class="position-absolute top-0 start-100 translate-middle badge cartlist">{{request.session.cartdata|length}}
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <li class="right-side d-block d-lg-none">
-                                        <div class="delivery-login-box">
-                                            <button class="btn location-button" data-bs-toggle="modal" data-bs-target="#locationModal">
-                                                <span class="location-arrow">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </li>
-                                    <li class="right-side onhover-dropdown" style="display: flex;">
-                                        <div class="delivery-login-box d-lg-none">
-                                            <div class="delivery-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                            </div>
-                                        </div>
-
-                                        {% if user.is_authenticated %}
-                                        <div class="onhover-div onhover-div-login">
-                                            <ul class="user-box-name">
-                                                <li class="product-box-contain">
-                                                    <i></i>
-                                                    <h5><b>Hi, {{request.user}}</b></h5>
-                                                </li>
-                                                <li class="product-box-contain">
-                                                    <i></i>
-                                                    <a href="{% url 'user-dashboard' %}">Dashboard</a>
-                                                </li>
-
-                                                <li class="product-box-contain">
-                                                    <a href="{% url 'order-tracking' %}">Track order</a>
-                                                </li>
-
-                                                <li class="product-box-contain">
-                                                    <a href="{% url 'logout' %}">Logout</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        {% else %}
-                                        <div class="onhover-div onhover-div-login">
-                                            <ul class="user-box-name">
-                                                <li class="product-box-contain">
-                                                    <i></i>
-                                                    <a href="{% url 'login' %}">Log In</a>
-                                                </li>
-
-                                                <li class="product-box-contain">
-                                                    <a href="{% url 'register' %}">Register</a>
-                                                </li>
-
-                                                <li class="product-box-contain">
-                                                    <a href="{% url 'forgot-password' %}">Forgot Password</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        {% endif %}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
-
-    <div class="mobile-menu d-md-none d-block mobile-cart">
-        <ul>
-            <li>
-                <a href="{% url 'home' %}">
-                    <i class="iconly-Home icli"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-
-            <li class="mobile-category">
-                <a href="{% url 'shop' %}">
-                    <i class="iconly-Category icli js-link"></i>
-                    <span>Shop</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'search' %}" class="search-box">
-                    <i class="iconly-Search icli"></i>
-                    <span>Search</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'wishlist' %}">
-                    <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'cart' %}">
-                    <i class="iconly-Bag-2 icli fly-cate"></i>
-
-                    <span>Cart</span>
-                </a>
-
-            </li>
-        </ul>
-    </div>
-
-    <!-- Home Section Start -->
-    <section class="home-search-full pt-0 overflow-hidden">
+    <section class="home-section-2 home-section-bg pt-0 overflow-hidden">
         <div class="container-fluid p-0">
             <div class="row">
                 <div class="col-12">
                     <div class="slider-animate">
                         <div>
                             <div class="home-contain rounded-0 p-0">
-                                <img src="{% static 'assets/' %}images/vegetable/bg-img.jpg"
-                                    class="img-fluid bg-img blur-up lazyload bg-top" alt="">
-                                <div class="home-detail p-center text-center home-overlay position-relative">
-                                    <div>
-                                        <div class="content">
-                                            <h2 style="font-style: italic; line-height: inherit;">Enjoy 7 days free delivery for your products...</h2>
-                                            <h3>Better groceries, better food, best fashions and much more at BEST PRICES!</h3>
-                                            <form method="get" action="{% url 'search' %}" class="search-box input-group">
-                                                <input type="search" class="form-control" name="q" values="{{request.GET.q}}" placeholder="I'm searching for..." aria-label="Recipient's username">
-                                                <button class="btn" type="submit" style="background-color:orange;">
-                                                    <i class="fa fa-search" style="color:white;"></i>
-                                                </button>
-                                            </form>
+                                <img src="{% static 'assets/' %}images/grocery/banner/slider1.png"
+                                    class="img-fluid bg-img blur-up lazyload" alt="">
+                                <div class="home-detail home-big-space p-center-left home-overlay position-relative">
+                                    <div class="container-fluid-lg">
+                                        <div>
+                                            <h6 class="ls-expanded theme-color text-uppercase">Excel
+                                            </h6>
+                                            <h1 class="heding-2">No.1 Online Shop For You</h1>
+                                            <h2 class="content-2">Purchase Of Goods Made Easy</h2>
+                                            <h5 class="text-content">Order your favourites and get it delivered to you!
+                                            </h5>
+                                            <button
+                                                class="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2 mend-auto"
+                                                onclick="location.href = '{% url 'shop' %}';">Shop Now <i
+                                                    class="fa-solid fa-arrow-right icon"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -294,23 +40,64 @@
     </section>
     <!-- Home Section End -->
 
-    <!-- product section start -->
-    <section class="section-b-space">
+    <!-- Banner Section Start -->
+
+    <!-- Banner Section End -->
+
+    <!-- Category Section Start -->
+    <section class="category-section-3">
         <div class="container-fluid-lg">
-            <div class="row">                
+            <div class="title">
+                <h2>Shop By Categories</h2>
+            </div>
+            <div class="row">
                 <div class="col-12">
-                    <div class="row row-cols-xxl-6 row-cols-xl-5 row-cols-md-3 row-cols-2 g-sm-4 g-3 no-arrow
-                        section-b-space">
-                        {% for p in products %}
+                    <div class="category-slider-1 arrow-slider wow fadeInUp">
+                        {% for cat in categories %}
+                        <div>
+                            <div class="category-box-list">
+                                <a href="/shop/{{cat.title}}-{{cat.id}}" class="category-name">
+                                    <h4>{{cat.title}}</h4>
+                                </a>
+                                <div class="category-box-view">
+                                    <a href="/shop/{{cat.title}}-{{cat.id}}">
+                                        <img style="height: 130px; width: 130px" src="{{cat.image.url}}" class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                    <button onclick="location.href = '/shop/{{cat.title}}-{{cat.id}}'" class="btn shop-button">
+                                        <span>Shop Now</span>
+                                        <i class="fas fa-angle-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Category Section End -->
+
+    <!-- Product Fruit & Vegetables Section Start -->
+    <section class="product-section-3">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Food & Grocery</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in grocery %}
                         {% if p.variation_set.all.count != 0 %}
                         <div>
-                            <div class="product-box product-white-bg wow fadeIn">
-                                <div class="product-image">
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
                                     <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
                                         <img src="{{p.thumb_nail.url}}"
                                             class="img-fluid blur-up lazyload" alt="">
                                     </a>
-                                    <ul class="product-option">
+
+                                    <ul class="option">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
                                             <a href="javascript:void(0)" data-bs-toggle="modal"
                                                 data-bs-target="#view{{p.id}}">
@@ -324,10 +111,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="product-detail position-relative">
-                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
-                                        <h6 class="name">{{p.name}}</h6>
-                                    </a>
+                                <div class="product-detail">
                                     <ul class="rating">
                                         {% for star in p.avg_ratings|ljust:p.avg_ratings %}
                                         <li>
@@ -335,56 +119,178 @@
                                         </li>
                                         {% endfor %}
                                     </ul>
-                                    <h6 class="sold weight text-content fw-normal">{{p.variation_set.first.size}}</h6>
-
+                                    <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                    
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
                                     {% if p.variation_set.first.discount %}
-                                    <h6 class="price">
-                                        <span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">                                     
-                                        <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>
-                                    </h6>
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>
+                                    </h5>
                                     {% else %}
-                                    <h6 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
                                         <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
-                                    </h6>
-                                    {% endif %}
-
-                                    <div class="add-to-cart-btn-2 addtocart_btn">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
                                         {% if p.number == 0 %}
                                         <br>
                                         <br>
                                         <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
-                                            <i class="text-black m-0">Out Of Stock</i>
+                                            <i class="text-white m-0">Out Of Stock</i>
                                         </button>
-                                        
                                         {% else %}
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
                                         <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
                                         <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                         <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                         <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
                                         <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
-                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}"><input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
-
-                                        <button class="btn addcart-button btn buy-button">
-                                            <i class="fa-solid  fa-plus">
-                                            </i>
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
                                         </button>
-                                        <div class="cart_qty qty-box-2">
-                                            <div class="input-group">
-                                                <button type="button" class="qty-left-minus cart-add add-to-cart" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" data-item="{{p.id}}" data-index="{{p.id}}">
-                                                    <i class="fa fa-minus" aria-hidden="true"></i>
-                                                </button>
+                                        {% endif %}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
 
-                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Fruit & Vegetables Section End -->
+    
+    <!-- Offer Section Start -->
+    <section class="offer-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="offer-box hover-effect">
+                        <h2><span>FREE GIFT ANY ORDER</span> 70% oFF</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Offer Section End -->
 
-                                                <button type="button" class="qty-right-plus cart-add add-to-cart" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" data-item="{{p.id}}" data-index="{{p.id}}">
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                </button>
+    <!-- Product Breakfast & Dairy Section Start -->
+    <section class="product-section-4">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Health</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in health %}
+                        {% if p.variation_set.all.count != 0 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="{{p.thumb_nail.url}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for star in p.avg_ratings|ljust:p.avg_ratings %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                    <h6 class="active1-{{p.id}} d-none">{{p.variation_set.first.size}}</h6> 
+                                    
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %}
+                                    
+                                    <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                
+                                                <input class="form-control prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
                                         {% endif %}
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -395,5 +301,662 @@
             </div>
         </div>
     </section>
-    <!-- product section end -->
-    {% include 'base/footer.html' %}
+    <!-- Product Breakfast & Dairy Section End -->
+
+    <!-- Product Chemist Store Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Beauty</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in beauty %}
+                        {% if p.variation_set.all.count != 0 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="{{p.thumb_nail.url}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for star in p.avg_ratings|ljust:p.avg_ratings %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                    <h6 class="active1-{{p.id}} d-none">{{p.variation_set.first.size}}</h6> 
+                                    
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                        {% endif %}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Chemist Store Section End -->
+
+
+    <!-- Product Drinks Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Fashion</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in fashion %}
+                        {% if p.variation_set.all.count != 0 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="{{p.thumb_nail.url}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for star in p.avg_ratings|ljust:p.avg_ratings %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                    <h6 class="active1-{{p.id}} d-none">{{p.variation_set.first.size}}</h6> 
+                                    
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                                                                
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                        {% endif %}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}                        
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Drinks Section End -->
+
+    <!-- Product Grocery & Staples Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Electronics</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in electronic %}
+                        {% if p.variation_set.all.count != 0 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="{{p.thumb_nail.url}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for star in p.avg_ratings|ljust:p.avg_ratings %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                    <h6 class="active1-{{p.id}} d-none">{{p.variation_set.first.size}}</h6> 
+                                    
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                        {% endif %}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Grocery & Staples Section End -->
+
+    <!-- Banner Section Start -->
+    <section class="banner-section">
+        <div class="container-fluid-lg">
+            <div class="row gy-lg-0 gy-3">
+                <div class="col-lg-8">
+                    <div class="banner-contain-3 h-100 pt-sm-5 hover-effect">
+                        <img src="{% static 'assets/' %}images/grocery/banner/8.png" class="bg-img blur-up lazyload" alt="">
+                        <div
+                            class="banner-detail banner-p-sm p-center-right position-relative banner-minus-position banner-detail-deliver">
+                            <div>
+                                <h3 class="fw-bold banner-contain">Safe Delivery to the door</h3>
+                                <h4 class="mb-sm-3 mb-2 delivery-contain">Order your terms. Anytime and anyhow.
+                                </h4>
+                                <ul class="banner-list">
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="check-icon">
+                                                <i class="fa-solid fa-check"></i>
+                                            </div>
+
+                                            <div class="check-contain">
+                                                <h5>Get live order tracking</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="delivery-box">
+                                            <div class="check-icon">
+                                                <i class="fa-solid fa-check"></i>
+                                            </div>
+
+                                            <div class="check-contain">
+                                                <h5>Get latest feature updates</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <button class="btn theme-bg-color text-white mt-sm-4 mt-3 fw-bold"
+                                    onclick="location.href = '{% url 'shop' %}';">Start Shopping</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="banner-contain-3 pt-lg-4 h-100 hover-effect">
+                        <a href="javascript:void(0)">
+                            <img src="{% static 'assets/' %}images/grocery/banner/9.jpg"
+                                class="img-fluid social-image blur-up lazyload w-100" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section End -->
+
+    <!-- Product Personal Care Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Stationary</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in stationery %}
+                        {% if p.variation_set.all.count != 0 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="{{p.thumb_nail.url}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for star in p.avg_ratings|ljust:p.avg_ratings %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                    <h6 class="active1-{{p.id}} d-none">{{p.variation_set.first.size}}</h6> 
+                                    
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                        {% endif %}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Personal Care Section End -->
+
+    <!-- Product Kitchen & Dining Needs Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="title">
+                <h2>Accessory</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="slider-7_1 arrow-slider img-slider">
+                        {% for p in accessory %}
+                        {% if p.variation_set.all.count != 0 %}
+                        <div>
+                            <div class="product-box-4 wow fadeInUp" data-wow-delay="0.05s">
+                                <div class="product-image product-image-2">
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <img src="{{p.thumb_nail.url}}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                data-bs-target="#view{{p.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="product-detail">
+                                    <ul class="rating">
+                                        {% for star in p.avg_ratings|ljust:p.avg_ratings %}
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h6 class="unit prod-size-{{p.id}} d-none">{{p.variation_set.first.size}}</h6>
+                                    <h6 class="active1-{{p.id}} d-none">{{p.variation_set.first.size}}</h6> 
+                                    
+                                    <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                        <h5 class="name text-title">{{p.name}}</h5>
+                                    </a>
+                                    {% if p.variation_set.first.discount %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                    <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                    <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                    <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                    </h5>
+                                    {% endif %} 
+                                    <div class="price-qty">
+                                        {% if p.number == 0 %}
+                                        <br>
+                                        <button style="width:100%" class="buy-button buy-button-2 btn add-to-cart" disabled>
+                                            <i class="text-white m-0">Out Of Stock</i>
+                                        </button>
+                                        {% else %}
+                                        <div class="counter-number">
+                                            <div class="counter">
+                                                <div class="qty-left-minus" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </div>
+                                                <input class="form-control input-number qty-input prod-qty-{{p.id}}" type="number" name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+                                                <div class="qty-right-plus" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                        <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                        <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
+                                        <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                        <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                        <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" /> 
+                                        
+                                        <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                        
+                                        
+                                        <button class="buy-button buy-button-2 btn cart-add add-to-cart" data-item="{{p.id}}" data-index="{{p.id}}">
+                                            <i class="iconly-Buy icli text-white m-0"></i>
+                                        </button>
+                                        {% endif %}
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Kitchen & Dining Needs Section End -->
+
+    
+    <!-- Service Section Start -->
+    <section class="service-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="row g-3 row-cols-xxl-5 row-cols-lg-3 row-cols-md-2">
+                <div>
+                    <div class="service-contain-2">
+                        <div class="service-image">
+                            <img src="{% static 'assets/' %}svg/delivery.svg" class="blur-up lazyloaded" alt="">
+                        </div>
+                        <div class="service-detail">
+                            <h3>Swift Delivery</h3>
+                            <h6 class="text-content">Cheap & Swift Delivery</h6>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="service-contain-2">
+                        <div class="service-image">
+                            <img src="{% static 'assets/' %}svg/product.svg" class="blur-up lazyloaded" alt="">
+                        </div>
+
+                        <div class="service-detail">
+                            <h3>24 x 7 Service</h3>
+                            <h6 class="text-content">Online Service For 24 x 7</h6>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="service-contain-2">
+                        <div class="service-image">
+                            <img src="{% static 'assets/' %}svg/discount.svg" class="blur-up lazyloaded" alt="">
+                        </div>
+                        <div class="service-detail">
+                            <h3>100% Original</h3>
+                            <h6 class="text-content">100% Money Back</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Service Section End -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "OnlineStore",
+        "name": "Excelcart Online Shopping",
+        "description": "Excelcart, dedicated to bringing vendors and consumers together. Explore our wide range of products and experience the ultimate in online shopping. Start Shopping Now!!!",
+        "image": "",
+        "logo": "{% static 'assets/' %}images/favicon/5.png",
+        "parentOrganization": {
+          "@type": "OnlineBusiness",
+          "name": "Excelcart Marketplace",
+          "url": "https://excelcart.com.ng"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "Nigeria",
+          "addressLocality": "Ibogun"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingCount": 35,
+          "ratingValue": 4.8
+        },
+        "interactionStatistic": {
+          "@type": "InteractionCounter",
+          "userInteractionCount": 50k,
+          "interactionType": "https://schema.org/TradeAction"
+        },
+        "foundingDate": "2023-01-01"
+      }
+    </script>
+    {% endblock content %}
+
+  
