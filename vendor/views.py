@@ -87,7 +87,7 @@ def confirm_email(request, token):
 	vend = VendorToken.objects.get(token = token)
 	if vend:
 		vendor = Vendor.objects.get(id=vend.vendor.id)
-		vendor.approve = True
+		vendor.approve = False
 		vendor.save()
 		return redirect('vendor-dashboard')
 	else:
