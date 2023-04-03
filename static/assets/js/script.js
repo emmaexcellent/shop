@@ -314,20 +314,6 @@ $(".cart-add").on("click", function () {
     });
 });
 
-/*=====================
-   14. Loader Js
-   ==========================*/
-const loaderEl = document.getElementsByClassName("fullpage-loader")[0];
-document.addEventListener("readystatechange", (event) => {
-    const readyState = "complete";
-    if (document.readyState == readyState) {
-        loaderEl.classList.add("fullpage-loader--invisible");
-
-        setTimeout(() => {
-            loaderEl.parentNode.removeChild(loaderEl);
-        }, 100);
-    }
-});
 
 /*=====================
     15. header Dropdown Js

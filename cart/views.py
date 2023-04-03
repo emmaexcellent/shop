@@ -78,8 +78,6 @@ def delete_cart_item(request):
 	for p_id,item in request.session['cartdata'].items():
 		total_amt+=int(item['qty'])*int(item['price'])
 
-		total = total_amt + delivery
-
 	prods = Product.objects.all()	
 	t=render_to_string('ajax/cart-list.html',
 		{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'prods':prods})

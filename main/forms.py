@@ -20,7 +20,9 @@ class SignupForm(UserCreationForm):
 			'type':"text", 
 			'name':"username",
 			'id':"username",
-			'placeholder':"Choose a username"
+			'placeholder':"Choose a username",
+			'autocomplete': "username"
+
 			})
 		self.fields["email"].widget.attrs.update({
 			'required':'',
@@ -28,7 +30,8 @@ class SignupForm(UserCreationForm):
 			'type':"email", 
 			'name':"email",
 			'id':"email",
-			'placeholder':"Email"
+			'placeholder':"Email",
+			'autocomplete': "email"
 			})
 		self.fields["password1"].widget.attrs.update({
 			'required':'',
@@ -36,7 +39,8 @@ class SignupForm(UserCreationForm):
 			'type':"text", 
 			'name':"password1",
 			'id':"password1",
-			'placeholder':"Password"
+			'placeholder':"Password",
+			'autocomplete': "password"
 			})
 		self.fields["password2"].widget.attrs.update({
 			'required':'',
@@ -44,7 +48,8 @@ class SignupForm(UserCreationForm):
 			'type':"text", 
 			'name':"password2",
 			'id':"password2",
-			'placeholder':"Confirm Password"
+			'placeholder':"Confirm Password",
+			'autocomplete': "confirm-password"
 			})
 
 

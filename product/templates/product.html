@@ -1,9 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% load text_extras %}
-{% block title %}
-    <title>{{p.name}}</title>
-{% endblock %}
 
 {% block meta %}
     <meta name="description" property="og:description" content="{{p.short}}">    
@@ -114,7 +111,7 @@
                                     </h3>                                    
                                     {% else %}
                                     <h3 class="theme-color">&#8358; <span class="product-price price">{{p.variation_set.first.price|floatformat:2}} </span>
-                                    <input type="hidden" class="product-price-h prod-price-{{p.id}}" name="price" value="{{p.variation_set.dis_first.price}}">
+                                    <input type="hidden" class="product-price-h prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
                                     </h3>
                                     {% endif %}
 
@@ -204,52 +201,13 @@
                                         </ul>
                                     </div>
                                 </div>
-
-                                <div class="paymnet-option">
-                                    <div class="product-title">
-                                        <h4>Guaranteed Safe Checkout</h4>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="{% static 'assets/' %}images/product/payment/1.svg"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="{% static 'assets/' %}images/product/payment/2.svg"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="{% static 'assets/' %}images/product/payment/3.svg"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="{% static 'assets/' %}images/product/payment/4.svg"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="{% static 'assets/' %}images/product/payment/5.svg"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                
+                                <br>                                
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block wow fadeInUp">
+                <div class="col-xxl-3 col-xl-4 col-lg-5 d-lg-block wow fadeInUp">
                     <div class="right-sidebar-box">
                         <div class="vendor-box">
                             <div class="verndor-contain">
@@ -300,7 +258,7 @@
                         </div>
 
                         <!-- Trending Product -->
-                        <div class="pt-25">
+                        <div class="pt-25 d-none d-lg-block">
                             <div class="category-menu">
                                 <h3>Trending Products</h3>
 
@@ -604,7 +562,7 @@
                                 </div>
                                 <div class="product-footer">
                                     <div class="product-detail">
-                                        <span class="span-name">{{p.category}}</span>
+                                        <span class="span-name">{{p.vendor}}</span>
                                         <a href="/product/{{p.category}}/{{p.name|slugify}}{{p.id}}">
                                             <h5 class="name">{{p.name}}</h5>
                                         </a>
