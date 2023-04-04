@@ -11,6 +11,8 @@ def verify_payment(request: HttpRequest, ref:str) -> HttpResponse:
 	verified = payment.verify_payment()
 	if verified:
 		messages.success(request, "Verification Successful")
+		return redirect('pay-success')
 	else:
-		messages.error(request, "Verification Failed!")	
+		messages.error(request, "Payment Verification Failed!")	
+		return redirect('checkout')
 	return redirect('checkout')

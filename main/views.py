@@ -231,7 +231,7 @@ def forgot_password(request):
 
 		forget_password_email(username,user_obj, token)
 		UserToken.objects.create(user =user, token=token)
-		messages.error(request, 'Check your email to set up new password.')		
+		messages.error(request, 'Check your email to set up new password. This can take up to 2mins...')		
 		return redirect('forgot-password')
 
 	return render(request, 'registration/forgot-password.html',{})

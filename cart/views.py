@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from .models import *
@@ -58,6 +58,14 @@ def cart_list(request):
 	if 'cartdata' in request.session:
 		for p_id,item in request.session['cartdata'].items():
 			total_amt+=int(item['qty'])*float(item['price'])
+
+			product = Product.objects.get(id=p_id)
+
+			if product.number < int(item['qty']):
+				cart_data=request.session['cartdata']
+				del request.session['cartdata'][p_id]
+				request.session['cartdata']=cart_data
+				return redirect('cart')
 
 		prods = Product.objects.all()
 
@@ -267,7 +275,7 @@ def checkout(request):
 	else:
 		
 		return render(request, 'checkout.html',
-			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'address':address})
+			{'cart_data':'','totalitems':0,'total_amt':total_amt,'discount':discount,'total':total,'address':address})
 
 
 def delivery_price(request):
@@ -278,5 +286,9 @@ def delivery_price(request):
 	city_price = City.objects.get(name = city)
 	price = city_price.price
 	total = float(total_amt) + float(discount) + float(price)
-	return render(request,'ajax/delivery_price.html', {'price':price,'total':total, 'discount':discount, 'total_amt':total_amt})	
+	vat_fee = total * 2/100
+	return render(request,'ajax/delivery_price.html', {'price':price,'total':total, 'discount':discount, 'total_amt':total_amt,'vat':vat_fee})	
 
+
+def pay_success(request):
+	return render(request, 'pay-success.html', {})

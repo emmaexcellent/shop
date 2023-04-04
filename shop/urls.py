@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/admin/admin/030/', admin.site.urls),
@@ -23,4 +24,6 @@ urlpatterns = [
     path('', include('cart.urls')),
     path('payment/', include('paystackpay.urls')),
     path('vendor/', include('vendor.urls')),
+
+    path('www.excelcart.com.ng', RedirectView.as_view(url='excelcart.com.ng/', permanent=True)),
 ]
