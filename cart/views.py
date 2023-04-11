@@ -223,7 +223,11 @@ def checkout(request):
 			city_price = City.objects.get(name = city.city)
 			delivery = city_price.price		
 
-			total = order.total_amt + delivery - discount	
+			tot = order.total_amt + delivery - discount
+
+			vat_fee = tot * 2/100
+
+			total = tot + vat_fee	
 
 			order.discount = discount
 			order.delivery = delivery
@@ -254,19 +258,19 @@ def checkout(request):
 
 				return render(request, 'by_cash.html',
 					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'order':order,
-					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address})
+					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address,'vat':vat_fee})
 
 			elif payment_choice == 'Transfer':
 
 				return render(request, 'by_transfer.html',
 					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'order':order,
-					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address})
+					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address,'vat':vat_fee })
 
 			elif payment_choice == 'Paystack':
 
 				return render(request, 'by_paystack.html',
 					{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'order':order,
-					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
+					 'payment':payment,'delivery':delivery,'discount':discount,'total':total,'address':address,'vat':vat_fee, 'paystack_public_key': settings.PAYSTACK_PUBLIC_KEY})
 						 		 	
 		return render(request, 'checkout.html',
 			{'cart_data':request.session['cartdata'],'totalitems':len(request.session['cartdata']),'total_amt':total_amt,'delivery':delivery,
@@ -285,8 +289,9 @@ def delivery_price(request):
 
 	city_price = City.objects.get(name = city)
 	price = city_price.price
-	total = float(total_amt) + float(discount) + float(price)
-	vat_fee = total * 2/100
+	tot = float(total_amt) + float(discount) + float(price)
+	vat_fee = tot * 2/100
+	total = int(tot) + int(vat_fee)
 	return render(request,'ajax/delivery_price.html', {'price':price,'total':total, 'discount':discount, 'total_amt':total_amt,'vat':vat_fee})	
 
 

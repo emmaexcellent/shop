@@ -10,6 +10,13 @@ admin.site.register(Vendor,VendorAdmin)
 
 admin.site.register(VendorToken)
 
+class VendorPayoutAdmin(admin.ModelAdmin):
+	list_display=('vendor','amount','status','date')
+	list_editable=('status',)
+admin.site.register(VendorPayout,VendorPayoutAdmin)
+
+admin.site.register(VendorWallet)
 admin.site.register(VendorPayment)
+
 admin.site.register(VendorReview)
 

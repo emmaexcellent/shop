@@ -19,14 +19,13 @@
 	    <input type="hidden" class="code_price" value="{{discount}}">
 	</li>
 
+	<li>
+        <h4>VAT Fee</h4>
+        <h4 class="price">&#8358; {{vat|floatformat:2}}</h4>
+    </li>
+
 	<li class="list-total">
 	    <h4>Total</h4>
 	    <h4 class="price">&#8358; {{total|floatformat:2}}</h4>
 	</li>
-
-	<li>
-        <h4>VAT Fee</h4>
-        <h4 class="price">&#8358; {{vat|floatformat:2}}</h4>
-        <input type="hidden" class="code_price" value="{{discount}}">
-    </li>
 </ul>

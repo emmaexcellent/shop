@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block title %}
+    <title>{{p.name}}</title>
+{% endblock %}
 {% load text_extras %}
 
 {% block meta %}
@@ -26,7 +29,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadscrumb-contain">
-                        <h2>{{p.name}}</h2>
                         <nav>
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item">

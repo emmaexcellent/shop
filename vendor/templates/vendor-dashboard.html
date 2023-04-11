@@ -106,6 +106,12 @@
                                     Payment Details</button>
                             </li>
                             <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-address-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-payout" type="button" role="tab"
+                                    aria-controls="pills-address" aria-selected="false"><i class="fa fa-money-bill"></i>&nbsp;
+                                    Payouts</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
                                 <button onclick="location.href='https://chat.whatsapp.com/HqiToOkndYT1vdvmBlWdez'" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="" type="button" role="tab"
                                     aria-controls="pills-profile" aria-selected="false"><i class="fa fa-whatsapp"></i>&nbsp;
@@ -146,9 +152,9 @@
                                         <p class="text-content">From your Seller Account Dashboard you have the ability to
                                             view a snapshot of your recent account activity and information about your products.</p>
                                         {% else %}
-                                        <h4 style="color: orangered;" class="text-content">Your Vendor account have not been approved! Check your email for the confirm link sent to you...
+                                        <h4 style="color: orangered;" class="text-content">Your Vendor account approval is pending! Our Teams are confirming your details to ensure trust within the site...
                                             <br>
-                                            <a href="{% url 'contact' %}">Contact Us</a> If you did not see any email or your account is not approve!
+                                            <a href="https://wa.me/message/G6VZDGPMOSK6P1">Contact Us</a> if you did not receive any message from us within 24hrs!
 
                                         </h4>  
                                         <i>You will not be able to take any action until your vendor account is approved. Thanks!</i>
@@ -157,6 +163,20 @@
 
                                     <div class="total-box">
                                         <div class="row g-sm-4 g-3">
+
+                                            <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                <div class="totle-contain">
+                                                    <img src="{% static 'assets/' %}images/svg/cash1.svg"
+                                                        class="img-1 blur-up lazyload" alt="">
+                                                    <img src="{% static 'assets/' %}images/svg/cash1.svg" class="blur-up lazyload"
+                                                        alt="">
+                                                    <div class="totle-detail">
+                                                        <h5>Wallet Balance</h5>
+                                                        <h3>&#8358; {{vend.vendorwallet_set.first.balance}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
                                                 <div class="totle-contain">
                                                     <img src="{% static 'assets/' %}images/svg/order.svg"
@@ -448,6 +468,68 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade show" id="pills-payout" role="tabpanel"
+                                aria-labelledby="pills-address-tab">
+                                <div class="product-tab">
+                                    <div class="title title-flex">
+                                        <div>
+                                            <h2>Payouts</h2>
+                                            <span class="title-leaf">
+                                                <svg class="icon-width bg-gray">
+                                                    <use xlink:href="/static/assets/svg/leaf.svg"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        {% if vend_approve %}
+                                        <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#add-payout"><i data-feather="plus"
+                                                class="me-2"></i> Request Payout
+                                        </button>                                        
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="table-responsive dashboard-bg-box">
+                                        <table class="table product-table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Payout Date</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Acct Number</th>
+                                                    <th scope="col">Bank</th>
+                                                    <th scope="col">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for p in payouts %}
+                                                <tr>
+                                                    <td>
+                                                        <h6>{{p.date}}</h6></a>
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="theme-color fw-bold">&#8358; {{p.amount}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6>{{p.bank.acct_no}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        <h6>{{p.bank.bank}}</h6>
+                                                    </td>
+                                                    <td>
+                                                        {% if p.status == True %}
+                                                        <label class="theme-color" style="background-color: rgba(var(--theme-color-rgb), 0.1);">Sent</label>
+                                                        {% else %}
+                                                        <label style="background-color: rgba(255,114,114,.1); color: #ff7272;">Pending</label>
+                                                        {% endif %}                                                                    
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="tab-pane fade show" id="pills-address" role="tabpanel"
                                 aria-labelledby="pills-address-tab">
                                 <div class="dashboard-address">
@@ -585,7 +667,7 @@
     <!-- User Dashboard Section End -->
 
 <div class="modal fade theme-modal" id="add-address" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Payment Details</h5>
@@ -621,9 +703,46 @@
     </div>
 </div>
 
+<div class="modal fade theme-modal" id="add-payout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Request Payout</h5>
+                <p class="mt-1 text-content">You can only request Payout after 3 days of previous payout requested...</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/vendor/dashboard">
+                    {% csrf_token %}
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="number" name="withdrawal_amount" class="form-control" id="amount" placeholder="Enter Amount" required>
+                        <label for="amount">Withdrawal Amount</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <select class="form-control" name="bank" placeholder="Leave a comment here" id="bank" required>
+                            {% for b in v.vendorpayment_set.all %}
+                            <option value="{{b.id}}">{{b.bank}} - {{b.acct_no}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="bank">Select Bank</label>
+                    </div> 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                        <button name="payout" type="submit" class="btn theme-bg-color btn-md text-white">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
 {% for i in payments %}
 <div class="modal fade theme-modal" id="edit-payment-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit Payment Details</h5>
@@ -651,7 +770,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
-                        <button name="pay_edit" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Add </button>
+                        <button name="pay_edit" type="submit" class="btn theme-bg-color btn-md text-white">Add </button>
                     </div>
                 </form>
             </div>
@@ -663,7 +782,7 @@
 
 {% for i in payments %}
 <div class="modal fade theme-modal" id="delete-payment-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to remove this payment account?</h5>
@@ -678,7 +797,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
-                        <button style="background-color:orangered;" name="pay_delete" type="submit" class="btn btn-md text-white" data-bs-dismiss="modal">Delete </button>
+                        <button style="background-color:orangered;" name="pay_delete" type="submit" class="btn btn-md text-white">Delete </button>
                     </div>
                 </form>
             </div>
@@ -692,7 +811,7 @@
 <!-- Edit Profile Modal Start -->
     <div class="modal fade theme-modal" id="edit-profile" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel3">Edit Your Vendor Profile</h5>
@@ -726,8 +845,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-animation btn-md fw-bold"
                                 data-bs-dismiss="modal">Cancel</button>
-                            <button name="profile_edit" type="submit" type="button" class="btn theme-bg-color btn-md fw-bold text-light"
-                                data-bs-dismiss="modal">Save</button>
+                            <button name="profile_edit" type="submit" type="button" class="btn theme-bg-color btn-md fw-bold text-light">Save</button>
                         </div>
                     </form>
                 </div>
@@ -739,7 +857,7 @@
 
 {% for p in products %}
 <div class="modal fade theme-modal" id="edit-product-{{p.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit Product Details</h5>
@@ -784,7 +902,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
-                        <button name="product_edit" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Save </button>
+                        <button name="product_edit" type="submit" class="btn theme-bg-color btn-md text-white">Save </button>
                     </div>
                 </form>
             </div>
@@ -796,7 +914,7 @@
 
 {% for p in products %}
 <div class="modal fade theme-modal" id="product-var-{{p.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Variation To Product</h5>
@@ -827,7 +945,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
-                        <button name="var_add" type="submit" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">Add</button>
+                        <button name="var_add" type="submit" class="btn theme-bg-color btn-md text-white">Add</button>
                     </div>
                 </form>
             </div>
@@ -839,7 +957,7 @@
 
 {% for i in products %}
 <div class="modal fade theme-modal" id="delete-product-{{i.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this product? </h5>
@@ -854,7 +972,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
-                        <button style="background-color:orangered;" name="prod_delete" type="submit" class="btn btn-md text-white" data-bs-dismiss="modal">Delete </button>
+                        <button style="background-color:orangered;" name="prod_delete" type="submit" class="btn btn-md text-white">Delete </button>
                     </div>
                 </form>
             </div>
@@ -863,6 +981,35 @@
     </div>
 </div>
 {% endfor %}
+
+<div id="alert-popup">
+  <div class="alert-content">
+    <p id="alert-message"></p>
+    <button onclick="location.href='{% url 'vendor-dashboard' %}'" id="alert-okay-btn">Okay</button>
+  </div>
+</div>
+
+<script> 
+    const alertPopup = document.getElementById('alert-popup');
+    const alertMessage = document.getElementById('alert-message');
+    const alertOkayBtn = document.getElementById('alert-okay-btn');
+
+    function showAlert(message) {
+      alertMessage.textContent = message;
+      alertPopup.style.display = 'flex';
+    }
+
+    alertOkayBtn.addEventListener('click', () => {
+      alertPopup.style.display = 'none';
+    });
+
+    {% if messages %}
+      {% for message in messages %}
+        showAlert('{{ message }}');
+      {% endfor %}
+    {% endif %}
+
+</script>
 
 {% endblock content %}
 

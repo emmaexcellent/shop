@@ -73,7 +73,18 @@ class VendorReview(models.Model):
 		return self.user.username
 
 
+class VendorWallet(models.Model):
+    vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE)
+    balance = models.DecimalField(max_digits=10, decimal_places=2)
+    last_withdrawal_time = models.DateTimeField(null=True, blank=True)
 
 
+class VendorPayout(models.Model):
+    vendor = models.ForeignKey(Vendor,on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    bank = models.ForeignKey(VendorPayment,on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
+    date = models.DateTimeField(default=now)  
 
-
+    def __str__(self):
+    	return self.vendor.name  

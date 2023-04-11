@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Avg,Count
 from django.contrib import messages
+from django.utils import timezone
 from product.models import *
 from main.manager import *
 from cart.models import *
@@ -68,9 +69,9 @@ def seller_reg(request):
 						email= vendormail,
 						)
 
-				token = str(uuid.uuid4())
-				new_vendor(vendor, token)
-				VendorToken.objects.create(vendor =vendor, token=token)
+				#token = str(uuid.uuid4())
+				#new_vendor(vendor, token)
+				#VendorToken.objects.create(vendor =vendor, token=token)
 				return redirect('/vendor/dashboard')
 
 	return render(request, 'seller-form.html', {})
@@ -119,6 +120,8 @@ def vendor_dashboard(request):
 		order_items = CartOrderItems.objects.filter(vendor=ven).order_by('-id')
 
 		payments = VendorPayment.objects.filter(vendor = v)
+
+		payouts = VendorPayout.objects.filter(vendor=v)
 
 		products = Product.objects.filter(vendor__name=ven).order_by('-id')
 
@@ -195,9 +198,9 @@ def vendor_dashboard(request):
 				var_edit.dis_price = pdisprice
 
 			if pnumber == '0':
-				var_edit.number = var_edit.number
+				p_edit.number = p_edit.number
 			else:					
-				var_edit.number = pnumber
+				p_edit.number = pnumber
 
 			p_edit.name = pname
 			if pimage == None:
@@ -229,13 +232,35 @@ def vendor_dashboard(request):
 			pid = request.POST.get('pid')
 			delete_prod = Product.objects.get(pk=pid)
 			delete_prod.delete()	
+
+		if 'payout' in request.POST:
+			wallet = VendorWallet.objects.get(vendor=v)
+			withdrawal_amount = float(request.POST.get('withdrawal_amount'))
+			bank_choice = request.POST.get('bank')
+			bank = VendorPayment.objects.get(id = bank_choice)
+
+			if wallet.balance >= withdrawal_amount:
+
+				current_time = timezone.now()
+
+				if wallet.last_withdrawal_time is None or (current_time - wallet.last_withdrawal_time).days >= 3:
+					wallet.balance = int(wallet.balance) - int(withdrawal_amount)
+					wallet.last_withdrawal_time = current_time
+					wallet.save()
+					VendorPayout.objects.create(vendor =v, amount=withdrawal_amount, bank=bank)
+					messages.success(request, 'Withdrawal request submitted successfully.')
+				else:
+					messages.error(request, 'You can only withdraw after 3 days interval.')
+			else:
+				messages.error(request, 'Insufficient balance for withdrawal.')	
+
 	else:
 		return redirect('user-dashboard')	
 
 	return render(request, 'vendor-dashboard.html', 
 		{'vendor':vendor,'vend_sale':vend_sale,'ord_pending':ord_pending,'popular_prod':popular_prod,
 		 'order_items':order_items,'products':products,'payments':payments,'v':v,
-		 'varform':varform,'vend_approve':vend_approve
+		 'varform':varform,'vend_approve':vend_approve, 'payouts':payouts
 
 		})	
 
@@ -289,3 +314,4 @@ def add_product(request):
 	return render(request, 'add-product.html', {
 		'pform':productform,'variationform':variationform,'prodinfoform':prodinfoform,
 		})	
+
