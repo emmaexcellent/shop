@@ -33,9 +33,9 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['excelcart-production.up.railway.app','excelcart.com.ng']
 
 # Application definition
 
@@ -185,6 +185,18 @@ EMAIL_PORT= 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#DEPLOYMENT 
+
+CSRF_TRUSTED_ORIGINS = ['https://excelcart-production.up.railway.app','https://excelcart.com.ng']
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
 import dj_database_url
