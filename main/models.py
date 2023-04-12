@@ -29,7 +29,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
 	category = models.ForeignKey(Category,on_delete=models.CASCADE, null=True)
-	svg = models.FileField(upload_to="svg", null = True , blank= True)
+	svg = models.FileField(upload_to="svg",null = True,blank= True, storage=gd_storage)
 	title=models.CharField(max_length=60)
 
 	class Meta:

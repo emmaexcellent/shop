@@ -134,7 +134,7 @@
                                             <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
                                             <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
                                             <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
-                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" />
+                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />
                                             <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
                                             {% if p.number == 0 %}
                                             <button class="btn btn-add-cart addcart-button" disabled>Out Of Stock
