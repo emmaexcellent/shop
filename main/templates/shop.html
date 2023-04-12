@@ -59,7 +59,7 @@
                             <ul class="nav nav-pills mb-3 custom-nav-tab" id="pills-tab" role="tablist">
                                 {% for cat in categories %}
                                 <li class="nav-item" role="presentation">
-                                    <button onclick="location.href='/shop/{{cat.title}}-{{cat.id}}'" class="nav-link" id="pills-vegetables" data-bs-toggle="pill" data-bs-target="#pills-vegetable" type="button" role="tab" aria-selected="true">{{cat.title}} <img src="{{cat.svg.url}}" class="blur-up lazyloaded" alt=""></button>
+                                    <button onclick="location.href='/shop/{{cat.title}}'" class="nav-link" id="pills-vegetables" data-bs-toggle="pill" data-bs-target="#pills-vegetable" type="button" role="tab" aria-selected="true">{{cat.title}} <img src="{{cat.svg.url}}" class="blur-up lazyloaded" alt=""></button>
                                 </li>
                                 {% endfor %}
                             </ul>

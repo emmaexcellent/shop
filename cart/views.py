@@ -59,7 +59,7 @@ def cart_list(request):
 		for p_id,item in request.session['cartdata'].items():
 			total_amt+=int(item['qty'])*float(item['price'])
 
-			product = Product.objects.get(id=p_id)
+			product = get_object_or_404(Product, id= p_id)
 
 			if product.number < int(item['qty']):
 				cart_data=request.session['cartdata']

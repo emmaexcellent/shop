@@ -1,0 +1,310 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    {% block mobilemenu %}
+
+    {% endblock %}
+
+
+
+    <!-- Home Section Start -->
+    <section class="home-section pt-2">
+        <div class="container-fluid-lg">
+            <div class="row g-4">
+                <div class="col-12 ratio_65">
+                    <div class="home-contain d-lg-none" style="height:200px;">
+                        <div class="h-100">
+                            <img src="{% static 'assets/' %}images/vegetable/banner/1.jpg" class="bg-img " alt="hero">
+                        </div>
+                        <div class="home-detail p-center-left w-75">
+                            <div>
+                                <h6><b>Enjoy our free delivery for</b><span>7 days</span></h6>
+                                <h1 class="text-uppercase">Stay home & We deliver your <span class="daily">Daily
+                                        Needs</span></h1>
+                                <p class="w-75 d-none d-sm-block">Vegetables contain many vitamins and minerals that are
+                                    good for your health.</p>
+                                <button onclick="location.href = '{% url 'shop' %}'"
+                                    class="btn btn-animation mt-xxl-4 mt-2 home-button mend-auto">Shop Now <i
+                                        class="fa-solid fa-right-long icon"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="home-contain d-none d-lg-block" style="height:300px;">
+                        <div class="h-100">
+                            <img src="{% static 'assets/' %}images/vegetable/banner/1.jpg" class="bg-img " alt="">
+                        </div>
+                        <div class="home-detail p-center-left w-75">
+                            <div>
+                                <h6><b>Enjoy our free delivery for</b><span>7 days</span></h6>
+                                <h1 class="text-uppercase">Stay home & We deliver your <span class="daily">Daily
+                                        Needs</span></h1>
+                                <p class="w-75 d-none d-sm-block">Vegetables contain many vitamins and minerals that are
+                                    good for your health.</p>
+                                <button onclick="location.href = '{% url 'shop' %}'"
+                                    class="btn btn-animation mt-xxl-4 mt-2 home-button mend-auto">Shop Now <i
+                                        class="fa-solid fa-right-long icon"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Home Section End -->
+
+    <!-- Banner Section Start -->
+    <section class="banner-section ratio_60 wow fadeInUp">
+        <div class="container-fluid-lg">
+            <div class="banner-slider">
+                <div>
+                    <div class="banner-contain hover-effect">
+                        <img src="{% static 'assets/' %}images/vegetable/banner/4.jpg" class="bg-img " alt="">
+                        <div class="banner-details">
+                            <div class="banner-box">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h5>Hot Deals on New Items</h5>
+                                <h6 class="text-content">Daily Essentials Eggs & Dairy</h6>
+                            </div>
+                            <a href="/shop/{{p.sub_category}}" class="banner-button text-white">Shop Now <i
+                                    class="fa-solid fa-right-long ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="banner-contain hover-effect">
+                        <img src="{% static 'assets/' %}images/vegetable/banner/5.jpg" class="bg-img " alt="">
+                        <div class="banner-details">
+                            <div class="banner-box">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h5>Buy More & Save More</h5>
+                                <h6 class="text-content">Fresh Fruits & Vegetables</h6>
+                            </div>
+                            <a href="/shop/{{p.sub_category}}" class="banner-button text-white">Shop Now <i
+                                    class="fa-solid fa-right-long ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="banner-contain hover-effect">
+                        <img src="{% static 'assets/' %}images/vegetable/banner/6.jpg" class="bg-img " alt="">
+                        <div class="banner-details">
+                            <div class="banner-box">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h5>Organic Meat Prepared</h5>
+                                <h6 class="text-content">Delivered to Your Home</h6>
+                            </div>
+                            <a href="/shop/{{p.sub_category}}" class="banner-button text-white">Shop Now <i
+                                    class="fa-solid fa-right-long ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="banner-contain hover-effect">
+                        <img src="{% static 'assets/' %}images/vegetable/banner/7.jpg" class="bg-img " alt="">
+                        <div class="banner-details">
+                            <div class="banner-box">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h5>Buy More & Save More</h5>
+                                <h6 class="text-content">Nuts & Snacks</h6>
+                            </div>
+                            <a href="/shop/{{p.sub_category}}" class="banner-button text-white">Shop Now <i
+                                    class="fa-solid fa-right-long ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section End -->
+    <br>
+    <!-- Product Section Start -->
+    <section class="product-section">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-4 g-3">
+                <div class="col-12">
+                    <div class="title">
+                        <h2>Shop Special Deals</h2>
+                        <span class="title-leaf">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+    <section class="section-b-space shop-section">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-custome-12">
+                    <div class="row g-sm-4 g-3 row-cols-xxl-6 row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-2 product-list-section">
+                        {% for p in grocery %}
+                        {% if p.variation_set.all.count != 0 %}
+                        <div>
+                            <div class="product-box-3 h-100 wow fadeInUp">
+                                <div class="product-header">
+                                    <div class="product-image">
+                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                            <img src="/media/{{p.thumb_nail}}"
+                                                class="img-fluid" alt="">
+                                        </a>
+
+                                        <ul class="product-option">
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                    data-bs-target="#view{{p.id}}">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                            </li>
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                                <a class="notifi-wishlist add-wishlist" data-product="{{p.id}}">
+                                                    <i data-feather="heart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-footer">
+                                    <div class="product-detail">
+                                        <span class="span-name">{{p.category}}</span>
+                                        <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
+                                            <h5 class="name">{{p.name}}</h5>
+                                        </a>
+                                        <p class="text-content mt-1 mb-2 product-content">{{p.short_description}}</p>
+                                        <div class="product-rating mt-2">
+                                            <ul class="rating">
+                                                {% for star in p.avg_ratings|ljust:p.avg_ratings %}
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <span>({{p.avg_ratings|floatformat:1}})</span>
+                                        </div>
+                                        <h6 class="unit prod-size-{{p.id}} d-none active1">{{p.variation_set.first.size}}</h6>
+                                        {% if p.variation_set.first.discount %}
+                                        <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
+                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                        <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
+                                        </h5>
+                                        {% else %}
+                                        <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.price|floatformat:2}}</span>
+                                            <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.price}}">
+                                        </h5>
+                                        {% endif %} 
+                                        <div class="add-to-cart-box bg-white">
+                                            <input type="hidden" class="prod-id-{{p.id}}" value="{{p.id}}" />
+                                            <input type="hidden" class="prod-name-{{p.id}}" value="{{p.name}}" />
+                                            <input type="hidden" class="prod-ref-{{p.id}}" value="{{p.ref}}" />
+                                            <input type="hidden" class="prod-cat-{{p.id}}" value="{{p.category}}" />
+                                            <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
+                                            <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail}}" />
+                                            <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                            {% if p.number == 0 %}
+                                            <button class="btn btn-add-cart addcart-button" disabled>Out Of Stock
+                                            </button>
+                                            {% else %}
+                                            <button class="btn btn-add-cart cart-add addcart-button add-to-cart" data-index="{{p.id}}">Add
+                                                <span class="add-icon bg-light-gray">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </span>
+                                            </button>
+                                            {% endif %}
+                                            
+                                            <div class="cart_qty qty-box">
+                                                <div class="input-group bg-white">
+                                                    <button type="button" class="bg-gray" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                        <i class="fa fa-minus add-to-cart" data-item="{{p.id}}" aria-hidden="true"></i>
+                                                    </button>
+                                                    <input class="form-control prod-qty-{{p.id}}" type="number"
+                                                        name="quantity" value="1" min="1" max="{{p.number}}" readonly>
+
+                                                    <button type="button" class="bg-gray" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                        <i class="fa fa-plus add-to-cart" data-item="{{p.id}}" aria-hidden="true" data-index="{{p.id}}"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    {% if products.has_other_pages %}
+                    <nav class="custome-pagination">
+                        <ul class="pagination justify-content-center">
+                            {% if products.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{products.previous_page_number}}" tabindex="-1" aria-disabled="true">
+                                    <i class="fa-solid fa-angles-left"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for i in products.paginator.page_range %}
+                            {% if products.number == i %}
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:void(0)">{{i}}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item" aria-current="page">
+                                <a class="page-link" href="?page={{i}}">{{i}}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            {% if products.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{products.next_page_number}}">
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section Start -->
+    <section class="newsletter-section section-b-space">
+        <div class="container-fluid-lg">
+            <div class="newsletter-box newsletter-box-2">
+                <div class="newsletter-contain py-5">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xxl-4 col-lg-5 col-md-7 col-sm-9 offset-xxl-2 offset-md-1">
+                                <div class="newsletter-detail">
+                                    <h2>Join our newsletter and get...</h2>
+                                    <h5>$20 discount for your first order</h5>
+                                    <div class="input-box">
+                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                            placeholder="Enter Your Email">
+                                        <i class="fa-solid fa-envelope arrow"></i>
+                                        <button class="sub-btn  btn-animation">
+                                            <span class="d-sm-block d-none">Subscribe</span>
+                                            <i class="fa-solid fa-arrow-right icon"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Newsletter Section End -->
+
+    
+
+
+{% endblock content %}    

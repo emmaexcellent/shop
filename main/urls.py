@@ -19,7 +19,11 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('shop', views.shop, name="shop"),
     path('search', views.search, name="search"),
+
     path('shop/<str:title>-<int:cat_id>', views.category_product_list, name="category"),
+    
+    path('shop/<str:title>', views.subcat_product_list, name="subcat"),
+
     path('accounts/register', views.registerUser, name="register"),
     path('accounts/login/', views.loginView, name="login"),
     path('accounts/logout', views.logoutUser, name="logout"),

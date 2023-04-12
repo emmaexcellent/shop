@@ -18,7 +18,7 @@ import uuid
 
 def home(request):
 	products = Product.objects.filter(approve = True).order_by('-id')
-	grocery = Product.objects.filter(category_id = 1, approve = True).order_by('-id')
+	grocery = Product.objects.filter(category_id = 1, approve = True, top_deals=True).order_by('-id')
 	health = Product.objects.filter(category_id = 2, approve = True).order_by('-id')
 	beauty = Product.objects.filter(category_id = 3, approve = True).order_by('-id')
 	accessory= Product.objects.filter(category_id = 4, approve = True).order_by('-id')
@@ -26,7 +26,7 @@ def home(request):
 	fashion = Product.objects.filter(category_id = 6, approve = True).order_by('-id')
 	stationery = Product.objects.filter(category_id = 7, approve = True).order_by('-id')
 
-	return render(request,'home.html', 
+	return render(request,'home3.html', 
 		{'products':products,'grocery':grocery,'health':health,'beauty':beauty,
 		'accessory':accessory,'electronic':electronic,'fashion':fashion,'stationery':stationery})
 
@@ -53,6 +53,18 @@ def category_product_list(request,cat_id,title):
 	category=Category.objects.get(id=cat_id)
 	products=Product.objects.filter(category=category, approve = True).order_by('-id')
 	cats=Category.objects.all().exclude(id=cat_id)
+
+	paginator=Paginator(products,30)
+	page_num=request.GET.get('page',1)
+	products=paginator.page(page_num)
+	
+	return render(request, 'category.html',
+		{'products':products,'cats':cats,'category':category,})		
+
+def subcat_product_list(request,title):
+	category=SubCategory.objects.get(title=title)
+	products=Product.objects.filter(sub_category=category, approve=True).order_by('-id')
+	cats=SubCategory.objects.all().exclude(id=category.id)
 
 	paginator=Paginator(products,30)
 	page_num=request.GET.get('page',1)
