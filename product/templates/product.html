@@ -142,7 +142,7 @@
                                     <ul class="select-packege">
                                         {% for s in p.variation_set.all %}
                                         <li>
-                                            <a href="javascript:void(0)" class="choose-size color{{size.id}} prod-size-{{p.id}}"
+                                            <a href="javascript:void(0)" class="choose-size color{{size.id}}" data-select="{{p.id}}"
                                             {% if s.discount %}
                                             data-price="{{s.dis_price|floatformat:2}}"
                                             {% else %}
