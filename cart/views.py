@@ -16,9 +16,10 @@ from main.manager import *
 # Add to cart
 def add_to_cart(request):
 	if request.GET.get('size') == '':
-		p = Variation.objects.get(product__ref = request.GET.get('ref'))
-		price = p.price
-		size= p.size
+		prod = Variation.objects.filter(product__ref = request.GET.get('ref'))[:1]
+		for p in prod:
+			price = p.price
+			size= p.size
 	else:
 		price = request.GET.get('price')
 		size = request.GET.get('size') 

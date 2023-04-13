@@ -271,6 +271,7 @@ def add_product(request):
 	if vend:
 
 		vendor = get_object_or_404(Vendor, user = request.user)
+		cat = Category.objects.get(pk=1)
 
 		if request.method == 'POST':
 
@@ -283,6 +284,7 @@ def add_product(request):
 			if productform.is_valid():
 				product = productform.save(commit=False)
 				product.vendor = vendor	
+				product.category = cat
 				product.save()		
 
 				for i in files:

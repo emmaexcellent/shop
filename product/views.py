@@ -24,7 +24,7 @@ def detail(request,id,slug,category_title):
 			rating=request.POST.get('rating'),
 			)
 
-	related = Product.objects.filter(category = p.category_id).exclude(id=p.id)	
+	related = Product.objects.filter(sub_category = p.sub_category_id).exclude(id=p.id)	
 	trend = Product.objects.order_by('-topic_views')[:4]	
 	review = Review.objects.filter(product=p, rating='5')[:1]
 

@@ -364,31 +364,6 @@
                                                 {% endif %}
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>Package Information</td>
-                                                <td>
-                                                {% if p.productinformation_set.first.package is not None %}
-                                                {{p.productinformation_set.first.package}}
-                                                {% endif %}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Manufacturer</td>
-                                                
-                                                <td>
-                                                    {% if p.productinformation_set.first.manufacturer is not None %}
-                                                    {{p.productinformation_set.first.manufacturer}}
-                                                    {% endif %}
-                                                </td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td>Item part number</td>
-                                                <td>
-                                                {% if p.productinformation_set.first.item_number is not None %}
-                                                {{p.productinformation_set.first.item_number}}
-                                                {% endif %}</td>
-                                            </tr>
 
                                             <tr>
                                                 <td>PROD date</td>

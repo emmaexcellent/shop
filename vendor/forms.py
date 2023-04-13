@@ -31,14 +31,6 @@ class ProductForm(forms.ModelForm):
 			'name':"prod_thumb",
 			'id':"prod_thumb",
 			})
-		self.fields["category"].widget.attrs.update({
-			'required':'',
-			'class':"form-control",
-			'type':"text", 
-			'name':"prod_cat",
-			'id':"prod_cat",
-			'placeholder':"Choose Category",
-			})
 		self.fields["sub_category"].widget.attrs.update({
 			'required':'',
 			'class':"form-control",
@@ -46,13 +38,6 @@ class ProductForm(forms.ModelForm):
 			'name':"prod_sub_cat",
 			'id':"prod_sub_cat",
 			'placeholder':"Choose Sub-Category",
-			})
-		self.fields["color"].widget.attrs.update({
-			'class':"form-control",
-			'type':"text", 
-			'name':"prod_color",
-			'id':"prod_color",
-			'placeholder':"Product Color",
 			})
 		self.fields["brand"].widget.attrs.update({
 			'class':"form-control",
@@ -79,20 +64,12 @@ class ProductForm(forms.ModelForm):
 
 	class Meta:
 		model= Product
-		fields=('name','short','category','sub_category','color','brand','number','description','thumb_nail')
+		fields=('name','short','sub_category','brand','number','description','thumb_nail')
 
 
 class VariationForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.fields["stock_status"].widget.attrs.update({
-			'required':'',
-			'class':"s-example-basic-single w-100 form-control",
-			'type':"text", 
-			'name':"stock_status",
-			'id':"stock_status",
-			'placeholder':"Status of product",
-			})
 		self.fields["size"].widget.attrs.update({
 			'required':'',
 			'class':"form-control",
@@ -119,19 +96,12 @@ class VariationForm(forms.ModelForm):
 
 	class Meta:
 		model= Variation
-		fields=('stock_status','size','price','dis_price')		
+		fields=('size','price','dis_price')		
 
 
 class ProductInfoForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.fields["manufacturer"].widget.attrs.update({
-			'class':"form-control",
-			'type':"text", 
-			'name':"prod_manu",
-			'id':"prod_manu",
-			'placeholder':"Product Manufacturer",
-			})
 		self.fields["ingredients"].widget.attrs.update({
 			'required':'',
 			'class':"form-control",
@@ -139,13 +109,6 @@ class ProductInfoForm(forms.ModelForm):
 			'name':"prod_ingr",
 			'id':"prod_ingr",
 			'placeholder':"Product Ingredients",
-			})
-		self.fields["item_number"].widget.attrs.update({
-			'class':"form-control",
-			'type':"text", 
-			'name':"prod_ingr",
-			'id':"prod_ingr",
-			'placeholder':"Number written on Product",
 			})
 		self.fields["prod_date"].widget.attrs.update({
 			'class':"form-control",
@@ -165,7 +128,5 @@ class ProductInfoForm(forms.ModelForm):
 
 	class Meta:
 		model= ProductInformation
-		fields=('manufacturer','ingredients','item_number','prod_date',
-			    'expiry_date'
-			)		
+		fields=('ingredients','prod_date','expiry_date')		
 
