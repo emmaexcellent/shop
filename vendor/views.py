@@ -69,9 +69,11 @@ def seller_reg(request):
 						email= vendormail,
 						)
 
-				#token = str(uuid.uuid4())
-				#new_vendor(vendor, token)
-				#VendorToken.objects.create(vendor =vendor, token=token)
+				VendorWallet.objects.create(vendor =vendor, balance=0)
+
+				token = str(uuid.uuid4())
+				new_vendor(vendor, token)
+				VendorToken.objects.create(vendor =vendor, token=token)
 				return redirect('/vendor/dashboard')
 
 	return render(request, 'seller-form.html', {})
