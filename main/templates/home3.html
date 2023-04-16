@@ -19,7 +19,7 @@
                         </div>
                         <div class="home-detail p-center-left w-75">
                             <div>
-                                <h6><b>Enjoy <span>7 days</span> free delivery</b></h6>
+                                <h6><b> Made For You</b></h6>
                                 <h1 class="text-uppercase">Stay home & We deliver your <span class="daily">Daily
                                         Needs</span></h1>
                                 <p class="w-75 d-none d-sm-block">Vegetables contain many vitamins and minerals that are
@@ -36,7 +36,7 @@
                         </div>
                         <div class="home-detail p-center-left w-75">
                             <div>
-                                <h6><b>Enjoy our free delivery for</b><span>7 days</span></h6>
+                                <h6><b> Made For You</span></h6>
                                 <h1 class="text-uppercase">Stay home & We deliver your <span class="daily">Daily
                                         Needs</span></h1>
                                 <p class="w-75 d-none d-sm-block">Vegetables contain many vitamins and minerals that are
@@ -81,7 +81,7 @@
                                     <div class="product-image">
                                         <a href="/shop/{{p.category}}/{{p.name|slugify}}-{{p.id}}">
                                             <img src="{{p.thumb_nail.url}}"
-                                                class="img-fluid" alt="">
+                                                class="img-fluid" alt="product-img" width="130px" height="180px">
                                         </a>
 
                                         <ul class="product-option">
@@ -119,8 +119,7 @@
                                         <h6 class="unit prod-size-{{p.id}} d-none active1">{{p.variation_set.first.size}}</h6>
                                         {% if p.variation_set.first.discount %}
                                         <h5 class="price"><span class="theme-color">&#8358; {{p.variation_set.first.dis_price|floatformat:2}}</span>
-                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">
-                                        <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">                                 
+                                        <input type="hidden" class="prod-price-{{p.id}}" name="price" value="{{p.variation_set.first.dis_price}}">           
                                         <del>&#8358;{{p.variation_set.first.price|floatformat:2}}</del>                                                                            
                                         </h5>
                                         {% else %}
@@ -136,6 +135,7 @@
                                             <input type="hidden" class="prod-color-{{p.id}}" value="{{p.color}}" />                                    
                                             <input type="hidden" class="prod-image-{{p.id}}" value="{{p.thumb_nail.url}}" />
                                             <input type="hidden" class="prod-stock-{{p.id}}" value="{{p.number}}" />
+                                            <input type="hidden" class="prod-vendor-{{p.id}}" name="vendor" value="{{p.vendor}}">
                                             {% if p.number == 0 %}
                                             <button class="btn btn-add-cart addcart-button" disabled>Out Of Stock
                                             </button>
@@ -204,36 +204,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Newsletter Section Start -->
-    <section class="newsletter-section section-b-space">
-        <div class="container-fluid-lg">
-            <div class="newsletter-box newsletter-box-2">
-                <div class="newsletter-contain py-5">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-xxl-4 col-lg-5 col-md-7 col-sm-9 offset-xxl-2 offset-md-1">
-                                <div class="newsletter-detail">
-                                    <h2>Join our newsletter and get...</h2>
-                                    <h5>$20 discount for your first order</h5>
-                                    <div class="input-box">
-                                        <input type="email" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="Enter Your Email">
-                                        <i class="fa-solid fa-envelope arrow"></i>
-                                        <button class="sub-btn  btn-animation">
-                                            <span class="d-sm-block d-none">Subscribe</span>
-                                            <i class="fa-solid fa-arrow-right icon"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Newsletter Section End -->
 
     
 

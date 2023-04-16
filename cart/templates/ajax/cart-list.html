@@ -98,10 +98,16 @@
 
                         <div class="button-group cart-button">
                             <ul>
+                                {% if min %}
+                                <li>
+                                    <button class="btn btn-animation proceed-btn fw-bold" disabled>Order is &#8358;500 minimum</button>
+                                </li>
+                                {% else %}
                                 <li>
                                     <button onclick="location.href = '{% url 'checkout' %}';"
-                                        class="btn btn-animation proceed-btn fw-bold">Process To Checkout</button>
+                                        class="btn btn-animation proceed-btn fw-bold">Proceed To Checkout</button>
                                 </li>
+                                {% endif %}
 
                                 <li>
                                     <button onclick="location.href = '{% url 'shop' %}';"

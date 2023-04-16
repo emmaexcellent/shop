@@ -35,6 +35,9 @@ class SubCategory(models.Model):
 	class Meta:
 		verbose_name_plural='Sub Categories'
 
+	def get_absolute_url(self):
+		return f'/shop/{self.title}'		
+
 	def __str__(self):
 		return self.title
 

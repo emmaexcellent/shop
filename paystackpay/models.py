@@ -1,5 +1,6 @@
 from django.db import models
 from cart.models import *
+from vendor.models import *
 from .paystack import PayStack
 
 # Create your models here.
@@ -34,6 +35,13 @@ class Payment(models.Model):
             object_with_similar_ref = Payment.objects.filter(ref=ref)
             if not object_with_similar_ref:
                 self.ref = ref
+        if self.verified == True:
+            items = CartOrderItems.objects.filter(order = self.order)
+            for i in items:
+                wallet = VendorWallet.objects.get(vendor__name = i.vendor)
+                wallet.balance = int(wallet.balance) + int(i.total)
+                wallet.save()               
+                    
         super().save(*args, **kwargs)
         
     def amount_value(self) -> int:

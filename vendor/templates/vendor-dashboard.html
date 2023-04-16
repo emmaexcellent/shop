@@ -708,7 +708,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Request Payout</h5>
-                <p class="mt-1 text-content">You can only request Payout after 3 days of previous payout requested...</p>
+                <p class="mt-1 text-content">Your payment can take up to 2 - 3 days business working days...</p>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -890,14 +890,19 @@
                     </div>
 
                     <div class="form-floating mb-4 theme-form-floating">
-                        <input type="number" class="form-control" name="pprice" id="price" value="0">
+                        <input type="number" class="form-control" name="pprice" id="price" value="{{p.variation_set.first.price}}">
                         <label for="price">Product Original Price</label>
                     </div>
 
                     <div class="form-floating mb-4 theme-form-floating">
-                        <input type="number" class="form-control" name="pdisprice" id="dis-price" value="0">
+                        <input type="number" class="form-control" name="pdisprice" id="dis-price" value="{{p.variation_set.first.dis_price}}">
                         <input type="hidden" name="pid" value="{{p.id}}">
                         <label for="dis-price">Product Discount Price</label>
+                    </div>
+
+                    <div class="form-floating mb-4 theme-form-floating">                        
+                        <input type="number" class="form-control" name="pnumber" id="number" value="{{p.number}}">
+                        <label for="number">Number Of Product</label>
                     </div>
 
                     <div class="modal-footer">

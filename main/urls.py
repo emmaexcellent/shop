@@ -12,6 +12,7 @@ sitemaps = {
     'products':ProductSitemap,
     'cats': CategorySitemap,
     'vend': VendorSitemap,
+    'subcats': SubCategorySitemap,
 }
 
 

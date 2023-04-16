@@ -24,6 +24,14 @@ class CategorySitemap(Sitemap):
 	def items(self):
 		return Category.objects.all()
 
+class SubCategorySitemap(Sitemap):
+	changefreq = "daily"
+	priority = 0.5
+	protocol = 'http'
+
+	def items(self):
+		return SubCategory.objects.all()		
+
 class VendorSitemap(Sitemap):
 	changefreq = "daily"
 	priority = 0.5

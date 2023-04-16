@@ -87,9 +87,7 @@ def vendor_list(request):
 def confirm_email(request, token):
 	vend = VendorToken.objects.get(token = token)
 	if vend:
-		vendor = Vendor.objects.get(id=vend.vendor.id)
-		vendor.approve = False
-		vendor.save()
+		messages.success(request, "Email confirmed!")
 		return redirect('vendor-dashboard')
 	else:
 		Vendor.objects.filter(user=request.user).delete()
@@ -121,7 +119,7 @@ def vendor_dashboard(request):
 
 		payments = VendorPayment.objects.filter(vendor = v)
 
-		payouts = VendorPayout.objects.filter(vendor=v)
+		payouts = VendorPayout.objects.filter(vendor=v).order_by('-id')
 
 		products = Product.objects.filter(vendor__name=ven).order_by('-id')
 
@@ -221,8 +219,9 @@ def vendor_dashboard(request):
 			if add_var.is_valid:
 				var_save = add_var.save(commit=False)
 				var_save.product = prod	 
-				
 				var_save.save()
+				messages.success(request, "Product Variation Saved!")
+
 				if Variation.objects.filter(product=prod, size=var_save.size).count() > 1:
 					Variation.objects.get(pk = var_save.id,product=prod, size=var_save.size).delete()
 
@@ -240,17 +239,13 @@ def vendor_dashboard(request):
 			bank = VendorPayment.objects.get(id = bank_choice)
 
 			if wallet.balance >= withdrawal_amount:
-
-				current_time = timezone.now()
-
-				if wallet.last_withdrawal_time is None or (current_time - wallet.last_withdrawal_time).days >= 3:
+				if VendorPayout.objects.filter(vendor=v, status = False).exists():
+					messages.error(request, 'We are working on your previous payout request. Please try again later!')	
+				else:	
 					wallet.balance = int(wallet.balance) - int(withdrawal_amount)
-					wallet.last_withdrawal_time = current_time
 					wallet.save()
 					VendorPayout.objects.create(vendor =v, amount=withdrawal_amount, bank=bank)
 					messages.success(request, 'Withdrawal request submitted successfully.')
-				else:
-					messages.error(request, 'You can only withdraw after 3 days interval.')
 			else:
 				messages.error(request, 'Insufficient balance for withdrawal.')	
 
